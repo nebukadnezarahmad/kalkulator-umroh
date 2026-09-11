@@ -100,7 +100,7 @@ button, input, select, textarea {
   border-bottom: none;
   box-shadow: none;
   padding: 16px 20px 0;
-  margin-bottom: -78px;
+  margin-bottom: -88px;
 }
 
 .header-container {
@@ -1156,7 +1156,7 @@ button, input, select, textarea {
 @media (max-width: 860px) {
   .site-header {
     padding: 12px 14px 0;
-    margin-bottom: -68px;
+    margin-bottom: -76px;
   }
 
   .header-container {
