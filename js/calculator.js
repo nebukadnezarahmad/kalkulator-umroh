@@ -532,6 +532,11 @@ function setupStepper(inputId, onChange) {
   });
 }
 
+const renderedHotelState = {
+  makkah: { hotelId: null },
+  madinah: { hotelId: null }
+};
+
 function renderHotelShowcase(city) {
   const isMakkah = city === "makkah";
   const hotelList = isMakkah ? UMRAH_DATA.hotelsMakkah : UMRAH_DATA.hotelsMadinah;
@@ -542,113 +547,74 @@ function renderHotelShowcase(city) {
 
   const currentRoom = calcState[city].roomType || "quad";
   const cityName = isMakkah ? "Makkah Al-Mukarramah" : "Madinah Al-Munawwarah";
-
-  const roomMeta = {
-    quad: { label: "Quad", capText: "Sekamar 4 Orang", capShort: "4 Orang" },
-    triple: { label: "Triple", capText: "Sekamar 3 Orang", capShort: "3 Orang" },
-    double: { label: "Double", capText: "Sekamar 2 Orang", capShort: "2 Orang" }
-  };
-
-  const activeMeta = roomMeta[currentRoom] || roomMeta.quad;
-  const activeRoomPrice = hotel.prices[currentRoom] || hotel.prices.quad;
-
+  const landmark = isMakkah ? "ke Masjidil Haram" : "ke Masjid Nabawi";
   const hotelImg = hotel.image || `assets/hotels/${hotel.id}.jpg`;
-  const roomImg = (hotel.roomImages && hotel.roomImages[currentRoom]) || `assets/hotels/rooms/${hotel.id}_${currentRoom}.jpg`;
+
+  // JIKA HOTEL SUDAH TER-RENDER DAN HANYA GANTI TIPE KAMAR:
+  // JANGAN re-render gambar atau DOM kartu hotel agar TIDAK ADA GLITCH / KEDIP SAMA SEKALI!
+  const existingCard = container.querySelector(".hotel-showcase-card");
+  if (existingCard && renderedHotelState[city].hotelId === hotel.id) {
+    const pills = container.querySelectorAll(".hotel-rate-pill");
+    pills.forEach(pill => {
+      if (pill.dataset.type === currentRoom) {
+        pill.classList.add("active");
+      } else {
+        pill.classList.remove("active");
+      }
+    });
+    return;
+  }
+
+  // Jika hotel berubah atau render awal, render kartu lengkap
+  renderedHotelState[city].hotelId = hotel.id;
 
   container.innerHTML = `
     <div class="hotel-showcase-card">
-      <div class="hotel-dual-grid">
-        <!-- Kotak Kiri: Gedung Hotel -->
-        <div class="hotel-photo-box hotel-box-building">
-          <div class="hotel-photo-media">
-            <img 
-              src="${hotelImg}" 
-              alt="${hotel.name}" 
-              class="hotel-photo-img" 
-              loading="lazy"
-              onerror="this.onerror=null; this.src='assets/hotels/${hotel.id}.jpg';"
-            >
-            <div class="hotel-photo-top-bar">
-              <span class="hotel-chip chip-building">🏢 Gedung Hotel</span>
-              <span class="hotel-chip chip-dist">📍 ${hotel.dist}</span>
-            </div>
-            <div class="hotel-photo-gradient-bar">
-              <div class="hotel-photo-info-main">
-                <span class="hotel-photo-title">${hotel.name}</span>
-                <span class="hotel-photo-subtitle">★ Bintang ${hotel.stars} • ${cityName}</span>
-              </div>
-            </div>
-          </div>
+      <div class="hotel-showcase-media">
+        <img 
+          src="${hotelImg}" 
+          alt="${hotel.name}" 
+          class="hotel-showcase-img" 
+          id="${city}-hotel-showcase-img"
+          loading="lazy"
+          onerror="this.onerror=null; this.src='assets/hotels/${hotel.id}.jpg';"
+        >
+        <div class="hotel-media-badges">
+          <span class="hotel-badge-stars">★ Bintang ${hotel.stars}</span>
+          <span class="hotel-badge-dist">📍 ${hotel.dist} ${landmark}</span>
         </div>
-
-        <!-- Kotak Kanan: Interior Jenis Kamar -->
-        <div class="hotel-photo-box hotel-box-room">
-          <div class="hotel-photo-media">
-            <img 
-              src="${roomImg}" 
-              alt="${hotel.name} - Kamar ${activeMeta.label}" 
-              class="hotel-photo-img" 
-              id="${city}-room-photo-img" 
-              loading="lazy"
-              onerror="this.onerror=null; this.src='${hotelImg}';"
-            >
-            <div class="hotel-photo-top-bar">
-              <span class="hotel-chip chip-room">🛏️ Kamar ${activeMeta.label}</span>
-              <span class="hotel-chip chip-cap">👥 ${activeMeta.capShort}</span>
-            </div>
-            <div class="hotel-photo-gradient-bar">
-              <div class="hotel-photo-info-main">
-                <span class="hotel-photo-title">Interior Tipe ${activeMeta.label}</span>
-                <span class="hotel-photo-subtitle">${activeMeta.capText} • ${formatSAR(activeRoomPrice)} / malam</span>
-              </div>
-            </div>
-          </div>
+        <div class="hotel-media-gradient">
+          <div class="hotel-media-name">${hotel.name}</div>
+          <div class="hotel-media-sub">★ Bintang ${hotel.stars} • ${cityName}</div>
         </div>
       </div>
-
-      <!-- Estimasi Tarif & Pemilihan Kamar -->
-      <div class="hotel-showcase-footer">
-        <div class="hotel-footer-header">
-          <div class="hotel-footer-title">Pilihan Jenis Kamar & Estimasi Tarif / Malam</div>
-          <div class="hotel-footer-hint">Klik untuk melihat foto kamar & perbarui estimasi</div>
+      <div class="hotel-showcase-body">
+        <div class="hotel-showcase-header">
+          <div class="hotel-showcase-name">Estimasi Tarif Kamar / Malam (${hotel.name})</div>
+          <div class="hotel-showcase-tag">Klik tipe kamar untuk memperbarui kalkulasi</div>
         </div>
         <div class="hotel-rate-pills">
-          <button type="button" class="hotel-rate-pill ${currentRoom === 'quad' ? 'active' : ''}" data-type="quad" aria-label="Pilih kamar tipe Quad">
-            <div class="pill-header-row">
-              <span class="pill-name">Quad (Sekamar 4)</span>
-              <span class="pill-dot"></span>
-            </div>
-            <div class="pill-price-row">
-              <span class="pill-price">${formatSAR(hotel.prices.quad)}</span>
-              <span class="pill-unit">/ malam</span>
-            </div>
+          <button type="button" class="hotel-rate-pill ${currentRoom === 'quad' ? 'active' : ''}" data-type="quad" aria-label="Pilih tipe kamar Quad">
+            <span class="pill-type">Quad (Sekamar 4)</span>
+            <span class="pill-price">${formatSAR(hotel.prices.quad)}</span>
+            <span class="pill-unit">/ malam</span>
           </button>
-          <button type="button" class="hotel-rate-pill ${currentRoom === 'triple' ? 'active' : ''}" data-type="triple" aria-label="Pilih kamar tipe Triple">
-            <div class="pill-header-row">
-              <span class="pill-name">Triple (Sekamar 3)</span>
-              <span class="pill-dot"></span>
-            </div>
-            <div class="pill-price-row">
-              <span class="pill-price">${formatSAR(hotel.prices.triple)}</span>
-              <span class="pill-unit">/ malam</span>
-            </div>
+          <button type="button" class="hotel-rate-pill ${currentRoom === 'triple' ? 'active' : ''}" data-type="triple" aria-label="Pilih tipe kamar Triple">
+            <span class="pill-type">Triple (Sekamar 3)</span>
+            <span class="pill-price">${formatSAR(hotel.prices.triple)}</span>
+            <span class="pill-unit">/ malam</span>
           </button>
-          <button type="button" class="hotel-rate-pill ${currentRoom === 'double' ? 'active' : ''}" data-type="double" aria-label="Pilih kamar tipe Double">
-            <div class="pill-header-row">
-              <span class="pill-name">Double (Sekamar 2)</span>
-              <span class="pill-dot"></span>
-            </div>
-            <div class="pill-price-row">
-              <span class="pill-price">${formatSAR(hotel.prices.double)}</span>
-              <span class="pill-unit">/ malam</span>
-            </div>
+          <button type="button" class="hotel-rate-pill ${currentRoom === 'double' ? 'active' : ''}" data-type="double" aria-label="Pilih tipe kamar Double">
+            <span class="pill-type">Double (Sekamar 2)</span>
+            <span class="pill-price">${formatSAR(hotel.prices.double)}</span>
+            <span class="pill-unit">/ malam</span>
           </button>
         </div>
       </div>
     </div>
   `;
 
-  // Attach interactive click on rate pills
+  // Event listener klik pada pills tarif kamar
   container.querySelectorAll(".hotel-rate-pill").forEach(pill => {
     pill.addEventListener("click", () => {
       const type = pill.dataset.type;
