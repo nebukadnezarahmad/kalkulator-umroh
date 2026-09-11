@@ -1626,7 +1626,8 @@ body:has(.sticky-summary) .footer-bottom-bar {
 @media (max-width: 768px) {
   body.has-sticky-summary .footer-bottom-bar,
   body:has(.sticky-summary) .footer-bottom-bar {
-    padding-bottom: 100px;
+    padding-top: 24px;
+    padding-bottom: 125px;
   }
 }
 
@@ -2039,7 +2040,7 @@ body:has(.sticky-summary) .footer-bottom-bar {
 
 @media (max-width: 640px) {
   .scroll-top-btn {
-    bottom: 96px;
+    bottom: 102px;
     right: 14px;
     width: 36px;
     height: 36px;
