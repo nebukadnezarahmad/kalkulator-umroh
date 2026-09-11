@@ -532,82 +532,142 @@ function setupStepper(inputId, onChange) {
   });
 }
 
-function updateHotelMakkahInfo() {
-  const hotel = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId) || UMRAH_DATA.hotelsMakkah[0];
-  const infoEl = document.getElementById("hotel-makkah-info");
-  if (!hotel || !infoEl) return;
+function renderHotelShowcase(city) {
+  const isMakkah = city === "makkah";
+  const hotelList = isMakkah ? UMRAH_DATA.hotelsMakkah : UMRAH_DATA.hotelsMadinah;
+  const hotelId = calcState[city].hotelId;
+  const hotel = hotelList.find(h => h.id === hotelId) || hotelList[0];
+  const container = document.getElementById(isMakkah ? "hotel-makkah-info" : "hotel-madinah-info");
+  if (!hotel || !container) return;
 
-  const currentRoom = calcState.makkah.roomType;
-  infoEl.innerHTML = `
+  const currentRoom = calcState[city].roomType || "quad";
+  const cityName = isMakkah ? "Makkah Al-Mukarramah" : "Madinah Al-Munawwarah";
+
+  const roomMeta = {
+    quad: { label: "Quad", capText: "Sekamar 4 Orang", capShort: "4 Orang" },
+    triple: { label: "Triple", capText: "Sekamar 3 Orang", capShort: "3 Orang" },
+    double: { label: "Double", capText: "Sekamar 2 Orang", capShort: "2 Orang" }
+  };
+
+  const activeMeta = roomMeta[currentRoom] || roomMeta.quad;
+  const activeRoomPrice = hotel.prices[currentRoom] || hotel.prices.quad;
+
+  const hotelImg = hotel.image || `assets/hotels/${hotel.id}.jpg`;
+  const roomImg = (hotel.roomImages && hotel.roomImages[currentRoom]) || `assets/hotels/rooms/${hotel.id}_${currentRoom}.jpg`;
+
+  container.innerHTML = `
     <div class="hotel-showcase-card">
-      <div class="hotel-showcase-media">
-        <img src="${hotel.image || 'assets/hotels/' + hotel.id + '.jpg'}" alt="${hotel.name}" class="hotel-showcase-img" loading="lazy">
-        <div class="hotel-media-badges">
-          <span class="hotel-badge-stars">★ Bintang ${hotel.stars}</span>
-          <span class="hotel-badge-dist">📍 ${hotel.dist} ke Masjidil Haram</span>
+      <div class="hotel-dual-grid">
+        <!-- Kotak Kiri: Gedung Hotel -->
+        <div class="hotel-photo-box hotel-box-building">
+          <div class="hotel-photo-media">
+            <img 
+              src="${hotelImg}" 
+              alt="${hotel.name}" 
+              class="hotel-photo-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='assets/hotels/${hotel.id}.jpg';"
+            >
+            <div class="hotel-photo-top-bar">
+              <span class="hotel-chip chip-building">🏢 Gedung Hotel</span>
+              <span class="hotel-chip chip-dist">📍 ${hotel.dist}</span>
+            </div>
+            <div class="hotel-photo-gradient-bar">
+              <div class="hotel-photo-info-main">
+                <span class="hotel-photo-title">${hotel.name}</span>
+                <span class="hotel-photo-subtitle">★ Bintang ${hotel.stars} • ${cityName}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kotak Kanan: Interior Jenis Kamar -->
+        <div class="hotel-photo-box hotel-box-room">
+          <div class="hotel-photo-media">
+            <img 
+              src="${roomImg}" 
+              alt="${hotel.name} - Kamar ${activeMeta.label}" 
+              class="hotel-photo-img" 
+              id="${city}-room-photo-img" 
+              loading="lazy"
+              onerror="this.onerror=null; this.src='${hotelImg}';"
+            >
+            <div class="hotel-photo-top-bar">
+              <span class="hotel-chip chip-room">🛏️ Kamar ${activeMeta.label}</span>
+              <span class="hotel-chip chip-cap">👥 ${activeMeta.capShort}</span>
+            </div>
+            <div class="hotel-photo-gradient-bar">
+              <div class="hotel-photo-info-main">
+                <span class="hotel-photo-title">Interior Tipe ${activeMeta.label}</span>
+                <span class="hotel-photo-subtitle">${activeMeta.capText} • ${formatSAR(activeRoomPrice)} / malam</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="hotel-showcase-body">
-        <div class="hotel-showcase-header">
-          <div class="hotel-showcase-name">${hotel.name}</div>
-          <div class="hotel-showcase-tag">Estimasi Tarif Kamar / Malam</div>
+
+      <!-- Estimasi Tarif & Pemilihan Kamar -->
+      <div class="hotel-showcase-footer">
+        <div class="hotel-footer-header">
+          <div class="hotel-footer-title">Pilihan Jenis Kamar & Estimasi Tarif / Malam</div>
+          <div class="hotel-footer-hint">Klik untuk melihat foto kamar & perbarui estimasi</div>
         </div>
         <div class="hotel-rate-pills">
-          <div class="hotel-rate-pill ${currentRoom === 'quad' ? 'active' : ''}">
-            <span class="pill-type">Quad (Sekamar 4)</span>
-            <span class="pill-price">${formatSAR(hotel.prices.quad)}</span>
-          </div>
-          <div class="hotel-rate-pill ${currentRoom === 'triple' ? 'active' : ''}">
-            <span class="pill-type">Triple (Sekamar 3)</span>
-            <span class="pill-price">${formatSAR(hotel.prices.triple)}</span>
-          </div>
-          <div class="hotel-rate-pill ${currentRoom === 'double' ? 'active' : ''}">
-            <span class="pill-type">Double (Sekamar 2)</span>
-            <span class="pill-price">${formatSAR(hotel.prices.double)}</span>
-          </div>
+          <button type="button" class="hotel-rate-pill ${currentRoom === 'quad' ? 'active' : ''}" data-type="quad" aria-label="Pilih kamar tipe Quad">
+            <div class="pill-header-row">
+              <span class="pill-name">Quad (Sekamar 4)</span>
+              <span class="pill-dot"></span>
+            </div>
+            <div class="pill-price-row">
+              <span class="pill-price">${formatSAR(hotel.prices.quad)}</span>
+              <span class="pill-unit">/ malam</span>
+            </div>
+          </button>
+          <button type="button" class="hotel-rate-pill ${currentRoom === 'triple' ? 'active' : ''}" data-type="triple" aria-label="Pilih kamar tipe Triple">
+            <div class="pill-header-row">
+              <span class="pill-name">Triple (Sekamar 3)</span>
+              <span class="pill-dot"></span>
+            </div>
+            <div class="pill-price-row">
+              <span class="pill-price">${formatSAR(hotel.prices.triple)}</span>
+              <span class="pill-unit">/ malam</span>
+            </div>
+          </button>
+          <button type="button" class="hotel-rate-pill ${currentRoom === 'double' ? 'active' : ''}" data-type="double" aria-label="Pilih kamar tipe Double">
+            <div class="pill-header-row">
+              <span class="pill-name">Double (Sekamar 2)</span>
+              <span class="pill-dot"></span>
+            </div>
+            <div class="pill-price-row">
+              <span class="pill-price">${formatSAR(hotel.prices.double)}</span>
+              <span class="pill-unit">/ malam</span>
+            </div>
+          </button>
         </div>
       </div>
     </div>
   `;
+
+  // Attach interactive click on rate pills
+  container.querySelectorAll(".hotel-rate-pill").forEach(pill => {
+    pill.addEventListener("click", () => {
+      const type = pill.dataset.type;
+      if (!type || type === calcState[city].roomType) return;
+      calcState[city].roomType = type;
+      syncRoomSegmentActive(city, type);
+      autoAdjustRooms(city);
+      renderHotelShowcase(city);
+      recalculateAll();
+    });
+  });
+}
+
+function updateHotelMakkahInfo() {
+  renderHotelShowcase("makkah");
 }
 
 function updateHotelMadinahInfo() {
-  const hotel = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId) || UMRAH_DATA.hotelsMadinah[0];
-  const infoEl = document.getElementById("hotel-madinah-info");
-  if (!hotel || !infoEl) return;
-
-  const currentRoom = calcState.madinah.roomType;
-  infoEl.innerHTML = `
-    <div class="hotel-showcase-card">
-      <div class="hotel-showcase-media">
-        <img src="${hotel.image || 'assets/hotels/' + hotel.id + '.jpg'}" alt="${hotel.name}" class="hotel-showcase-img" loading="lazy">
-        <div class="hotel-media-badges">
-          <span class="hotel-badge-stars">★ Bintang ${hotel.stars}</span>
-          <span class="hotel-badge-dist">📍 ${hotel.dist} ke Masjid Nabawi</span>
-        </div>
-      </div>
-      <div class="hotel-showcase-body">
-        <div class="hotel-showcase-header">
-          <div class="hotel-showcase-name">${hotel.name}</div>
-          <div class="hotel-showcase-tag">Estimasi Tarif Kamar / Malam</div>
-        </div>
-        <div class="hotel-rate-pills">
-          <div class="hotel-rate-pill ${currentRoom === 'quad' ? 'active' : ''}">
-            <span class="pill-type">Quad (Sekamar 4)</span>
-            <span class="pill-price">${formatSAR(hotel.prices.quad)}</span>
-          </div>
-          <div class="hotel-rate-pill ${currentRoom === 'triple' ? 'active' : ''}">
-            <span class="pill-type">Triple (Sekamar 3)</span>
-            <span class="pill-price">${formatSAR(hotel.prices.triple)}</span>
-          </div>
-          <div class="hotel-rate-pill ${currentRoom === 'double' ? 'active' : ''}">
-            <span class="pill-type">Double (Sekamar 2)</span>
-            <span class="pill-price">${formatSAR(hotel.prices.double)}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
+  renderHotelShowcase("madinah");
 }
 
 function buildSummaryText() {
