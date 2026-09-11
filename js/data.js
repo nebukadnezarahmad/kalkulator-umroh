@@ -23,30 +23,30 @@ const UMRAH_DATA = {
   },
 
   hotelsMakkah: [
-    { id: "dar_al_taqwa", name: "Dar Al Taqwa (Bintang 5, Pelataran)", stars: 5, dist: "Pelataran Haram", prices: { double: 1450, triple: 1800, quad: 2150 } },
-    { id: "pullman_zamzam", name: "Pullman Zamzam Makkah (Bintang 5, Tower)", stars: 5, dist: "0 m (Tower)", prices: { double: 1100, triple: 1350, quad: 1600 } },
-    { id: "hilton_convention", name: "Hilton Convention Makkah (Bintang 5)", stars: 5, dist: "150 m", prices: { double: 1050, triple: 1250, quad: 1450 } },
-    { id: "swissotel_makkah", name: "Swissotel Makkah (Bintang 5, Abraj Al Bait)", stars: 5, dist: "0 m", prices: { double: 1150, triple: 1400, quad: 1650 } },
-    { id: "anjum_hotel", name: "Anjum Hotel Makkah (Bintang 5)", stars: 5, dist: "200 m", prices: { double: 850, triple: 1050, quad: 1250 } },
-    { id: "emaar_grand", name: "Emaar Grand Hotel (Bintang 4)", stars: 4, dist: "450 m", prices: { double: 550, triple: 650, quad: 750 } },
-    { id: "emaar_elite", name: "Emaar Elite Makkah (Bintang 4)", stars: 4, dist: "500 m", prices: { double: 500, triple: 600, quad: 700 } },
-    { id: "retaj_al_rayyan", name: "Retaj Al Rayyan (Bintang 4)", stars: 4, dist: "600 m", prices: { double: 480, triple: 560, quad: 640 } },
-    { id: "le_meridien_towers", name: "Le Meridien Towers (Bintang 5, Shuttle 24 Jam)", stars: 5, dist: "Shuttle Bus Gratis", prices: { double: 420, triple: 490, quad: 560 } },
-    { id: "al_kiswah_towers", name: "Al Kiswah Towers (Bintang 3, Shuttle Bus)", stars: 3, dist: "Shuttle Bus 24 Jam", prices: { double: 320, triple: 370, quad: 420 } },
-    { id: "olayan_golden", name: "Olayan Golden Hotel (Bintang 3)", stars: 3, dist: "750 m", prices: { double: 280, triple: 320, quad: 360 } }
+    { id: "dar_al_taqwa", name: "Dar Al Taqwa (Bintang 5, Pelataran)", stars: 5, dist: "Pelataran Haram", image: "assets/hotels/dar_al_taqwa.jpg", prices: { double: 1450, triple: 1800, quad: 2150 } },
+    { id: "pullman_zamzam", name: "Pullman Zamzam Makkah (Bintang 5, Tower)", stars: 5, dist: "0 m (Tower)", image: "assets/hotels/pullman_zamzam.jpg", prices: { double: 1100, triple: 1350, quad: 1600 } },
+    { id: "hilton_convention", name: "Hilton Convention Makkah (Bintang 5)", stars: 5, dist: "150 m", image: "assets/hotels/hilton_convention.jpg", prices: { double: 1050, triple: 1250, quad: 1450 } },
+    { id: "swissotel_makkah", name: "Swissotel Makkah (Bintang 5, Abraj Al Bait)", stars: 5, dist: "0 m", image: "assets/hotels/swissotel_makkah.jpg", prices: { double: 1150, triple: 1400, quad: 1650 } },
+    { id: "anjum_hotel", name: "Anjum Hotel Makkah (Bintang 5)", stars: 5, dist: "200 m", image: "assets/hotels/anjum_hotel.jpg", prices: { double: 850, triple: 1050, quad: 1250 } },
+    { id: "emaar_grand", name: "Emaar Grand Hotel (Bintang 4)", stars: 4, dist: "450 m", image: "assets/hotels/emaar_grand.jpg", prices: { double: 550, triple: 650, quad: 750 } },
+    { id: "emaar_elite", name: "Emaar Elite Makkah (Bintang 4)", stars: 4, dist: "500 m", image: "assets/hotels/emaar_elite.jpg", prices: { double: 500, triple: 600, quad: 700 } },
+    { id: "retaj_al_rayyan", name: "Retaj Al Rayyan (Bintang 4)", stars: 4, dist: "600 m", image: "assets/hotels/retaj_al_rayyan.jpg", prices: { double: 480, triple: 560, quad: 640 } },
+    { id: "le_meridien_towers", name: "Le Meridien Towers (Bintang 5, Shuttle 24 Jam)", stars: 5, dist: "Shuttle Bus Gratis", image: "assets/hotels/le_meridien_towers.jpg", prices: { double: 420, triple: 490, quad: 560 } },
+    { id: "al_kiswah_towers", name: "Al Kiswah Towers (Bintang 3, Shuttle Bus)", stars: 3, dist: "Shuttle Bus 24 Jam", image: "assets/hotels/al_kiswah_towers.jpg", prices: { double: 320, triple: 370, quad: 420 } },
+    { id: "olayan_golden", name: "Olayan Golden Hotel (Bintang 3)", stars: 3, dist: "750 m", image: "assets/hotels/olayan_golden.jpg", prices: { double: 280, triple: 320, quad: 360 } }
   ],
 
   hotelsMadinah: [
-    { id: "dar_al_iman_intercon", name: "Dar Al Iman InterContinental (Bintang 5, Depan Pintu 25)", stars: 5, dist: "Pelataran Nabawi", prices: { double: 1250, triple: 1450, quad: 1650 } },
-    { id: "maden_hotel", name: "Maden Hotel Madinah (Bintang 5)", stars: 5, dist: "50 m", prices: { double: 950, triple: 1100, quad: 1250 } },
-    { id: "pullman_madinah", name: "Pullman Madinah (Bintang 5)", stars: 5, dist: "100 m", prices: { double: 880, triple: 1100, quad: 1320 } },
-    { id: "saja_al_madinah", name: "Saja Al Madinah (Bintang 4, Favorit Jemaah)", stars: 4, dist: "250 m", prices: { double: 520, triple: 580, quad: 640 } },
-    { id: "rua_international", name: "Rua International Hotel (Bintang 4)", stars: 4, dist: "200 m", prices: { double: 500, triple: 550, quad: 600 } },
-    { id: "emaar_royal", name: "Emaar Royal Madinah (Bintang 5)", stars: 5, dist: "150 m", prices: { double: 680, triple: 780, quad: 880 } },
-    { id: "grand_plaza_badr", name: "Grand Plaza Badr Al Maqam (Bintang 4)", stars: 4, dist: "300 m", prices: { double: 520, triple: 600, quad: 680 } },
-    { id: "concorde_dar_al_khair", name: "Concorde Dar Al Khair (Bintang 3)", stars: 3, dist: "250 m", prices: { double: 480, triple: 530, quad: 580 } },
-    { id: "diyar_al_eiman", name: "Diyar Al Eiman (Bintang 3)", stars: 3, dist: "350 m", prices: { double: 460, triple: 510, quad: 560 } },
-    { id: "saman_al_jadid", name: "Saman Al Jadid (Bintang 3 Ekonomis)", stars: 3, dist: "450 m", prices: { double: 300, triple: 340, quad: 380 } }
+    { id: "dar_al_iman_intercon", name: "Dar Al Iman InterContinental (Bintang 5, Depan Pintu 25)", stars: 5, dist: "Pelataran Nabawi", image: "assets/hotels/dar_al_iman_intercon.jpg", prices: { double: 1250, triple: 1450, quad: 1650 } },
+    { id: "maden_hotel", name: "Maden Hotel Madinah (Bintang 5)", stars: 5, dist: "50 m", image: "assets/hotels/maden_hotel.jpg", prices: { double: 950, triple: 1100, quad: 1250 } },
+    { id: "pullman_madinah", name: "Pullman Madinah (Bintang 5)", stars: 5, dist: "100 m", image: "assets/hotels/pullman_madinah.jpg", prices: { double: 880, triple: 1100, quad: 1320 } },
+    { id: "saja_al_madinah", name: "Saja Al Madinah (Bintang 4, Favorit Jemaah)", stars: 4, dist: "250 m", image: "assets/hotels/saja_al_madinah.jpg", prices: { double: 520, triple: 580, quad: 640 } },
+    { id: "rua_international", name: "Rua International Hotel (Bintang 4)", stars: 4, dist: "200 m", image: "assets/hotels/rua_international.jpg", prices: { double: 500, triple: 550, quad: 600 } },
+    { id: "emaar_royal", name: "Emaar Royal Madinah (Bintang 5)", stars: 5, dist: "150 m", image: "assets/hotels/emaar_royal.jpg", prices: { double: 680, triple: 780, quad: 880 } },
+    { id: "grand_plaza_badr", name: "Grand Plaza Badr Al Maqam (Bintang 4)", stars: 4, dist: "300 m", image: "assets/hotels/grand_plaza_badr.jpg", prices: { double: 520, triple: 600, quad: 680 } },
+    { id: "concorde_dar_al_khair", name: "Concorde Dar Al Khair (Bintang 3)", stars: 3, dist: "250 m", image: "assets/hotels/concorde_dar_al_khair.jpg", prices: { double: 480, triple: 530, quad: 580 } },
+    { id: "diyar_al_eiman", name: "Diyar Al Eiman (Bintang 3)", stars: 3, dist: "350 m", image: "assets/hotels/diyar_al_eiman.jpg", prices: { double: 460, triple: 510, quad: 560 } },
+    { id: "saman_al_jadid", name: "Saman Al Jadid (Bintang 3 Ekonomis)", stars: 3, dist: "450 m", image: "assets/hotels/saman_al_jadid.jpg", prices: { double: 300, triple: 340, quad: 380 } }
   ],
 
   hhrRoutes: [

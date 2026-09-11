@@ -183,12 +183,12 @@ function updateRoomCapacityHints() {
 
   const makkahHint = document.getElementById("makkah-room-calc-hint");
   if (makkahHint) {
-    makkahHint.textContent = `${pax} jamaah idealnya butuh ${makkahAutoRooms} kamar (${calcState.makkah.roomType.toUpperCase()})`;
+    makkahHint.textContent = `${pax} pax: ${makkahAutoRooms} kamar (${calcState.makkah.roomType.toUpperCase()})`;
   }
 
   const madinahHint = document.getElementById("madinah-room-calc-hint");
   if (madinahHint) {
-    madinahHint.textContent = `${pax} jamaah idealnya butuh ${madinahAutoRooms} kamar (${calcState.madinah.roomType.toUpperCase()})`;
+    madinahHint.textContent = `${pax} pax: ${madinahAutoRooms} kamar (${calcState.madinah.roomType.toUpperCase()})`;
   }
 }
 
@@ -478,6 +478,8 @@ function setupRoomTypeControl(city) {
       btn.classList.add("active");
       calcState[city].roomType = btn.dataset.type;
       autoAdjustRooms(city);
+      if (city === "makkah") updateHotelMakkahInfo();
+      if (city === "madinah") updateHotelMadinahInfo();
       recalculateAll();
     });
   });
@@ -531,35 +533,81 @@ function setupStepper(inputId, onChange) {
 }
 
 function updateHotelMakkahInfo() {
-  const hotel = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId);
+  const hotel = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId) || UMRAH_DATA.hotelsMakkah[0];
   const infoEl = document.getElementById("hotel-makkah-info");
-  if (hotel && infoEl) {
-    infoEl.innerHTML = `
-      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:13px;margin-bottom:6px;">
-        <span>★ <b>Bintang ${hotel.stars}</b></span>
-        <span>📍 <b>${hotel.dist} ke Masjidil Haram</b></span>
+  if (!hotel || !infoEl) return;
+
+  const currentRoom = calcState.makkah.roomType;
+  infoEl.innerHTML = `
+    <div class="hotel-showcase-card">
+      <div class="hotel-showcase-media">
+        <img src="${hotel.image || 'assets/hotels/' + hotel.id + '.jpg'}" alt="${hotel.name}" class="hotel-showcase-img" loading="lazy">
+        <div class="hotel-media-badges">
+          <span class="hotel-badge-stars">★ Bintang ${hotel.stars}</span>
+          <span class="hotel-badge-dist">📍 ${hotel.dist} ke Masjidil Haram</span>
+        </div>
       </div>
-      <div style="font-size:12px;color:var(--text-muted)">
-        Quad: <b>${hotel.prices.quad} SAR</b> · Triple: <b>${hotel.prices.triple} SAR</b> · Double: <b>${hotel.prices.double} SAR</b> / kamar / malam
+      <div class="hotel-showcase-body">
+        <div class="hotel-showcase-header">
+          <div class="hotel-showcase-name">${hotel.name}</div>
+          <div class="hotel-showcase-tag">Estimasi Tarif Kamar / Malam</div>
+        </div>
+        <div class="hotel-rate-pills">
+          <div class="hotel-rate-pill ${currentRoom === 'quad' ? 'active' : ''}">
+            <span class="pill-type">Quad (Sekamar 4)</span>
+            <span class="pill-price">${formatSAR(hotel.prices.quad)}</span>
+          </div>
+          <div class="hotel-rate-pill ${currentRoom === 'triple' ? 'active' : ''}">
+            <span class="pill-type">Triple (Sekamar 3)</span>
+            <span class="pill-price">${formatSAR(hotel.prices.triple)}</span>
+          </div>
+          <div class="hotel-rate-pill ${currentRoom === 'double' ? 'active' : ''}">
+            <span class="pill-type">Double (Sekamar 2)</span>
+            <span class="pill-price">${formatSAR(hotel.prices.double)}</span>
+          </div>
+        </div>
       </div>
-    `;
-  }
+    </div>
+  `;
 }
 
 function updateHotelMadinahInfo() {
-  const hotel = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId);
+  const hotel = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId) || UMRAH_DATA.hotelsMadinah[0];
   const infoEl = document.getElementById("hotel-madinah-info");
-  if (hotel && infoEl) {
-    infoEl.innerHTML = `
-      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:13px;margin-bottom:6px;">
-        <span>★ <b>Bintang ${hotel.stars}</b></span>
-        <span>📍 <b>${hotel.dist} ke Masjid Nabawi</b></span>
+  if (!hotel || !infoEl) return;
+
+  const currentRoom = calcState.madinah.roomType;
+  infoEl.innerHTML = `
+    <div class="hotel-showcase-card">
+      <div class="hotel-showcase-media">
+        <img src="${hotel.image || 'assets/hotels/' + hotel.id + '.jpg'}" alt="${hotel.name}" class="hotel-showcase-img" loading="lazy">
+        <div class="hotel-media-badges">
+          <span class="hotel-badge-stars">★ Bintang ${hotel.stars}</span>
+          <span class="hotel-badge-dist">📍 ${hotel.dist} ke Masjid Nabawi</span>
+        </div>
       </div>
-      <div style="font-size:12px;color:var(--text-muted)">
-        Quad: <b>${hotel.prices.quad} SAR</b> · Triple: <b>${hotel.prices.triple} SAR</b> · Double: <b>${hotel.prices.double} SAR</b> / kamar / malam
+      <div class="hotel-showcase-body">
+        <div class="hotel-showcase-header">
+          <div class="hotel-showcase-name">${hotel.name}</div>
+          <div class="hotel-showcase-tag">Estimasi Tarif Kamar / Malam</div>
+        </div>
+        <div class="hotel-rate-pills">
+          <div class="hotel-rate-pill ${currentRoom === 'quad' ? 'active' : ''}">
+            <span class="pill-type">Quad (Sekamar 4)</span>
+            <span class="pill-price">${formatSAR(hotel.prices.quad)}</span>
+          </div>
+          <div class="hotel-rate-pill ${currentRoom === 'triple' ? 'active' : ''}">
+            <span class="pill-type">Triple (Sekamar 3)</span>
+            <span class="pill-price">${formatSAR(hotel.prices.triple)}</span>
+          </div>
+          <div class="hotel-rate-pill ${currentRoom === 'double' ? 'active' : ''}">
+            <span class="pill-type">Double (Sekamar 2)</span>
+            <span class="pill-price">${formatSAR(hotel.prices.double)}</span>
+          </div>
+        </div>
       </div>
-    `;
-  }
+    </div>
+  `;
 }
 
 function buildSummaryText() {
