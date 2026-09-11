@@ -57,20 +57,20 @@ const UMRAH_DATA = {
   ],
 
   localTransport: [
-    { id: "airport_hotel_jeddah", label: "Antar-Jemput Bandara Jeddah ↔ Hotel Makkah", priceSar: 350, icon: "car" },
-    { id: "airport_hotel_medinah", label: "Antar-Jemput Bandara Madinah ↔ Hotel Madinah", priceSar: 250, icon: "car" },
-    { id: "stasiun_hotel_makkah", label: "Stasiun Kereta HHR ↔ Hotel Makkah", priceSar: 200, icon: "car" },
-    { id: "stasiun_hotel_medinah", label: "Stasiun Kereta HHR ↔ Hotel Madinah", priceSar: 200, icon: "car" },
-    { id: "carter_ziarah_makkah", label: "Carter Mobil Ziarah Kota Makkah (Jabal Nur, Arafah, Mina - 6 Jam)", priceSar: 450, icon: "van" },
-    { id: "carter_ziarah_medinah", label: "Carter Mobil Ziarah Kota Madinah (Masjid Quba, Uhud, Percetakan Quran - 6 Jam)", priceSar: 400, icon: "van" },
-    { id: "ziarah_thaif", label: "Carter Mobil Ekskursi Ziarah Thaif PP (Teleferik, Masjid Abbas - 6-8 Jam)", priceSar: 600, icon: "mountain" },
-    { id: "wisata_alula", label: "Ekskursi Madinah ↔ Al Ula PP (Madain Saleh, Elephant Rock)", priceSar: 1200, icon: "landmark" }
+    { id: "airport_hotel_jeddah", label: "Antar-Jemput Bandara Jeddah ↔ Hotel Makkah", priceSar: 350, desc: "Sedan / GMC privat langsung ke lobi hotel Makkah", icon: "car" },
+    { id: "airport_hotel_medinah", label: "Antar-Jemput Bandara Madinah ↔ Hotel Madinah", priceSar: 250, desc: "Sedan / GMC privat langsung ke lobi hotel Madinah", icon: "car" },
+    { id: "stasiun_hotel_makkah", label: "Stasiun Kereta HHR ↔ Hotel Makkah", priceSar: 200, desc: "Antar-jemput stasiun Haramain ke hotel Makkah", icon: "car" },
+    { id: "stasiun_hotel_medinah", label: "Stasiun Kereta HHR ↔ Hotel Madinah", priceSar: 200, desc: "Antar-jemput stasiun Haramain ke hotel Madinah", icon: "car" },
+    { id: "carter_ziarah_makkah", label: "Carter Mobil Ziarah Kota Makkah", priceSar: 450, desc: "Jabal Nur, Arafah, Mina, Jabal Tsur (Durasi ±6 Jam)", icon: "van" },
+    { id: "carter_ziarah_medinah", label: "Carter Mobil Ziarah Kota Madinah", priceSar: 400, desc: "Masjid Quba, Jabal Uhud, Percetakan Quran (Durasi ±6 Jam)", icon: "van" },
+    { id: "ziarah_thaif", label: "Carter Mobil Ekskursi Ziarah Thaif PP", priceSar: 600, desc: "Teleferik, Masjid Abdullah bin Abbas, Miqat Qarnul Manazil (±8 Jam)", icon: "mountain" },
+    { id: "wisata_alula", label: "Ekskursi Madinah ↔ Al Ula PP", priceSar: 1200, desc: "Kawasan Bersejarah Hegra / Madain Saleh & Elephant Rock", icon: "landmark" }
   ],
 
   mutawwifServices: [
-    { id: "mutawwif_full", label: "Pendampingan Mutawwif Khusus (Full Manasik & Bimbingan Ibadah)", priceSar: 1500, desc: "Mutawwif resmi berbahasa Indonesia mendampingi rangkaian ibadah umroh & ziarah sejarah Islam.", checked: true },
-    { id: "airport_handling", label: "Handling Bandara Kedatangan & Kepulangan (Fast Track & Bagasi)", priceSar: 300, desc: "Penyambutan di bandara, bantuan imigrasi, penanganan bagasi bus/mobil, dan check-in hotel.", checked: true },
-    { id: "exclusive_merchandise", label: "Paket Perlengkapan Umroh Mutawwifmu (Koper Fiber, Kain Ihram/Mukena, Tas Paspor)", priceIdr: 950000, isPerPax: true, desc: "Perlengkapan standar ibadah eksklusif dikirim ke rumah sebelum keberangkatan.", checked: false }
+    { id: "mutawwif_full", label: "Pendampingan Mutawwif Khusus", priceSar: 1500, desc: "Mutawwif resmi berbahasa Indonesia mendampingi rangkaian ibadah umroh & ziarah sejarah Islam.", checked: true },
+    { id: "airport_handling", label: "Handling Bandara Kedatangan & Kepulangan", priceSar: 300, desc: "Penyambutan di bandara, bantuan imigrasi, penanganan bagasi bus/mobil, dan check-in hotel.", checked: true },
+    { id: "exclusive_merchandise", label: "Paket Perlengkapan Umroh Mutawwifmu", priceIdr: 950000, isPerPax: true, desc: "Perlengkapan ibadah eksklusif dikirim ke rumah sebelum keberangkatan (Koper fiber, Ihram/Mukena, Tas paspor).", checked: false }
   ],
 
   flightEstimates: [

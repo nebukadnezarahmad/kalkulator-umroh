@@ -226,8 +226,8 @@ function initCalculator() {
           <div class="option-left">
             <input type="checkbox" id="hhr-${r.id}" class="option-checkbox" value="${r.id}" ${isChecked ? 'checked' : ''}>
             <div>
-              <div class="option-label">${r.route}</div>
-              <div class="option-desc">${r.class} · estimasi ${r.duration}</div>
+              <div class="option-label">${r.label}</div>
+              <div class="option-desc">${r.desc}</div>
             </div>
           </div>
           <div class="option-price">${formatSAR(r.priceSar)} / tiket</div>
@@ -261,8 +261,8 @@ function initCalculator() {
           <div class="option-left">
             <input type="checkbox" id="transport-${t.id}" class="option-checkbox" value="${t.id}" ${isChecked ? 'checked' : ''}>
             <div>
-              <div class="option-label">${t.title}</div>
-              <div class="option-desc">${t.vehicle} · ${t.desc}</div>
+              <div class="option-label">${t.label}</div>
+              <div class="option-desc">${t.desc}</div>
             </div>
           </div>
           <div class="option-price">${formatSAR(t.priceSar)}</div>
@@ -297,7 +297,7 @@ function initCalculator() {
           <div class="option-left">
             <input type="checkbox" id="mutawwif-${m.id}" class="option-checkbox" value="${m.id}" ${isChecked ? 'checked' : ''}>
             <div>
-              <div class="option-label">${m.title}</div>
+              <div class="option-label">${m.label}</div>
               <div class="option-desc">${m.desc}</div>
             </div>
           </div>
@@ -573,12 +573,12 @@ function renderHotelShowcase(city) {
         </div>
         <div class="hotel-media-gradient">
           <div class="hotel-media-name">${hotel.name}</div>
-          <div class="hotel-media-sub">★ Bintang ${hotel.stars} • ${cityName}</div>
+          <div class="hotel-media-sub">${cityName}</div>
         </div>
       </div>
       <div class="hotel-showcase-body">
         <div class="hotel-showcase-header">
-          <div class="hotel-showcase-name">Estimasi Tarif Kamar / Malam (${hotel.name})</div>
+          <div class="hotel-showcase-name">Pilihan Tipe Kamar &amp; Tarif / Malam</div>
           <div class="hotel-showcase-tag">Klik tipe kamar untuk memperbarui kalkulasi</div>
         </div>
         <div class="hotel-rate-pills">
