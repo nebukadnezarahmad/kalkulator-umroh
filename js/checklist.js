@@ -5,39 +5,9 @@
 
 let checklistState = [];
 
-function initTheme() {
-  const savedTheme = localStorage.getItem("mutawwifmu_theme") || "light";
-  document.documentElement.setAttribute("data-theme", savedTheme);
-  updateThemeIcons(savedTheme);
-
-  const toggleBtn = document.getElementById("theme-toggle");
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-      const current = document.documentElement.getAttribute("data-theme") || "light";
-      const next = current === "dark" ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", next);
-      localStorage.setItem("mutawwifmu_theme", next);
-      updateThemeIcons(next);
-    });
-  }
-}
-
-function updateThemeIcons(theme) {
-  const moon = document.getElementById("theme-icon-moon");
-  const sun = document.getElementById("theme-icon-sun");
-  if (moon && sun) {
-    if (theme === "dark") {
-      moon.style.display = "none";
-      sun.style.display = "block";
-    } else {
-      moon.style.display = "block";
-      sun.style.display = "none";
-    }
-  }
-}
-
 function initChecklist() {
-  initTheme();
+  document.documentElement.removeAttribute("data-theme");
+  localStorage.removeItem("mutawwifmu_theme");
 
   const saved = localStorage.getItem("MUTAWWIFMU_CHECKLIST");
   if (saved) {
