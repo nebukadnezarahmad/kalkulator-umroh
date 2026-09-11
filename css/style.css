@@ -337,19 +337,37 @@ button, input, select, textarea {
   box-shadow: none;
 }
 
-.btn-gold {
+.btn-gold,
+a.btn-gold,
+button.btn-gold {
   background-color: var(--gold);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   border-color: var(--gold);
   box-shadow: none;
 }
 
-.btn-gold:hover {
+.btn-gold:hover,
+.btn-gold:focus,
+.btn-gold:active,
+.btn-gold:visited,
+a.btn-gold:hover,
+a.btn-gold:focus,
+a.btn-gold:active,
+a.btn-gold:visited,
+button.btn-gold:hover,
+button.btn-gold:focus,
+button.btn-gold:active {
   background-color: var(--gold-hover);
   border-color: var(--gold-hover);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   transform: none;
   box-shadow: none;
+}
+
+.btn-gold *,
+a.btn-gold *,
+button.btn-gold * {
+  color: #FFFFFF !important;
 }
 
 .btn-outline-gold {
@@ -478,9 +496,11 @@ button, input, select, textarea {
   margin-bottom: 24px;
 }
 
-.btn-hero-cta {
+.btn-hero-cta,
+a.btn-hero-cta,
+button.btn-hero-cta {
   background-color: var(--gold);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   padding: 13px 28px;
   border-radius: 8px;
   font-family: var(--font-heading);
@@ -496,11 +516,27 @@ button, input, select, textarea {
   text-decoration: none;
 }
 
-.btn-hero-cta:hover {
+.btn-hero-cta:hover,
+.btn-hero-cta:focus,
+.btn-hero-cta:active,
+.btn-hero-cta:visited,
+a.btn-hero-cta:hover,
+a.btn-hero-cta:focus,
+a.btn-hero-cta:active,
+a.btn-hero-cta:visited,
+button.btn-hero-cta:hover,
+button.btn-hero-cta:focus,
+button.btn-hero-cta:active {
   background-color: var(--gold-hover);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   transform: none;
   box-shadow: none;
+}
+
+.btn-hero-cta *,
+a.btn-hero-cta *,
+button.btn-hero-cta * {
+  color: #FFFFFF !important;
 }
 
 .rate-pills {
@@ -1079,9 +1115,11 @@ button, input, select, textarea {
   gap: 10px;
 }
 
-.btn-whatsapp-cta {
+.btn-whatsapp-cta,
+button.btn-whatsapp-cta,
+a.btn-whatsapp-cta {
   background-color: var(--gold);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   min-height: 44px;
   padding: 11px 22px;
   border-radius: 8px;
@@ -1096,19 +1134,37 @@ button, input, select, textarea {
   box-shadow: none;
   transition: background-color 0.2s ease;
   white-space: nowrap;
+  text-decoration: none;
 }
 
-.btn-whatsapp-cta:hover {
+.btn-whatsapp-cta:hover,
+.btn-whatsapp-cta:focus,
+.btn-whatsapp-cta:active,
+.btn-whatsapp-cta:visited,
+button.btn-whatsapp-cta:hover,
+button.btn-whatsapp-cta:focus,
+button.btn-whatsapp-cta:active,
+a.btn-whatsapp-cta:hover,
+a.btn-whatsapp-cta:focus,
+a.btn-whatsapp-cta:active,
+a.btn-whatsapp-cta:visited {
   background-color: var(--gold-hover);
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   transform: none;
   box-shadow: none;
 }
 
-.btn-whatsapp-cta svg {
+.btn-whatsapp-cta *,
+button.btn-whatsapp-cta *,
+a.btn-whatsapp-cta * {
+  color: #FFFFFF !important;
+}
+
+.btn-whatsapp-cta svg,
+.btn-whatsapp-cta svg path {
   width: 18px;
   height: 18px;
-  fill: currentColor;
+  fill: #FFFFFF !important;
 }
 
 .btn-reset-summary {
@@ -1277,7 +1333,9 @@ button, input, select, textarea {
   flex-wrap: wrap;
 }
 
-.btn-cta-gold {
+.btn-cta-gold,
+a.btn-cta-gold,
+button.btn-cta-gold {
   background-color: var(--gold);
   color: #FFFFFF !important;
   padding: 13px 28px;
@@ -1295,11 +1353,27 @@ button, input, select, textarea {
   cursor: pointer;
 }
 
-.btn-cta-gold:hover {
+.btn-cta-gold:hover,
+.btn-cta-gold:focus,
+.btn-cta-gold:active,
+.btn-cta-gold:visited,
+a.btn-cta-gold:hover,
+a.btn-cta-gold:focus,
+a.btn-cta-gold:active,
+a.btn-cta-gold:visited,
+button.btn-cta-gold:hover,
+button.btn-cta-gold:focus,
+button.btn-cta-gold:active {
   background-color: var(--gold-hover);
   color: #FFFFFF !important;
   transform: none;
   box-shadow: none;
+}
+
+.btn-cta-gold *,
+a.btn-cta-gold *,
+button.btn-cta-gold * {
+  color: #FFFFFF !important;
 }
 
 .btn-cta-outline {
