@@ -50,6 +50,10 @@
     const stickySummary = document.querySelector('.sticky-summary');
     const heroInner = document.querySelector('.hero-inner');
 
+    if (stickySummary) {
+      document.body.classList.add('has-sticky-summary');
+    }
+
     // If reduced motion is requested, reveal everything immediately and keep it simple
     if (isReducedMotion) {
       if (stickySummary) {
