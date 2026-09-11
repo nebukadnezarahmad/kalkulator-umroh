@@ -91,25 +91,30 @@ button, input, select, textarea {
   outline-offset: 2px;
 }
 
-/* Header and primary navigation */
+/* Header and primary navigation (Floating Pill Header as in mutawwifmu.com) */
 .site-header {
   position: sticky;
-  top: 0;
-  z-index: 50;
-  background: var(--bg-surface);
-  border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  top: 16px;
+  z-index: 60;
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+  padding: 16px 20px 0;
+  margin-bottom: -78px;
 }
 
 .header-container {
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 12px 24px;
+  padding: 10px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  background: #FFFFFF;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(15, 30, 60, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.9);
 }
 
 .brand-logo {
@@ -160,6 +165,31 @@ button, input, select, textarea {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.btn-header-contact {
+  background-color: #355C9D;
+  color: #FFFFFF;
+  border: 1px solid #355C9D;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.btn-header-contact:hover {
+  background-color: #28477C;
+  border-color: #28477C;
+  color: #FFFFFF;
+  transform: translateY(-1px);
 }
 
 /* Button styles with high-contrast accessibility */
@@ -219,6 +249,28 @@ button, input, select, textarea {
   border-color: var(--gold-hover);
 }
 
+.btn-outline-white {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-outline-white:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
 .btn-secondary {
   background-color: var(--bg-soft);
   color: var(--text-body);
@@ -235,65 +287,97 @@ button, input, select, textarea {
   font-size: 12.5px;
 }
 
-/* Hero section */
+/* Hero Section (Mutawwifmu Aesthetic with Airplane Window & Kaaba) */
 .hero-section {
-  background: linear-gradient(135deg, #162744 0%, #203A63 50%, #30548E 100%);
+  background-color: #426BAD;
+  background-image: url("../assets/hero-bg.webp");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: auto 100%;
   color: #FFFFFF;
-  padding: 52px 24px 60px;
+  padding: 120px 24px 76px;
   position: relative;
   overflow: hidden;
+  min-height: 550px;
+  display: flex;
+  align-items: center;
 }
 
 .hero-inner {
   max-width: var(--container-max);
+  width: 100%;
   margin: 0 auto;
   position: relative;
-  z-index: 1;
-  text-align: center;
+  z-index: 2;
+  text-align: left;
 }
 
-.tag-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 16px;
-  border-radius: var(--radius-pill);
-  background: rgba(214, 158, 75, 0.18);
-  border: 1px solid rgba(214, 158, 75, 0.45);
-  color: #F8E3C2;
-  font-family: var(--font-heading);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 16px;
+.hero-content {
+  max-width: 580px;
+}
+
+.hero-eyebrow {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 500;
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
 }
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(26px, 4vw, 40px);
-  font-weight: 800;
-  line-height: 1.25;
-  margin-bottom: 14px;
+  font-size: clamp(34px, 4.4vw, 52px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 18px;
   color: #FFFFFF;
 }
 
-.hero-title span {
-  color: #F3C47E;
+.hero-desc {
+  font-size: clamp(14.5px, 1.55vw, 16px);
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 520px;
+  margin: 0 0 26px 0;
+  line-height: 1.65;
 }
 
-.hero-desc {
-  font-size: clamp(14px, 1.8vw, 16px);
-  color: rgba(255, 255, 255, 0.9);
-  max-width: 680px;
-  margin: 0 auto 24px;
-  line-height: 1.65;
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.btn-hero-cta {
+  background-color: var(--gold);
+  color: #FFFFFF;
+  padding: 13px 28px;
+  border-radius: 8px;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(214, 158, 75, 0.35);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.btn-hero-cta:hover {
+  background-color: var(--gold-hover);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(214, 158, 75, 0.45);
 }
 
 .rate-pills {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   flex-wrap: wrap;
 }
@@ -922,8 +1006,37 @@ button, input, select, textarea {
 
 /* Mobile responsive adjustments */
 @media (max-width: 860px) {
+  .site-header {
+    padding: 12px 14px 0;
+    margin-bottom: -68px;
+  }
+
+  .header-container {
+    padding: 8px 16px;
+  }
+
+  .brand-logo img {
+    height: 34px;
+  }
+
+  .btn-header-contact {
+    padding: 8px 16px;
+    font-size: 12.5px;
+  }
+
   .nav-menu {
     display: none;
+  }
+
+  .hero-section {
+    padding: 95px 18px 50px;
+    background: linear-gradient(180deg, rgba(66, 107, 173, 0.92) 0%, rgba(66, 107, 173, 0.96) 100%), url("../assets/hero-bg.webp") no-repeat center right / cover;
+    min-height: auto;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    text-align: left;
   }
 
   .faq-grid {
