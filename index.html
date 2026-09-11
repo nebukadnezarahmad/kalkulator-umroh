@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Biaya Umroh Mandiri 2026 — Mutawwifmu</title>
+  <meta name="description" content="Hitung estimasi rincian biaya umroh mandiri & backpacker 2026 secara akurat dan transparan. Simulasi visa, hotel Makkah-Madinah, Kereta Cepat HHR bersama Mutawwifmu.">
+  <link rel="icon" type="image/webp" href="assets/favicon.webp">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==================== TOP NAVIGATION ==================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo" aria-label="Mutawwifmu Beranda">
+        <img src="assets/logo.webp" alt="Mutawwifmu Logo" width="180" height="42">
+      </a>
+      <nav aria-label="Navigasi Utama">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">Kalkulator Umroh</a></li>
+          <li><a href="checklist.html" class="nav-link">Checklist Persiapan</a></li>
+          <li><a href="https://mutawwifmu.com/tentang-kami/" target="_blank" rel="noopener" class="nav-link">Tentang Kami</a></li>
+          <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener" class="nav-link">Layanan LA</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="checklist.html" class="btn btn-outline-gold btn-sm">Checklist Ibadah</a>
+        <button id="nav-btn-wa" class="btn btn-gold btn-sm" aria-label="Konsultasi WhatsApp">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Konsultasi
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO BANNER ==================== -->
+  <section class="hero-section">
+    <div class="hero-inner">
+      <div class="tag-badge">Land Arrangement &amp; Umroh Mandiri</div>
+      <h1 class="hero-title">Rancang &amp; Hitung Estimasi Biaya <span>Umroh Mandiri</span></h1>
+      <p class="hero-desc">
+        Hitung sendiri kebutuhan Land Arrangement (LA) di Tanah Suci secara akurat, transparan, dan terpercaya bersama Mutawwifmu. Tanpa biaya tersembunyi.
+      </p>
+      <div class="rate-pills">
+        <span class="rate-chip">Kurs SAR: <b>1 SAR ≈ Rp4.250</b></span>
+        <span class="rate-chip">Kurs USD: <b>1 USD ≈ Rp16.200</b></span>
+        <span class="rate-chip">Mitra Resmi: <b>Mutawwifmu Global</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== MAIN CALCULATOR WORKFLOW ==================== -->
+  <main class="main-wrapper">
+    <div class="calculator-grid">
+
+      <!-- LANGKAH 1: VISA & JUMLAH JAMAAH -->
+      <section class="calc-card" id="card-step-visa">
+        <div class="card-header">
+          <div class="step-info">
+            <div class="step-num">01</div>
+            <div>
+              <h2 class="card-title">Visa Umroh &amp; Jumlah Jamaah</h2>
+              <p class="card-subtitle">Penerbitan visa resmi umroh dan proteksi asuransi kesehatan Kerajaan Arab Saudi</p>
+            </div>
+          </div>
+          <div class="card-subtotal">
+            <div class="sar-val" id="subtotal-visa-sar">$430</div>
+            <div class="idr-val" id="subtotal-visa-idr">Rp6.966.000</div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="pax-count">
+              <span>Jumlah Jamaah (Orang)</span>
+              <span class="hint">Minimal 1 orang</span>
+            </label>
+            <div class="stepper-wrap">
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi jumlah orang">−</button>
+              <input type="number" id="pax-count" class="stepper-input" value="2" min="1" max="50">
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah jumlah orang">+</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">
+              <span>Paket Visa</span>
+              <span class="hint">Biaya resmi per pax</span>
+            </label>
+            <input type="text" class="form-control" value="Visa Umroh + Asuransi Medis ($215 / pax)" readonly style="background:#f8fafc;cursor:not-allowed">
+          </div>
+        </div>
+      </section>
+
+      <!-- LANGKAH 2: AKOMODASI MAKKAH -->
+      <section class="calc-card" id="card-step-makkah">
+        <div class="card-header">
+          <div class="step-info">
+            <div class="step-num">02</div>
+            <div>
+              <h2 class="card-title">Akomodasi Hotel Makkah</h2>
+              <p class="card-subtitle">Pilih hotel, jarak ke Masjidil Haram, dan konfigurasi kamar</p>
+            </div>
+          </div>
+          <div class="card-subtotal">
+            <div class="sar-val" id="subtotal-makkah-sar">3.750 SAR</div>
+            <div class="idr-val" id="subtotal-makkah-idr">Rp15.937.500</div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label class="form-label" for="hotel-makkah-select">Pilihan Hotel Makkah</label>
+          <select id="hotel-makkah-select" class="form-select"></select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label class="form-label">
+            <span>Tipe Kamar (Kapasitas Tempat Tidur)</span>
+            <span class="hint">Quad paling hemat untuk rombongan/keluarga</span>
+          </label>
+          <div class="room-type-selector" id="room-type-makkah">
+            <button type="button" class="room-type-btn active" data-room-type="quad">
+              <span class="title">Quad (4 Orang)</span>
+              <span class="desc">4 Single Bed (Hemat)</span>
+            </button>
+            <button type="button" class="room-type-btn" data-room-type="triple">
+              <span class="title">Triple (3 Orang)</span>
+              <span class="desc">3 Single Bed (Nyaman)</span>
+            </button>
+            <button type="button" class="room-type-btn" data-room-type="double">
+              <span class="title">Double (2 Orang)</span>
+              <span class="desc">2 Bed / King (Privat)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="makkah-nights">Durasi Menginap (Malam)</label>
+            <div class="stepper-wrap">
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi malam">−</button>
+              <input type="number" id="makkah-nights" class="stepper-input" value="5" min="1" max="30">
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah malam">+</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="makkah-rooms">Jumlah Kamar</label>
+            <div class="stepper-wrap">
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi kamar">−</button>
+              <input type="number" id="makkah-rooms" class="stepper-input" value="1" min="1" max="20">
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah kamar">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotel-details-box" id="hotel-makkah-info"></div>
+      </section>
+
+      <!-- LANGKAH 3: AKOMODASI MADINAH -->
+      <section class="calc-card" id="card-step-madinah">
+        <div class="card-header">
+          <div class="step-info">
+            <div class="step-num">03</div>
+            <div>
+              <h2 class="card-title">Akomodasi Hotel Madinah</h2>
+              <p class="card-subtitle">Pilih hotel dan durasi menginap di sekitar Masjid Nabawi &amp; Raudhah</p>
+            </div>
+          </div>
+          <div class="card-subtotal">
+            <div class="sar-val" id="subtotal-madinah-sar">2.560 SAR</div>
+            <div class="idr-val" id="subtotal-madinah-idr">Rp10.880.000</div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label class="form-label" for="hotel-madinah-select">Pilihan Hotel Madinah</label>
+          <select id="hotel-madinah-select" class="form-select"></select>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 18px;">
+          <label class="form-label">
+            <span>Tipe Kamar Madinah</span>
+            <span class="hint">Pilih sesuai kebutuhan privasi jemaah</span>
+          </label>
+          <div class="room-type-selector" id="room-type-madinah">
+            <button type="button" class="room-type-btn active" data-room-type="quad">
+              <span class="title">Quad (4 Orang)</span>
+              <span class="desc">Paling Ramah Kantong</span>
+            </button>
+            <button type="button" class="room-type-btn" data-room-type="triple">
+              <span class="title">Triple (3 Orang)</span>
+              <span class="desc">Ekstra Ruang &amp; Lega</span>
+            </button>
+            <button type="button" class="room-type-btn" data-room-type="double">
+              <span class="title">Double (2 Orang)</span>
+              <span class="desc">Opsi Pasutri / Privat</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="madinah-nights">Durasi Menginap (Malam)</label>
+            <div class="stepper-wrap">
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi malam">−</button>
+              <input type="number" id="madinah-nights" class="stepper-input" value="4" min="1" max="30">
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah malam">+</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="madinah-rooms">Jumlah Kamar</label>
+            <div class="stepper-wrap">
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi kamar">−</button>
+              <input type="number" id="madinah-rooms" class="stepper-input" value="1" min="1" max="20">
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah kamar">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="hotel-details-box" id="hotel-madinah-info"></div>
+      </section>
+
+      <!-- LANGKAH 4: KERETA CEPAT HARAMAIN (HHR) -->
+      <section class="calc-card" id="card-step-hhr">
+        <div class="card-header">
+          <div class="step-info">
+            <div class="step-num">04</div>
+            <div>
+              <h2 class="card-title">Kereta Cepat Haramain (HHR)</h2>
+              <p class="card-subtitle">Transportasi rel super cepat memangkas perjalanan Makkah ↔ Madinah jadi 2 jam</p>
+            </div>
+          </div>
+          <div class="card-subtotal">
+            <div class="sar-val" id="subtotal-hhr-sar">400 SAR</div>
+            <div class="idr-val" id="subtotal-hhr-idr">Rp1.700.000</div>
+          </div>
+        </div>
+
+        <div class="option-list" id="hhr-routes-container" style="margin-bottom: 18px;"></div>
+
+        <div class="form-group" style="max-width: 280px;">
+          <label class="form-label" for="hhr-tickets">Jumlah Tiket Kereta</label>
+          <div class="stepper-wrap">
+            <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi tiket">−</button>
+            <input type="number" id="hhr-tickets" class="stepper-input" value="2" min="0" max="50">
+            <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah tiket">+</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- LANGKAH 5: TRANSPORTASI LOKAL & CARTER -->
+      <section class="calc-card" id="card-step-transport">
+        <div class="card-header">
+          <div class="step-info">
+            <div class="step-num">05</div>
+            <div>
+              <h2 class="card-title">Transportasi Antar-Jemput &amp; Ziarah</h2>
+              <p class="card-subtitle">Layanan jemput bandara, stasiun, carter ziarah Makkah, Madinah, dan Thaif</p>
+            </div>
+          </div>
+          <div class="card-subtotal">
+            <div class="sar-val" id="subtotal-transport-sar">1.200 SAR</div>
+            <div class="idr-val" id="subtotal-transport-idr">Rp5.100.000</div>
+          </div>
+        </div>
+
+        <div class="option-list" id="local-transport-container"></div>
+      </section>
+
+      <!-- LANGKAH 6: MUTAWWIF & HANDLING KHAS MUTAWWIFMU -->
+      <section class="calc-card" id="card-step-mutawwif">
+        <div class="card-header">
+          <div class="step-info">
+            <div class="step-num">06</div>
+            <div>
+              <h2 class="card-title">Pendampingan Mutawwif &amp; Handling</h2>
+              <p class="card-subtitle">Layanan bimbingan ibadah resmi berbahasa Indonesia dan fast track bandara</p>
+            </div>
+          </div>
+          <div class="card-subtotal">
+            <div class="sar-val" id="subtotal-mutawwif-sar">1.800 SAR</div>
+            <div class="idr-val" id="subtotal-mutawwif-idr">Rp7.650.000</div>
+          </div>
+        </div>
+
+        <div class="option-list" id="mutawwif-services-container"></div>
+      </section>
+
+      <!-- LANGKAH 7: ESTIMASI TIKET PESAWAT -->
+      <section class="calc-card" id="card-step-flight">
+        <div class="card-header">
+          <div class="step-info">
+            <div class="step-num">07</div>
+            <div>
+              <h2 class="card-title">Estimasi Tiket Pesawat Internasional</h2>
+              <p class="card-subtitle">Pilih estimasi maskapai penerbangan pulang-pergi (PP) atau input sendiri</p>
+            </div>
+          </div>
+          <div class="card-subtotal">
+            <div class="sar-val" style="font-size:13px;color:var(--text-muted)">Tiket Pesawat</div>
+            <div class="idr-val" id="subtotal-flight-idr" style="font-size:16px;font-weight:700;color:var(--primary)">Rp33.000.000</div>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="flight-select">Referensi Maskapai Penerbangan</label>
+            <select id="flight-select" class="form-select"></select>
+          </div>
+
+          <div class="form-group" id="custom-flight-wrap" style="display: none;">
+            <label class="form-label" for="custom-flight-input">Nominal Tiket PP per Pax (Rp)</label>
+            <input type="text" id="custom-flight-input" class="form-control" placeholder="Contoh: 14.500.000">
+          </div>
+        </div>
+      </section>
+
+      <!-- CALLOUT CHECKLIST IBADAH -->
+      <div class="callout-box">
+        <div style="display: flex; align-items: center; gap: 18px;">
+          <div class="callout-icon">📋</div>
+          <div class="callout-text">
+            <h3>Sudah Siap Melangkah ke Baitullah?</h3>
+            <p>Jangan sampai ada berkas atau barang penting tertinggal. Buka checklist interaktif persiapan umroh 5 fase.</p>
+          </div>
+        </div>
+        <a href="checklist.html" class="btn btn-gold">Buka Checklist Ibadah →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==================== FAQ SECTION ==================== -->
+  <section class="faq-section">
+    <div class="section-header">
+      <span class="section-tag">Tanya Jawab</span>
+      <h2 class="section-title">Seputar Umroh Mandiri &amp; Land Arrangement</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-card">
+        <h3 class="faq-q">Berapa estimasi total biaya umroh mandiri di tahun 2026?</h3>
+        <p class="faq-a">Estimasi biaya umroh mandiri umumnya berkisar antara Rp18 juta hingga Rp26 juta per orang untuk durasi 9 s.d. 12 hari, tergantung tipe kamar hotel (Quad jauh lebih hemat), rute kereta HHR, dan promo tiket pesawat.</p>
+      </div>
+      <div class="faq-card">
+        <h3 class="faq-q">Apa keunggulan kamar Quad dibanding Double?</h3>
+        <p class="faq-a">Kamar tipe Quad diisi 4 orang dengan tempat tidur terpisah sehingga biaya sewa kamar dibagi rata berempat. Opsi ini mampu memangkas pengeluaran hotel hingga 35-40% per orang tanpa mengorbankan kenyamanan.</p>
+      </div>
+      <div class="faq-card">
+        <h3 class="faq-q">Mengapa disarankan menggunakan Kereta Cepat Haramain (HHR)?</h3>
+        <p class="faq-a">Kereta Cepat HHR memangkas perjalanan antarkota Madinah-Makkah menjadi hanya 2 jam dengan kecepatan 300 km/jam, jauh lebih cepat dibanding bus umum (6-7 jam), sehingga fisik jemaah tetap bugar saat ibadah.</p>
+      </div>
+      <div class="faq-card">
+        <h3 class="faq-q">Bagaimana cara memvalidasi paket LA ini ke Mutawwifmu?</h3>
+        <p class="faq-a">Cukup klik tombol "Konsultasikan Rincian ke WhatsApp" di bilah bawah. Rincian hotel, pax, dan rute Anda akan otomatis terangkum rapi untuk dikonfirmasi tanggal dan ketersediaannya oleh tim Mutawwifmu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STICKY BOTTOM SUMMARY ==================== -->
+  <aside class="sticky-summary" aria-label="Ringkasan Estimasi Biaya">
+    <div class="summary-inner">
+      <div class="summary-numbers">
+        <span class="summary-label">Estimasi Total Biaya Umroh Mandiri</span>
+        <div class="summary-idr" id="sticky-total-idr">Rp0</div>
+        <div class="summary-subbreakdown">
+          <span>Per orang: <b id="sticky-perpax-idr">Rp0 / org</b></span>
+          <span>•</span>
+          <span>Total Land: <b id="sticky-total-sar">0 SAR</b></span>
+          <span>•</span>
+          <span>Visa: <b id="sticky-total-visa">$0</b></span>
+        </div>
+      </div>
+      <div class="summary-cta-group">
+        <button id="btn-whatsapp-action" class="btn-whatsapp-cta">
+          <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          Konsultasikan Rincian ke WhatsApp
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== SITE FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="assets/logo.webp" alt="Mutawwifmu" width="160" height="38" style="filter: brightness(0) invert(1);">
+        <p>Platform mitra Land Arrangement umroh dan wisata halal global terpercaya. Menyediakan visa, hotel, transportasi, handling bandara, dan mutawwif berizin resmi.</p>
+        <p style="margin-top: 10px; font-size: 12.5px; color: rgba(255,255,255,0.6);">
+          📍 Jl. Lengkong Gudang Timur Raya No.79 a, Kota Tangerang Selatan, Banten, Indonesia
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Layanan Kami</h4>
+        <ul class="footer-links">
+          <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener">Mutawwif Umrah &amp; Haji</a></li>
+          <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener">Land Arrangement Umroh</a></li>
+          <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener">Tiket Kereta Cepat HHR</a></li>
+          <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener">Handling &amp; Airport VIP</a></li>
+          <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener">Wisata Religi &amp; Ziarah</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Link Cepat</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Kalkulator Biaya Umroh</a></li>
+          <li><a href="checklist.html">Checklist Persiapan Ibadah</a></li>
+          <li><a href="https://mutawwifmu.com/tentang-kami/" target="_blank" rel="noopener">Tentang Mutawwifmu</a></li>
+          <li><a href="https://mutawwifmu.com/artikel/" target="_blank" rel="noopener">Artikel &amp; Edukasi</a></li>
+          <li><a href="https://wa.me/6287745873159" target="_blank" rel="noopener">Kontak WhatsApp Resmi</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Mutawwifmu Karya Bangsa. Seluruh Hak Cipta Dilindungi.</div>
+      <div>Kalkulator Mandiri didesain dengan standar visual resmi Mutawwifmu.</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/whatsapp.js"></script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist Persiapan Umroh Mandiri — Mutawwifmu</title>
+  <meta name="description" content="Checklist interaktif persiapan umroh mandiri. Pastikan paspor, visa, kain ihram, obat-obatan, dan aplikasi Nusuk sudah siap sebelum ke Tanah Suci.">
+  <link rel="icon" type="image/webp" href="assets/favicon.webp">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .progress-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 24px;
+    }
+    .progress-bar-bg {
+      width: 100%;
+      height: 12px;
+      background: var(--bg-soft);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin: 12px 0 6px;
+      border: 1px solid var(--border);
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold) 0%, #E5AA55 100%);
+      border-radius: var(--radius-pill);
+      transition: width 0.3s ease;
+    }
+    @media print {
+      body { padding-bottom: 0; background: #FFF; }
+      .site-header, .hero-section, .sticky-summary, .site-footer, .no-print { display: none !important; }
+      .main-wrapper { margin: 0; padding: 0; max-width: 100%; }
+      .calc-card { box-shadow: none; border: 1px solid #CCC; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== TOP NAVIGATION ==================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-logo" aria-label="Mutawwifmu Beranda">
+        <img src="assets/logo.webp" alt="Mutawwifmu Logo" width="180" height="42">
+      </a>
+      <nav aria-label="Navigasi Utama">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Kalkulator Umroh</a></li>
+          <li><a href="checklist.html" class="nav-link active">Checklist Persiapan</a></li>
+          <li><a href="https://mutawwifmu.com/tentang-kami/" target="_blank" rel="noopener" class="nav-link">Tentang Kami</a></li>
+          <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener" class="nav-link">Layanan LA</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="index.html" class="btn btn-primary btn-sm">← Kembali ke Kalkulator</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="hero-section">
+    <div class="hero-inner">
+      <div class="tag-badge">Panduan Praktis Jamaah</div>
+      <h1 class="hero-title">Checklist Persiapan <span>Ibadah Umroh</span></h1>
+      <p class="hero-desc">
+        Centang setiap perlengkapan dan berkas penting agar perjalanan ibadah ke Tanah Suci lancar, tenang, dan mabrur. Data tersimpan otomatis di perangkat Anda.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <main class="main-wrapper">
+
+    <!-- PROGRESS OVERVIEW -->
+    <div class="progress-card">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;">
+        <span style="font-family: var(--font-heading); font-weight: 700; font-size: 16px; color: var(--text-main);">
+          Progres Kesiapan Keberangkatan Anda
+        </span>
+        <span id="progress-text" style="font-family: var(--font-heading); font-weight: 800; font-size: 18px; color: var(--gold);">
+          0%
+        </span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 13px; color: var(--text-muted);">
+        <span id="progress-count">0 dari 0 persiapan terpenuhi</span>
+        <div class="no-print" style="display: flex; gap: 10px;">
+          <button id="btn-print-checklist" class="btn btn-sm btn-outline-gold">🖨️ Cetak / Simpan PDF</button>
+          <button id="btn-reset-checklist" class="btn btn-sm" style="background:#f1f5f9;border:0;color:#64748b">Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PHASES CONTAINER -->
+    <div id="checklist-phases"></div>
+
+    <!-- TAMBAH TUGAS KUSTOM -->
+    <div class="calc-card no-print" style="margin-top: 24px;">
+      <h3 class="card-title" style="margin-bottom: 12px; font-size: 16px;">+ Tambah Catatan / Barang Pribadi</h3>
+      <div class="form-grid" style="grid-template-columns: 1fr 2fr auto;">
+        <select id="select-task-phase" class="form-select">
+          <option value="0">Tahap 1: Dokumen &amp; Tiket</option>
+          <option value="1">Tahap 2: Perlengkapan Ibadah</option>
+          <option value="2">Tahap 3: Logistik &amp; Obat</option>
+          <option value="3">Tahap 4: Setibanya di Arab Saudi</option>
+        </select>
+        <input type="text" id="input-new-task" class="form-control" placeholder="Tulis perlengkapan atau berkas tambahan...">
+        <button id="btn-add-task" class="btn btn-gold">+ Tambah</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="site-footer">
+    <div class="footer-bottom" style="margin-top: 0; border-top: 0;">
+      <div>&copy; 2026 Mutawwifmu Karya Bangsa. Seluruh Hak Cipta Dilindungi.</div>
+      <div><a href="index.html" style="color:var(--gold);">Kalkulator Biaya Umroh</a> • <a href="https://mutawwifmu.com" style="color:#FFF;">Website Resmi Mutawwifmu</a></div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/checklist.js"></script>
+</body>
+</html>
