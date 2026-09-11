@@ -34,7 +34,7 @@
     }
     @media print {
       body { padding-bottom: 0; background: #FFF; }
-      .site-header, .hero-section, .sticky-summary, .site-footer, .no-print { display: none !important; }
+      .site-header, .hero-section, .hero-frame-wrap, .sticky-summary, .site-footer, .no-print { display: none !important; }
       .main-wrapper { margin: 0; padding: 0; max-width: 100%; }
       .calc-card { box-shadow: none; border: 1px solid #CCC; page-break-inside: avoid; }
     }
@@ -42,47 +42,50 @@
 </head>
 <body>
 
-  <!-- Top Navigation (Floating Pill Header) -->
-  <header class="site-header">
-    <div class="header-container">
-      <a href="index.html" class="brand-logo" aria-label="Mutawwifmu Beranda">
-        <img src="assets/logo.webp" alt="Mutawwifmu Logo" width="180" height="42">
-      </a>
-      <nav aria-label="Navigasi Utama">
-        <ul class="nav-menu">
-          <li><a href="https://mutawwifmu.com/" target="_blank" rel="noopener" class="nav-link">Beranda</a></li>
-          <li><a href="index.html" class="nav-link">Kalkulator Umroh</a></li>
-          <li><a href="checklist.html" class="nav-link active">Checklist Ibadah</a></li>
-          <li><a href="https://mutawwifmu.com/tentang-kami/" target="_blank" rel="noopener" class="nav-link">Tentang Kami</a></li>
-          <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener" class="nav-link">Layanan</a></li>
-        </ul>
-      </nav>
-      <div class="header-actions">
-        <a href="https://wa.me/6287745873159" target="_blank" rel="noopener" class="btn-header-contact">Hubungi Kami</a>
-      </div>
-    </div>
-  </header>
+  <!-- Hero Section with Outer Frame & Large Rounded Blue Box -->
+  <div class="hero-frame-wrap">
+    <div class="hero-rounded-box">
+      <!-- Top Navigation (Floating Pill Header inside Rounded Box) -->
+      <header class="site-header">
+        <div class="header-container">
+          <a href="index.html" class="brand-logo" aria-label="Mutawwifmu Beranda">
+            <img src="assets/logo.webp" alt="Mutawwifmu Logo" width="180" height="42">
+          </a>
+          <nav aria-label="Navigasi Utama">
+            <ul class="nav-menu">
+              <li><a href="https://mutawwifmu.com/" target="_blank" rel="noopener" class="nav-link">Beranda</a></li>
+              <li><a href="index.html" class="nav-link">Kalkulator Umroh</a></li>
+              <li><a href="checklist.html" class="nav-link active">Checklist Ibadah</a></li>
+              <li><a href="https://mutawwifmu.com/tentang-kami/" target="_blank" rel="noopener" class="nav-link">Tentang Kami</a></li>
+              <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener" class="nav-link">Layanan</a></li>
+            </ul>
+          </nav>
+          <div class="header-actions">
+            <a href="https://wa.me/6287745873159" target="_blank" rel="noopener" class="btn-header-contact">Hubungi Kami</a>
+          </div>
+        </div>
+      </header>
 
-  <!-- Hero Section (Aesthetic Mutawwifmu Hero) -->
-  <section class="hero-section">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-eyebrow">Panduan Jamaah Mandiri</div>
-        <h1 class="hero-title">Checklist Persiapan<br>Ibadah Umroh</h1>
-        <p class="hero-desc">
-          Centang setiap berkas penting dan perlengkapan ibadah agar perjalanan ke Tanah Suci lancar, tenang, dan mabrur. Data progres Anda tersimpan otomatis di perangkat.
-        </p>
-        <div class="hero-actions">
-          <a href="index.html" class="btn-hero-cta">
-            Hitung Estimasi Biaya
-          </a>
-          <a href="https://wa.me/6287745873159" target="_blank" rel="noopener" class="btn-outline-white">
-            Konsultasi Sekarang
-          </a>
+      <!-- Hero Content -->
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-eyebrow">Panduan Jamaah Mandiri</div>
+          <h1 class="hero-title">Checklist Persiapan<br>Ibadah Umroh</h1>
+          <p class="hero-desc">
+            Centang setiap berkas penting dan perlengkapan ibadah agar perjalanan ke Tanah Suci lancar, tenang, dan mabrur. Data progres Anda tersimpan otomatis di perangkat.
+          </p>
+          <div class="hero-actions">
+            <a href="index.html" class="btn-hero-cta">
+              Hitung Estimasi Biaya
+            </a>
+            <a href="https://wa.me/6287745873159" target="_blank" rel="noopener" class="btn-outline-white">
+              Konsultasi Sekarang
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Main Content -->
   <main class="main-wrapper">

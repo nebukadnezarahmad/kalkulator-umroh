@@ -91,16 +91,15 @@ button, input, select, textarea {
   outline-offset: 2px;
 }
 
-/* Header and primary navigation (Floating Pill Header as in mutawwifmu.com) */
+/* Header and primary navigation (Floating Pill Header inside Rounded Box) */
 .site-header {
-  position: sticky;
-  top: 16px;
-  z-index: 60;
+  position: relative;
+  z-index: 20;
   background: transparent;
   border-bottom: none;
   box-shadow: none;
-  padding: 16px 20px 0;
-  margin-bottom: -88px;
+  padding: 0;
+  margin-bottom: 40px;
 }
 
 .header-container {
@@ -287,20 +286,28 @@ button, input, select, textarea {
   font-size: 12.5px;
 }
 
-/* Hero Section (Mutawwifmu Aesthetic with Airplane Window & Kaaba) */
-.hero-section {
+/* Big Rounded Hero Card Section (Official Mutawwifmu Layout) */
+.hero-frame-wrap {
+  width: 100%;
+  background-color: #FFFFFF;
+  padding: 20px;
+}
+
+.hero-rounded-box {
   background-color: #426BAD;
   background-image: url("../assets/hero-bg.webp");
   background-repeat: no-repeat;
   background-position: right center;
-  background-size: auto 100%;
-  color: #FFFFFF;
-  padding: 120px 24px 76px;
-  position: relative;
+  background-size: cover;
+  border-radius: 16px;
   overflow: hidden;
-  min-height: 550px;
+  position: relative;
+  min-height: 560px;
+  padding: 24px 32px 64px;
+  box-shadow: 0 12px 36px rgba(46, 83, 142, 0.12);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .hero-inner {
@@ -402,7 +409,7 @@ button, input, select, textarea {
 /* Calculator workflow layout */
 .main-wrapper {
   max-width: var(--container-max);
-  margin: -28px auto 40px;
+  margin: 20px auto 40px;
   padding: 0 20px;
   position: relative;
   z-index: 10;
@@ -1154,13 +1161,25 @@ button, input, select, textarea {
 
 /* Mobile responsive adjustments */
 @media (max-width: 860px) {
+  .hero-frame-wrap {
+    padding: 12px;
+  }
+
+  .hero-rounded-box {
+    border-radius: 12px;
+    padding: 14px 16px 40px;
+    min-height: auto;
+    background: linear-gradient(180deg, rgba(66, 107, 173, 0.92) 0%, rgba(66, 107, 173, 0.96) 100%), url("../assets/hero-bg.webp") no-repeat center right / cover;
+  }
+
   .site-header {
-    padding: 12px 14px 0;
-    margin-bottom: -76px;
+    padding: 0;
+    margin-bottom: 24px;
   }
 
   .header-container {
-    padding: 8px 16px;
+    padding: 8px 14px;
+    border-radius: 10px;
   }
 
   .brand-logo img {
@@ -1176,15 +1195,18 @@ button, input, select, textarea {
     display: none;
   }
 
-  .hero-section {
-    padding: 95px 18px 50px;
-    background: linear-gradient(180deg, rgba(66, 107, 173, 0.92) 0%, rgba(66, 107, 173, 0.96) 100%), url("../assets/hero-bg.webp") no-repeat center right / cover;
-    min-height: auto;
+  .hero-inner {
+    padding: 0;
   }
 
   .hero-content {
     max-width: 100%;
     text-align: left;
+  }
+
+  .main-wrapper {
+    margin: 16px auto 32px;
+    padding: 0 12px;
   }
 
   .faq-grid {
