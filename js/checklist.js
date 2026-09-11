@@ -1,11 +1,44 @@
 /**
- * Checklist Persiapan Umroh - Mutawwifmu Edition
- * Interactive task manager with progress bar, localStorage persistence, and print export.
+ * Checklist Persiapan Umroh Mandiri
+ * Mutawwifmu Visual Design System Edition
  */
 
 let checklistState = [];
 
+function initTheme() {
+  const savedTheme = localStorage.getItem("mutawwifmu_theme") || "light";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  updateThemeIcons(savedTheme);
+
+  const toggleBtn = document.getElementById("theme-toggle");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme") || "light";
+      const next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("mutawwifmu_theme", next);
+      updateThemeIcons(next);
+    });
+  }
+}
+
+function updateThemeIcons(theme) {
+  const moon = document.getElementById("theme-icon-moon");
+  const sun = document.getElementById("theme-icon-sun");
+  if (moon && sun) {
+    if (theme === "dark") {
+      moon.style.display = "none";
+      sun.style.display = "block";
+    } else {
+      moon.style.display = "block";
+      sun.style.display = "none";
+    }
+  }
+}
+
 function initChecklist() {
+  initTheme();
+
   const saved = localStorage.getItem("MUTAWWIFMU_CHECKLIST");
   if (saved) {
     try {
@@ -48,10 +81,10 @@ function renderChecklist() {
         </div>
         <div class="task-list" style="display: flex; flex-direction: column; gap: 10px;">
           ${phase.items.map((item, iIdx) => `
-            <label class="option-card ${item.done ? 'checked' : ''}" style="padding: 10px 14px;">
-              <input type="checkbox" data-phase="${pIdx}" data-item="${iIdx}" ${item.done ? 'checked' : ''}>
-              <div class="option-content">
-                <span style="${item.done ? 'text-decoration: line-through; opacity: 0.7;' : 'font-weight: 500;'} font-size: 13.5px;">
+            <label class="option-item ${item.done ? 'selected' : ''}" style="padding: 12px 16px; min-height: 44px; cursor: pointer;">
+              <div class="option-left">
+                <input type="checkbox" class="option-checkbox" data-phase="${pIdx}" data-item="${iIdx}" ${item.done ? 'checked' : ''}>
+                <span style="${item.done ? 'text-decoration: line-through; opacity: 0.65;' : 'font-weight: 500;'} font-size: 14px; color: var(--text-main);">
                   ${item.text}
                 </span>
               </div>
@@ -62,7 +95,6 @@ function renderChecklist() {
     `;
   }).join("");
 
-  // Update Progress Bar
   const percent = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
   const fillEl = document.getElementById("progress-fill");
   const textEl = document.getElementById("progress-text");
@@ -72,7 +104,6 @@ function renderChecklist() {
   if (textEl) textEl.textContent = `${percent}%`;
   if (countEl) countEl.textContent = `${completedTasks} dari ${totalTasks} persiapan terpenuhi`;
 
-  // Attach Checkbox event listeners
   container.querySelectorAll('input[type="checkbox"]').forEach(chk => {
     chk.addEventListener("change", (e) => {
       const pIdx = parseInt(e.target.dataset.phase, 10);
@@ -85,7 +116,6 @@ function renderChecklist() {
 }
 
 function setupChecklistActions() {
-  // Add task button
   const addBtn = document.getElementById("btn-add-task");
   const inputEl = document.getElementById("input-new-task");
   const selectPhase = document.getElementById("select-task-phase");
@@ -113,7 +143,6 @@ function setupChecklistActions() {
     });
   }
 
-  // Reset button
   const resetBtn = document.getElementById("btn-reset-checklist");
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
@@ -125,7 +154,6 @@ function setupChecklistActions() {
     });
   }
 
-  // Print button
   const printBtn = document.getElementById("btn-print-checklist");
   if (printBtn) {
     printBtn.addEventListener("click", () => {

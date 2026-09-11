@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checklist Persiapan Umroh Mandiri — Mutawwifmu</title>
-  <meta name="description" content="Checklist interaktif persiapan umroh mandiri. Pastikan paspor, visa, kain ihram, obat-obatan, dan aplikasi Nusuk sudah siap sebelum ke Tanah Suci.">
+  <title>Checklist Persiapan Umroh Mandiri: Panduan Jamaah Mutawwifmu</title>
+  <meta name="description" content="Checklist interaktif persiapan ibadah umroh mandiri. Panduan lengkap paspor, visa, kain ihram, obat-obatan, dan aplikasi Nusuk sebelum berangkat ke Tanah Suci.">
   <link rel="icon" type="image/webp" href="assets/favicon.webp">
   <link rel="stylesheet" href="css/style.css">
   <style>
     .progress-card {
-      background: #FFFFFF;
+      background: var(--bg-surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 24px;
       box-shadow: var(--shadow-card);
       margin-bottom: 24px;
+      transition: background 0.2s, border-color 0.2s;
     }
     .progress-bar-bg {
       width: 100%;
@@ -41,7 +42,7 @@
 </head>
 <body>
 
-  <!-- ==================== TOP NAVIGATION ==================== -->
+  <!-- Top Navigation -->
   <header class="site-header">
     <div class="header-container">
       <a href="index.html" class="brand-logo" aria-label="Mutawwifmu Beranda">
@@ -56,26 +57,30 @@
         </ul>
       </nav>
       <div class="header-actions">
-        <a href="index.html" class="btn btn-primary btn-sm">← Kembali ke Kalkulator</a>
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Ganti Tema Tampilan" title="Ganti Mode Terang / Gelap" type="button">
+          <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+        <a href="index.html" class="btn btn-primary btn-sm">Kembali ke Kalkulator</a>
       </div>
     </div>
   </header>
 
-  <!-- ==================== HERO SECTION ==================== -->
+  <!-- Hero Section -->
   <section class="hero-section">
     <div class="hero-inner">
       <div class="tag-badge">Panduan Praktis Jamaah</div>
       <h1 class="hero-title">Checklist Persiapan <span>Ibadah Umroh</span></h1>
       <p class="hero-desc">
-        Centang setiap perlengkapan dan berkas penting agar perjalanan ibadah ke Tanah Suci lancar, tenang, dan mabrur. Data tersimpan otomatis di perangkat Anda.
+        Centang setiap berkas penting dan perlengkapan ibadah agar perjalanan ke Tanah Suci lancar, tenang, dan mabrur. Data progres Anda tersimpan otomatis di perangkat.
       </p>
     </div>
   </section>
 
-  <!-- ==================== MAIN CONTENT ==================== -->
+  <!-- Main Content -->
   <main class="main-wrapper">
 
-    <!-- PROGRESS OVERVIEW -->
+    <!-- Progress Overview -->
     <div class="progress-card">
       <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;">
         <span style="font-family: var(--font-heading); font-weight: 700; font-size: 16px; color: var(--text-main);">
@@ -88,21 +93,21 @@
       <div class="progress-bar-bg">
         <div class="progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
       </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 13px; color: var(--text-muted);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 13px; color: var(--text-muted); flex-wrap: wrap; gap: 10px;">
         <span id="progress-count">0 dari 0 persiapan terpenuhi</span>
         <div class="no-print" style="display: flex; gap: 10px;">
-          <button id="btn-print-checklist" class="btn btn-sm btn-outline-gold">🖨️ Cetak / Simpan PDF</button>
-          <button id="btn-reset-checklist" class="btn btn-sm" style="background:#f1f5f9;border:0;color:#64748b">Reset</button>
+          <button id="btn-print-checklist" class="btn btn-sm btn-outline-gold" type="button">Cetak / Simpan PDF</button>
+          <button id="btn-reset-checklist" class="btn btn-sm btn-secondary" type="button">Reset</button>
         </div>
       </div>
     </div>
 
-    <!-- PHASES CONTAINER -->
+    <!-- Phases Container -->
     <div id="checklist-phases"></div>
 
-    <!-- TAMBAH TUGAS KUSTOM -->
+    <!-- Tambah Catatan Kustom -->
     <div class="calc-card no-print" style="margin-top: 24px;">
-      <h3 class="card-title" style="margin-bottom: 12px; font-size: 16px;">+ Tambah Catatan / Barang Pribadi</h3>
+      <h3 class="card-title" style="margin-bottom: 12px; font-size: 16px;">Tambah Catatan / Kebutuhan Pribadi</h3>
       <div class="form-grid" style="grid-template-columns: 1fr 2fr auto;">
         <select id="select-task-phase" class="form-select">
           <option value="0">Tahap 1: Dokumen &amp; Tiket</option>
@@ -111,13 +116,13 @@
           <option value="3">Tahap 4: Setibanya di Arab Saudi</option>
         </select>
         <input type="text" id="input-new-task" class="form-control" placeholder="Tulis perlengkapan atau berkas tambahan...">
-        <button id="btn-add-task" class="btn btn-gold">+ Tambah</button>
+        <button id="btn-add-task" class="btn btn-gold" type="button">+ Tambah</button>
       </div>
     </div>
 
   </main>
 
-  <!-- ==================== FOOTER ==================== -->
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="footer-bottom" style="margin-top: 0; border-top: 0;">
       <div>&copy; 2026 Mutawwifmu Karya Bangsa. Seluruh Hak Cipta Dilindungi.</div>

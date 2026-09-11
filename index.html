@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator Biaya Umroh Mandiri 2026 — Mutawwifmu</title>
-  <meta name="description" content="Hitung estimasi rincian biaya umroh mandiri & backpacker 2026 secara akurat dan transparan. Simulasi visa, hotel Makkah-Madinah, Kereta Cepat HHR bersama Mutawwifmu.">
+  <title>Kalkulator Biaya Umroh Mandiri 2026: Mutawwifmu</title>
+  <meta name="description" content="Simulasi rincian estimasi biaya umroh mandiri dan backpacker 2026. Hitung visa, hotel Makkah dan Madinah, tiket Kereta Cepat HHR, serta mutawwif berizin bersama Mutawwifmu.">
   <link rel="icon" type="image/webp" href="assets/favicon.webp">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ==================== TOP NAVIGATION ==================== -->
+  <!-- Top Navigation -->
   <header class="site-header">
     <div class="header-container">
       <a href="index.html" class="brand-logo" aria-label="Mutawwifmu Beranda">
@@ -25,8 +25,12 @@
         </ul>
       </nav>
       <div class="header-actions">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Ganti Tema Tampilan" title="Ganti Mode Terang / Gelap" type="button">
+          <svg id="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
         <a href="checklist.html" class="btn btn-outline-gold btn-sm">Checklist Ibadah</a>
-        <button id="nav-btn-wa" class="btn btn-gold btn-sm" aria-label="Konsultasi WhatsApp">
+        <button id="nav-btn-wa" class="btn btn-gold btn-sm" aria-label="Konsultasi WhatsApp Langsung">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
           Konsultasi
         </button>
@@ -34,13 +38,13 @@
     </div>
   </header>
 
-  <!-- ==================== HERO BANNER ==================== -->
+  <!-- Hero Banner -->
   <section class="hero-section">
     <div class="hero-inner">
       <div class="tag-badge">Land Arrangement &amp; Umroh Mandiri</div>
       <h1 class="hero-title">Rancang &amp; Hitung Estimasi Biaya <span>Umroh Mandiri</span></h1>
       <p class="hero-desc">
-        Hitung sendiri kebutuhan Land Arrangement (LA) di Tanah Suci secara akurat, transparan, dan terpercaya bersama Mutawwifmu. Tanpa biaya tersembunyi.
+        Simulasi rincian estimasi biaya Land Arrangement (LA) di Tanah Suci berdasarkan tarif riil hotel, tiket kereta cepat Haramain, dan armada transportasi resmi di Arab Saudi.
       </p>
       <div class="rate-pills">
         <span class="rate-chip">Kurs SAR: <b>1 SAR ≈ Rp4.250</b></span>
@@ -50,11 +54,11 @@
     </div>
   </section>
 
-  <!-- ==================== MAIN CALCULATOR WORKFLOW ==================== -->
+  <!-- Main Calculator Workflow -->
   <main class="main-wrapper">
     <div class="calculator-grid">
 
-      <!-- LANGKAH 1: VISA & JUMLAH JAMAAH -->
+      <!-- Langkah 1: Visa & Jumlah Jamaah -->
       <section class="calc-card" id="card-step-visa">
         <div class="card-header">
           <div class="step-info">
@@ -88,12 +92,12 @@
               <span>Paket Visa</span>
               <span class="hint">Biaya resmi per pax</span>
             </label>
-            <input type="text" class="form-control" value="Visa Umroh + Asuransi Medis ($215 / pax)" readonly style="background:#f8fafc;cursor:not-allowed">
+            <input type="text" class="form-control" value="Visa Umroh + Asuransi Medis ($215 / pax)" readonly style="background:var(--bg-soft);cursor:not-allowed">
           </div>
         </div>
       </section>
 
-      <!-- LANGKAH 2: AKOMODASI MAKKAH -->
+      <!-- Langkah 2: Akomodasi Makkah -->
       <section class="calc-card" id="card-step-makkah">
         <div class="card-header">
           <div class="step-info">
@@ -119,58 +123,64 @@
             <span>Tipe Kamar (Kapasitas Tempat Tidur)</span>
             <span class="hint">Quad paling hemat untuk rombongan/keluarga</span>
           </label>
-          <div class="room-type-selector" id="room-type-makkah">
-            <button type="button" class="room-type-btn active" data-room-type="quad">
-              <span class="title">Quad (4 Orang)</span>
-              <span class="desc">4 Single Bed (Hemat)</span>
+          <div class="segmented-control" id="makkah-room-type-control">
+            <button type="button" class="segment-btn active" data-type="quad">
+              Quad (Sekamar Ber-4)
+              <small>Tempat tidur berempat</small>
             </button>
-            <button type="button" class="room-type-btn" data-room-type="triple">
-              <span class="title">Triple (3 Orang)</span>
-              <span class="desc">3 Single Bed (Nyaman)</span>
+            <button type="button" class="segment-btn" data-type="triple">
+              Triple (Sekamar Ber-3)
+              <small>Tempat tidur bertiga</small>
             </button>
-            <button type="button" class="room-type-btn" data-room-type="double">
-              <span class="title">Double (2 Orang)</span>
-              <span class="desc">2 Bed / King (Privat)</span>
+            <button type="button" class="segment-btn" data-type="double">
+              Double (Sekamar Ber-2)
+              <small>Tempat tidur berdua</small>
             </button>
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label" for="makkah-nights">Durasi Menginap (Malam)</label>
+            <label class="form-label" for="makkah-nights">
+              <span>Durasi Menginap (Malam)</span>
+              <span class="hint">Rekomendasi 4-6 malam</span>
+            </label>
             <div class="stepper-wrap">
-              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi malam">−</button>
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi malam Makkah">−</button>
               <input type="number" id="makkah-nights" class="stepper-input" value="5" min="1" max="30">
-              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah malam">+</button>
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah malam Makkah">+</button>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="makkah-rooms">Jumlah Kamar</label>
+            <label class="form-label" for="makkah-rooms">
+              <span>Jumlah Kamar</span>
+              <span class="hint" id="makkah-room-calc-hint">Dihitung otomatis per pax</span>
+            </label>
             <div class="stepper-wrap">
-              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi kamar">−</button>
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi kamar Makkah">−</button>
               <input type="number" id="makkah-rooms" class="stepper-input" value="1" min="1" max="20">
-              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah kamar">+</button>
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah kamar Makkah">+</button>
             </div>
           </div>
         </div>
 
-        <div class="hotel-details-box" id="hotel-makkah-info"></div>
+        <div id="hotel-makkah-info" style="margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border);"></div>
       </section>
 
-      <!-- LANGKAH 3: AKOMODASI MADINAH -->
+      <!-- Langkah 3: Akomodasi Madinah -->
       <section class="calc-card" id="card-step-madinah">
         <div class="card-header">
           <div class="step-info">
             <div class="step-num">03</div>
             <div>
               <h2 class="card-title">Akomodasi Hotel Madinah</h2>
-              <p class="card-subtitle">Pilih hotel dan durasi menginap di sekitar Masjid Nabawi &amp; Raudhah</p>
+              <p class="card-subtitle">Pilih hotel dekat pelataran Masjid Nabawi</p>
             </div>
           </div>
           <div class="card-subtotal">
-            <div class="sar-val" id="subtotal-madinah-sar">2.560 SAR</div>
-            <div class="idr-val" id="subtotal-madinah-idr">Rp10.880.000</div>
+            <div class="sar-val" id="subtotal-madinah-sar">2.800 SAR</div>
+            <div class="idr-val" id="subtotal-madinah-idr">Rp11.900.000</div>
           </div>
         </div>
 
@@ -181,159 +191,176 @@
 
         <div class="form-group" style="margin-bottom: 18px;">
           <label class="form-label">
-            <span>Tipe Kamar Madinah</span>
-            <span class="hint">Pilih sesuai kebutuhan privasi jemaah</span>
+            <span>Tipe Kamar (Kapasitas Tempat Tidur)</span>
+            <span class="hint">Pilihan kapasitas kasur</span>
           </label>
-          <div class="room-type-selector" id="room-type-madinah">
-            <button type="button" class="room-type-btn active" data-room-type="quad">
-              <span class="title">Quad (4 Orang)</span>
-              <span class="desc">Paling Ramah Kantong</span>
+          <div class="segmented-control" id="madinah-room-type-control">
+            <button type="button" class="segment-btn active" data-type="quad">
+              Quad (Sekamar Ber-4)
+              <small>Tempat tidur berempat</small>
             </button>
-            <button type="button" class="room-type-btn" data-room-type="triple">
-              <span class="title">Triple (3 Orang)</span>
-              <span class="desc">Ekstra Ruang &amp; Lega</span>
+            <button type="button" class="segment-btn" data-type="triple">
+              Triple (Sekamar Ber-3)
+              <small>Tempat tidur bertiga</small>
             </button>
-            <button type="button" class="room-type-btn" data-room-type="double">
-              <span class="title">Double (2 Orang)</span>
-              <span class="desc">Opsi Pasutri / Privat</span>
+            <button type="button" class="segment-btn" data-type="double">
+              Double (Sekamar Ber-2)
+              <small>Tempat tidur berdua</small>
             </button>
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label" for="madinah-nights">Durasi Menginap (Malam)</label>
+            <label class="form-label" for="madinah-nights">
+              <span>Durasi Menginap (Malam)</span>
+              <span class="hint">Rekomendasi 3-5 malam</span>
+            </label>
             <div class="stepper-wrap">
-              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi malam">−</button>
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi malam Madinah">−</button>
               <input type="number" id="madinah-nights" class="stepper-input" value="4" min="1" max="30">
-              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah malam">+</button>
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah malam Madinah">+</button>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label" for="madinah-rooms">Jumlah Kamar</label>
+            <label class="form-label" for="madinah-rooms">
+              <span>Jumlah Kamar</span>
+              <span class="hint" id="madinah-room-calc-hint">Disesuaikan otomatis</span>
+            </label>
             <div class="stepper-wrap">
-              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi kamar">−</button>
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi kamar Madinah">−</button>
               <input type="number" id="madinah-rooms" class="stepper-input" value="1" min="1" max="20">
-              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah kamar">+</button>
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah kamar Madinah">+</button>
             </div>
           </div>
         </div>
 
-        <div class="hotel-details-box" id="hotel-madinah-info"></div>
+        <div id="hotel-madinah-info" style="margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border);"></div>
       </section>
 
-      <!-- LANGKAH 4: KERETA CEPAT HARAMAIN (HHR) -->
+      <!-- Langkah 4: Kereta Cepat Haramain (HHR) -->
       <section class="calc-card" id="card-step-hhr">
         <div class="card-header">
           <div class="step-info">
             <div class="step-num">04</div>
             <div>
               <h2 class="card-title">Kereta Cepat Haramain (HHR)</h2>
-              <p class="card-subtitle">Transportasi rel super cepat memangkas perjalanan Makkah ↔ Madinah jadi 2 jam</p>
+              <p class="card-subtitle">Perjalanan nyaman antarkota Makkah, Madinah, dan Bandara Jeddah (kecepatan 300 km/jam)</p>
             </div>
           </div>
           <div class="card-subtotal">
-            <div class="sar-val" id="subtotal-hhr-sar">400 SAR</div>
-            <div class="idr-val" id="subtotal-hhr-idr">Rp1.700.000</div>
+            <div class="sar-val" id="subtotal-hhr-sar">380 SAR</div>
+            <div class="idr-val" id="subtotal-hhr-idr">Rp1.615.000</div>
           </div>
         </div>
 
-        <div class="option-list" id="hhr-routes-container" style="margin-bottom: 18px;"></div>
-
-        <div class="form-group" style="max-width: 280px;">
-          <label class="form-label" for="hhr-tickets">Jumlah Tiket Kereta</label>
-          <div class="stepper-wrap">
-            <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi tiket">−</button>
-            <input type="number" id="hhr-tickets" class="stepper-input" value="2" min="0" max="50">
-            <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah tiket">+</button>
+        <div style="margin-bottom: 14px;">
+          <div class="form-group" style="max-width: 280px; margin-bottom: 14px;">
+            <label class="form-label" for="hhr-tickets">Jumlah Tiket Kereta</label>
+            <div class="stepper-wrap">
+              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi tiket kereta">−</button>
+              <input type="number" id="hhr-tickets" class="stepper-input" value="2" min="1" max="50">
+              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah tiket kereta">+</button>
+            </div>
           </div>
+          <label class="form-label" style="margin-bottom: 8px;">Pilihan Rute Kereta Cepat HHR</label>
+          <div class="options-list" id="hhr-routes-list"></div>
         </div>
       </section>
 
-      <!-- LANGKAH 5: TRANSPORTASI LOKAL & CARTER -->
+      <!-- Langkah 5: Transportasi Lokal & Ziarah -->
       <section class="calc-card" id="card-step-transport">
         <div class="card-header">
           <div class="step-info">
             <div class="step-num">05</div>
             <div>
-              <h2 class="card-title">Transportasi Antar-Jemput &amp; Ziarah</h2>
-              <p class="card-subtitle">Layanan jemput bandara, stasiun, carter ziarah Makkah, Madinah, dan Thaif</p>
+              <h2 class="card-title">Transportasi Darat &amp; Ziarah</h2>
+              <p class="card-subtitle">Carter kendaraan antar jemput bandara, stasiun, dan ziarah kota suci</p>
             </div>
           </div>
           <div class="card-subtotal">
-            <div class="sar-val" id="subtotal-transport-sar">1.200 SAR</div>
-            <div class="idr-val" id="subtotal-transport-idr">Rp5.100.000</div>
+            <div class="sar-val" id="subtotal-transport-sar">1.350 SAR</div>
+            <div class="idr-val" id="subtotal-transport-idr">Rp5.737.500</div>
           </div>
         </div>
 
-        <div class="option-list" id="local-transport-container"></div>
+        <div>
+          <label class="form-label" style="margin-bottom: 10px;">Pilihan Rute Carter Mobil / Bus</label>
+          <div class="options-list" id="transport-routes-list"></div>
+        </div>
       </section>
 
-      <!-- LANGKAH 6: MUTAWWIF & HANDLING KHAS MUTAWWIFMU -->
+      <!-- Langkah 6: Layanan Mutawwif & Handling -->
       <section class="calc-card" id="card-step-mutawwif">
         <div class="card-header">
           <div class="step-info">
             <div class="step-num">06</div>
             <div>
-              <h2 class="card-title">Pendampingan Mutawwif &amp; Handling</h2>
-              <p class="card-subtitle">Layanan bimbingan ibadah resmi berbahasa Indonesia dan fast track bandara</p>
+              <h2 class="card-title">Layanan Mutawwif &amp; Handling Bandara</h2>
+              <p class="card-subtitle">Bimbingan ibadah berpengalaman sesuai sunnah dan asistensi resmi di Tanah Suci</p>
             </div>
           </div>
           <div class="card-subtotal">
-            <div class="sar-val" id="subtotal-mutawwif-sar">1.800 SAR</div>
-            <div class="idr-val" id="subtotal-mutawwif-idr">Rp7.650.000</div>
+            <div class="sar-val" id="subtotal-mutawwif-sar">1.950 SAR</div>
+            <div class="idr-val" id="subtotal-mutawwif-idr">Rp8.287.500</div>
           </div>
         </div>
 
-        <div class="option-list" id="mutawwif-services-container"></div>
+        <div>
+          <label class="form-label" style="margin-bottom: 10px;">Pilihan Layanan Asistensi Mutawwifmu</label>
+          <div class="options-list" id="mutawwif-services-list"></div>
+        </div>
       </section>
 
-      <!-- LANGKAH 7: ESTIMASI TIKET PESAWAT -->
+      <!-- Langkah 7: Estimasi Tiket Pesawat PP -->
       <section class="calc-card" id="card-step-flight">
         <div class="card-header">
           <div class="step-info">
             <div class="step-num">07</div>
             <div>
-              <h2 class="card-title">Estimasi Tiket Pesawat Internasional</h2>
-              <p class="card-subtitle">Pilih estimasi maskapai penerbangan pulang-pergi (PP) atau input sendiri</p>
+              <h2 class="card-title">Tiket Pesawat PP Internasional</h2>
+              <p class="card-subtitle">Perkiraan harga tiket penerbangan pulang-pergi Indonesia ke Arab Saudi</p>
             </div>
           </div>
           <div class="card-subtotal">
-            <div class="sar-val" style="font-size:13px;color:var(--text-muted)">Tiket Pesawat</div>
-            <div class="idr-val" id="subtotal-flight-idr" style="font-size:16px;font-weight:700;color:var(--primary)">Rp33.000.000</div>
+            <div class="sar-val" id="subtotal-flight-sar">3.411 SAR</div>
+            <div class="idr-val" id="subtotal-flight-idr">Rp29.000.000</div>
           </div>
         </div>
 
         <div class="form-grid">
           <div class="form-group">
-            <label class="form-label" for="flight-select">Referensi Maskapai Penerbangan</label>
+            <label class="form-label" for="flight-select">Maskapai Penerbangan</label>
             <select id="flight-select" class="form-select"></select>
           </div>
 
-          <div class="form-group" id="custom-flight-wrap" style="display: none;">
-            <label class="form-label" for="custom-flight-input">Nominal Tiket PP per Pax (Rp)</label>
-            <input type="text" id="custom-flight-input" class="form-control" placeholder="Contoh: 14.500.000">
+          <div class="form-group" id="custom-flight-group" style="display: none;">
+            <label class="form-label" for="custom-flight-input">
+              <span>Nominal Tiket PP per Orang</span>
+              <span class="hint">Masukkan dalam Rupiah</span>
+            </label>
+            <input type="number" id="custom-flight-input" class="form-control" placeholder="Contoh: 14500000" step="100000">
           </div>
         </div>
       </section>
 
-      <!-- CALLOUT CHECKLIST IBADAH -->
+      <!-- Callout Checklist Ibadah -->
       <div class="callout-box">
         <div style="display: flex; align-items: center; gap: 18px;">
           <div class="callout-icon">📋</div>
           <div class="callout-text">
             <h3>Sudah Siap Melangkah ke Baitullah?</h3>
-            <p>Jangan sampai ada berkas atau barang penting tertinggal. Buka checklist interaktif persiapan umroh 5 fase.</p>
+            <p>Pastikan berkas dan kebutuhan pribadi tidak ada yang terlewat dengan checklist interaktif persiapan ibadah.</p>
           </div>
         </div>
-        <a href="checklist.html" class="btn btn-gold">Buka Checklist Ibadah →</a>
+        <a href="checklist.html" class="btn btn-gold">Buka Checklist Ibadah</a>
       </div>
 
     </div>
   </main>
 
-  <!-- ==================== FAQ SECTION ==================== -->
+  <!-- Tanya Jawab -->
   <section class="faq-section">
     <div class="section-header">
       <span class="section-tag">Tanya Jawab</span>
@@ -342,24 +369,24 @@
     <div class="faq-grid">
       <div class="faq-card">
         <h3 class="faq-q">Berapa estimasi total biaya umroh mandiri di tahun 2026?</h3>
-        <p class="faq-a">Estimasi biaya umroh mandiri umumnya berkisar antara Rp18 juta hingga Rp26 juta per orang untuk durasi 9 s.d. 12 hari, tergantung tipe kamar hotel (Quad jauh lebih hemat), rute kereta HHR, dan promo tiket pesawat.</p>
+        <p class="faq-a">Estimasi biaya umroh mandiri berkisar antara Rp18 juta hingga Rp26 juta per orang untuk durasi 9 s.d. 12 hari, bergantung pada tipe kamar hotel (Quad paling hemat), rute kereta cepat HHR, dan penawaran tiket pesawat yang Anda pesan.</p>
       </div>
       <div class="faq-card">
         <h3 class="faq-q">Apa keunggulan kamar Quad dibanding Double?</h3>
-        <p class="faq-a">Kamar tipe Quad diisi 4 orang dengan tempat tidur terpisah sehingga biaya sewa kamar dibagi rata berempat. Opsi ini mampu memangkas pengeluaran hotel hingga 35-40% per orang tanpa mengorbankan kenyamanan.</p>
+        <p class="faq-a">Kamar tipe Quad diisi 4 orang dengan kasur terpisah sehingga tarif sewa kamar dibagi rata berempat. Opsi ini memangkas biaya hotel hingga 35-40% per orang tanpa mengurangi kenyamanan istirahat.</p>
       </div>
       <div class="faq-card">
         <h3 class="faq-q">Mengapa disarankan menggunakan Kereta Cepat Haramain (HHR)?</h3>
-        <p class="faq-a">Kereta Cepat HHR memangkas perjalanan antarkota Madinah-Makkah menjadi hanya 2 jam dengan kecepatan 300 km/jam, jauh lebih cepat dibanding bus umum (6-7 jam), sehingga fisik jemaah tetap bugar saat ibadah.</p>
+        <p class="faq-a">Kereta Cepat HHR memangkas waktu tempuh Madinah-Makkah menjadi 2 jam saja (kecepatan 300 km/jam), jauh lebih singkat dibanding bus umum (6-7 jam), sehingga stamina jamaah tetap prima untuk tawaf dan sa'i.</p>
       </div>
       <div class="faq-card">
-        <h3 class="faq-q">Bagaimana cara memvalidasi paket LA ini ke Mutawwifmu?</h3>
-        <p class="faq-a">Cukup klik tombol "Konsultasikan Rincian ke WhatsApp" di bilah bawah. Rincian hotel, pax, dan rute Anda akan otomatis terangkum rapi untuk dikonfirmasi tanggal dan ketersediaannya oleh tim Mutawwifmu.</p>
+        <h3 class="faq-q">Bagaimana cara mengonfirmasi paket LA ini ke Mutawwifmu?</h3>
+        <p class="faq-a">Klik tombol "Konsultasikan Rincian ke WhatsApp". Rincian tanggal, tipe kamar hotel, tiket kereta, dan armada kendaraan akan tersusun rapi untuk divalidasi ketersediaannya oleh tim Mutawwifmu.</p>
       </div>
     </div>
   </section>
 
-  <!-- ==================== STICKY BOTTOM SUMMARY ==================== -->
+  <!-- Sticky Bottom Summary Bar -->
   <aside class="sticky-summary" aria-label="Ringkasan Estimasi Biaya">
     <div class="summary-inner">
       <div class="summary-numbers">
@@ -374,22 +401,24 @@
         </div>
       </div>
       <div class="summary-cta-group">
-        <button id="btn-whatsapp-action" class="btn-whatsapp-cta">
+        <button id="btn-copy-summary" class="btn-reset-summary" type="button" title="Salin ringkasan teks itinerary">Salin Ringkasan</button>
+        <button id="btn-reset-calculator" class="btn-reset-summary" type="button" title="Kembalikan ke konfigurasi awal">Reset</button>
+        <button id="btn-whatsapp-action" class="btn-whatsapp-cta" type="button">
           <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-          Konsultasikan Rincian ke WhatsApp
+          Konsultasikan ke WhatsApp
         </button>
       </div>
     </div>
   </aside>
 
-  <!-- ==================== SITE FOOTER ==================== -->
+  <!-- Site Footer -->
   <footer class="site-footer">
     <div class="footer-container">
       <div class="footer-brand">
         <img src="assets/logo.webp" alt="Mutawwifmu" width="160" height="38" style="filter: brightness(0) invert(1);">
-        <p>Platform mitra Land Arrangement umroh dan wisata halal global terpercaya. Menyediakan visa, hotel, transportasi, handling bandara, dan mutawwif berizin resmi.</p>
+        <p>Platform mitra Land Arrangement umroh dan wisata halal global. Menyediakan visa resmi, hotel Makkah-Madinah, armada transportasi, handling bandara, serta mutawwif bersertifikat.</p>
         <p style="margin-top: 10px; font-size: 12.5px; color: rgba(255,255,255,0.6);">
-          📍 Jl. Lengkong Gudang Timur Raya No.79 a, Kota Tangerang Selatan, Banten, Indonesia
+          Jl. Lengkong Gudang Timur Raya No.79 a, Kota Tangerang Selatan, Banten, Indonesia
         </p>
       </div>
 
@@ -421,6 +450,9 @@
       <div>Kalkulator Mandiri didesain dengan standar visual resmi Mutawwifmu.</div>
     </div>
   </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast-notice" class="toast-notice" role="status" aria-live="polite"></div>
 
   <!-- Scripts -->
   <script src="js/data.js"></script>
