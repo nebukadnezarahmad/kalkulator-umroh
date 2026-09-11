@@ -51,17 +51,55 @@
           <a href="index.html" class="brand-logo" aria-label="Mutawwifmu Beranda">
             <img src="assets/logo.webp" alt="Mutawwifmu Logo" width="180" height="42">
           </a>
-          <nav aria-label="Navigasi Utama">
-            <ul class="nav-menu">
-              <li><a href="https://mutawwifmu.com/" target="_blank" rel="noopener" class="nav-link">Beranda</a></li>
+          <nav aria-label="Navigasi Utama" class="main-nav">
+            <ul class="nav-menu" id="primary-nav-menu">
               <li><a href="index.html" class="nav-link">Kalkulator Umroh</a></li>
+              <li class="nav-item-dropdown">
+                <a href="index.html#card-step-visa" class="nav-link nav-link-dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span>Komponen Biaya</span>
+                  <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </a>
+                <div class="dropdown-menu" role="menu">
+                  <a href="index.html#card-step-visa" class="dropdown-item" role="menuitem">
+                    <span class="dropdown-step">01</span>
+                    <span class="dropdown-text">Visa Umroh &amp; Jamaah</span>
+                  </a>
+                  <a href="index.html#card-step-makkah" class="dropdown-item" role="menuitem">
+                    <span class="dropdown-step">02</span>
+                    <span class="dropdown-text">Hotel Makkah</span>
+                  </a>
+                  <a href="index.html#card-step-madinah" class="dropdown-item" role="menuitem">
+                    <span class="dropdown-step">03</span>
+                    <span class="dropdown-text">Hotel Madinah</span>
+                  </a>
+                  <a href="index.html#card-step-hhr" class="dropdown-item" role="menuitem">
+                    <span class="dropdown-step">04</span>
+                    <span class="dropdown-text">Kereta Cepat Haramain</span>
+                  </a>
+                  <a href="index.html#card-step-transport" class="dropdown-item" role="menuitem">
+                    <span class="dropdown-step">05</span>
+                    <span class="dropdown-text">Transportasi &amp; Ziarah</span>
+                  </a>
+                  <a href="index.html#card-step-mutawwif" class="dropdown-item" role="menuitem">
+                    <span class="dropdown-step">06</span>
+                    <span class="dropdown-text">Mutawwif &amp; Handling</span>
+                  </a>
+                  <a href="index.html#card-step-flight" class="dropdown-item" role="menuitem">
+                    <span class="dropdown-step">07</span>
+                    <span class="dropdown-text">Tiket Pesawat PP</span>
+                  </a>
+                </div>
+              </li>
               <li><a href="checklist.html" class="nav-link active">Checklist Ibadah</a></li>
-              <li><a href="https://mutawwifmu.com/tentang-kami/" target="_blank" rel="noopener" class="nav-link">Tentang Kami</a></li>
-              <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener" class="nav-link">Layanan</a></li>
+              <li><a href="index.html#faq-section" class="nav-link">Tanya Jawab</a></li>
+              <li><a href="https://mutawwifmu.com/tentang-kami/" target="_blank" rel="noopener" class="nav-link">Tentang Mutawwifmu</a></li>
             </ul>
           </nav>
           <div class="header-actions">
-            <a href="https://wa.me/6287745873159" target="_blank" rel="noopener" class="btn-header-contact">Hubungi Kami</a>
+            <a href="https://wa.me/6287745873159" target="_blank" rel="noopener" class="btn-header-contact" id="nav-btn-wa">Hubungi Kami</a>
+            <button type="button" class="btn-mobile-menu" id="mobile-menu-toggle" aria-label="Buka Menu Navigasi" aria-expanded="false">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
           </div>
         </div>
       </header>
@@ -173,12 +211,13 @@
       </div>
 
       <div class="footer-col-links">
-        <h5 class="footer-heading">Link Cepat</h5>
+        <h5 class="footer-heading">Navigasi Utama</h5>
         <ul class="footer-links-list">
-          <li><a href="https://mutawwifmu.com/tentang-kami/" target="_blank" rel="noopener">Tentang Kami</a></li>
-          <li><a href="https://mutawwifmu.com/layanan/" target="_blank" rel="noopener">Layanan</a></li>
-          <li><a href="https://mutawwifmu.com/artikel/" target="_blank" rel="noopener">Artikel</a></li>
-          <li><a href="https://wa.me/6287745873159" target="_blank" rel="noopener">Hubungi Kami</a></li>
+          <li><a href="index.html">Kalkulator Umroh</a></li>
+          <li><a href="index.html#card-step-visa">Komponen Biaya</a></li>
+          <li><a href="checklist.html">Checklist Ibadah</a></li>
+          <li><a href="index.html#faq-section">Tanya Jawab (FAQ)</a></li>
+          <li><a href="https://mutawwifmu.com/tentang-kami/" target="_blank" rel="noopener">Tentang Mutawwifmu</a></li>
         </ul>
       </div>
 

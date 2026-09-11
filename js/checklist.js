@@ -132,4 +132,33 @@ function setupChecklistActions() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", initChecklist);
+function setupNavMenu() {
+  const toggleBtn = document.getElementById("mobile-menu-toggle");
+  const navMenu = document.getElementById("primary-nav-menu");
+  if (!toggleBtn || !navMenu) return;
+
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = navMenu.classList.toggle("open");
+    toggleBtn.setAttribute("aria-expanded", isOpen);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
+      navMenu.classList.remove("open");
+      toggleBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  navMenu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      navMenu.classList.remove("open");
+      toggleBtn.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initChecklist();
+  setupNavMenu();
+});
