@@ -60,23 +60,19 @@ function recalculateAll() {
   const currency = UMRAH_DATA.config.currency;
   const pax = Math.max(1, calcState.pax);
 
-  // 1. Visa & Asuransi
   const visaUsd = pax * UMRAH_DATA.visa.priceUsd;
   const visaIdr = visaUsd * currency.USD_TO_IDR;
 
-  // 2. Hotel Makkah
   const hotelMakkah = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId) || UMRAH_DATA.hotelsMakkah[0];
   const makkahPricePerNight = hotelMakkah.prices[calcState.makkah.roomType] || 0;
   const makkahSar = makkahPricePerNight * calcState.makkah.nights * calcState.makkah.rooms;
   const makkahIdr = makkahSar * currency.SAR_TO_IDR;
 
-  // 3. Hotel Madinah
   const hotelMadinah = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId) || UMRAH_DATA.hotelsMadinah[0];
   const madinahPricePerNight = hotelMadinah.prices[calcState.madinah.roomType] || 0;
   const madinahSar = madinahPricePerNight * calcState.madinah.nights * calcState.madinah.rooms;
   const madinahIdr = madinahSar * currency.SAR_TO_IDR;
 
-  // 4. Kereta Cepat Haramain (HHR)
   let hhrSingleTripCost = 0;
   calcState.hhr.selectedRoutes.forEach(rId => {
     const route = UMRAH_DATA.hhrRoutes.find(r => r.id === rId);
@@ -85,7 +81,6 @@ function recalculateAll() {
   const hhrSar = hhrSingleTripCost * calcState.hhr.tickets;
   const hhrIdr = hhrSar * currency.SAR_TO_IDR;
 
-  // 5. Transportasi Lokal & Carter
   let transportSar = 0;
   calcState.transport.selectedIds.forEach(tId => {
     const item = UMRAH_DATA.localTransport.find(t => t.id === tId);
@@ -93,7 +88,6 @@ function recalculateAll() {
   });
   const transportIdr = transportSar * currency.SAR_TO_IDR;
 
-  // 6. Mutawwif & Layanan Tambahan
   let mutawwifSar = 0;
   let mutawwifIdr = 0;
   calcState.mutawwif.selectedIds.forEach(mId => {
@@ -106,7 +100,6 @@ function recalculateAll() {
     }
   });
 
-  // 7. Tiket Pesawat
   let flightIdr = 0;
   const flightItem = UMRAH_DATA.flightEstimates.find(f => f.id === calcState.flight.selectedId);
   if (flightItem) {
@@ -117,7 +110,6 @@ function recalculateAll() {
     }
   }
 
-  // Akumulasi Total
   const totalSar = makkahSar + madinahSar + hhrSar + transportSar + mutawwifSar;
   const totalIdr = (totalSar * currency.SAR_TO_IDR) + visaIdr + mutawwifIdr + flightIdr;
   const perPaxIdr = Math.round(totalIdr / pax);
@@ -400,7 +392,6 @@ function initCalculator() {
     recalculateAll();
   });
 
-  // Reset button
   const resetBtn = document.getElementById("btn-reset-calculator");
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
@@ -414,7 +405,6 @@ function initCalculator() {
         flight: { selectedId: "saudia", customPrice: 0 }
       };
 
-      // Reset DOM values
       const paxEl = document.getElementById("pax-count");
       if (paxEl) paxEl.value = 2;
       const mkNights = document.getElementById("makkah-nights");
@@ -438,7 +428,6 @@ function initCalculator() {
     });
   }
 
-  // Copy summary button
   const copyBtn = document.getElementById("btn-copy-summary");
   if (copyBtn) {
     copyBtn.addEventListener("click", () => {
@@ -550,8 +539,7 @@ function renderHotelShowcase(city) {
   const landmark = isMakkah ? "ke Masjidil Haram" : "ke Masjid Nabawi";
   const hotelImg = hotel.image || `assets/hotels/${hotel.id}.jpg`;
 
-  // JIKA HOTEL SUDAH TER-RENDER DAN HANYA GANTI TIPE KAMAR:
-  // JANGAN re-render gambar atau DOM kartu hotel agar TIDAK ADA GLITCH / KEDIP SAMA SEKALI!
+  // Preserve existing DOM and image element when only switching room type to prevent flickering.
   const existingCard = container.querySelector(".hotel-showcase-card");
   if (existingCard && renderedHotelState[city].hotelId === hotel.id) {
     const pills = container.querySelectorAll(".hotel-rate-pill");
@@ -565,7 +553,7 @@ function renderHotelShowcase(city) {
     return;
   }
 
-  // Jika hotel berubah atau render awal, render kartu lengkap
+  // Render full hotel card upon initial load or hotel change
   renderedHotelState[city].hotelId = hotel.id;
 
   container.innerHTML = `
@@ -581,7 +569,7 @@ function renderHotelShowcase(city) {
         >
         <div class="hotel-media-badges">
           <span class="hotel-badge-stars">★ Bintang ${hotel.stars}</span>
-          <span class="hotel-badge-dist">📍 ${hotel.dist} ${landmark}</span>
+          <span class="hotel-badge-dist"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:-1px; margin-right:3px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>${hotel.dist} ${landmark}</span>
         </div>
         <div class="hotel-media-gradient">
           <div class="hotel-media-name">${hotel.name}</div>

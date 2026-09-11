@@ -13,14 +13,12 @@ function buildWhatsAppConsultationMessage() {
   lines.push("Ref: Kalkulator Mandiri Mutawwifmu.com");
   lines.push("---------------------------------------");
 
-  // 1. Pax & Visa
   const visaUsd = pax * UMRAH_DATA.visa.priceUsd;
   const visaIdr = visaUsd * currency.USD_TO_IDR;
   lines.push(`👥 *Jumlah Jamaah:* ${pax} Orang`);
   lines.push(`📄 *Visa & Asuransi:* ${formatUSD(visaUsd)} (~${formatIDR(visaIdr)})`);
   lines.push("");
 
-  // 2. Hotel Makkah
   const hotelMakkah = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId);
   if (hotelMakkah) {
     const roomTypeLabel = calcState.makkah.roomType.toUpperCase();
@@ -31,7 +29,6 @@ function buildWhatsAppConsultationMessage() {
   }
   lines.push("");
 
-  // 3. Hotel Madinah
   const hotelMadinah = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId);
   if (hotelMadinah) {
     const roomTypeLabel = calcState.madinah.roomType.toUpperCase();
@@ -42,7 +39,6 @@ function buildWhatsAppConsultationMessage() {
   }
   lines.push("");
 
-  // 4. Kereta Cepat Haramain (HHR)
   if (calcState.hhr.selectedRoutes.length > 0) {
     lines.push(`🚄 *Kereta Cepat Haramain (HHR):*`);
     calcState.hhr.selectedRoutes.forEach(rId => {
@@ -52,7 +48,6 @@ function buildWhatsAppConsultationMessage() {
     lines.push("");
   }
 
-  // 5. Transportasi Lokal & Carter
   if (calcState.transport.selectedIds.length > 0) {
     lines.push(`🚗 *Transportasi Lokal & Carter:*`);
     calcState.transport.selectedIds.forEach(tId => {
@@ -62,7 +57,6 @@ function buildWhatsAppConsultationMessage() {
     lines.push("");
   }
 
-  // 6. Mutawwif & Handling
   if (calcState.mutawwif.selectedIds.length > 0) {
     lines.push(`🧕 *Layanan Mutawwif & Handling:*`);
     calcState.mutawwif.selectedIds.forEach(mId => {
@@ -72,7 +66,6 @@ function buildWhatsAppConsultationMessage() {
     lines.push("");
   }
 
-  // 7. Tiket Pesawat
   const flight = UMRAH_DATA.flightEstimates.find(f => f.id === calcState.flight.selectedId);
   if (flight) {
     let flightText = flight.label;
@@ -83,7 +76,6 @@ function buildWhatsAppConsultationMessage() {
     lines.push("");
   }
 
-  // 8. Total Rangkuman
   const totalIdrEl = document.getElementById("sticky-total-idr")?.textContent || "Rp0";
   const totalSarEl = document.getElementById("sticky-total-sar")?.textContent || "0 SAR";
   const perPaxIdrEl = document.getElementById("sticky-perpax-idr")?.textContent || "Rp0 / org";
