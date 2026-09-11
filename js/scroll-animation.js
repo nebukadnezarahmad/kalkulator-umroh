@@ -21,29 +21,6 @@
     }
     const progressBar = document.getElementById('scroll-progress-bar');
 
-    // 2. Setup Floating Scroll-to-Top Button
-    let scrollTopBtn = document.querySelector('.scroll-top-btn');
-    if (!scrollTopBtn) {
-      scrollTopBtn = document.createElement('button');
-      scrollTopBtn.className = 'scroll-top-btn';
-      scrollTopBtn.type = 'button';
-      scrollTopBtn.setAttribute('aria-label', 'Kembali ke atas halaman');
-      scrollTopBtn.setAttribute('title', 'Kembali ke atas');
-      scrollTopBtn.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="18 15 12 9 6 15"></polyline>
-        </svg>
-      `;
-      document.body.appendChild(scrollTopBtn);
-
-      scrollTopBtn.addEventListener('click', function () {
-        window.scrollTo({
-          top: 0,
-          behavior: isReducedMotion ? 'auto' : 'smooth'
-        });
-      });
-    }
-
     // Enable scroll animation styling on body
     document.body.classList.add('has-scroll-anim');
 
@@ -151,15 +128,6 @@
           stickySummary.classList.add('is-visible');
         } else {
           stickySummary.classList.remove('is-visible');
-        }
-      }
-
-      // Scroll-to-top button visibility threshold
-      if (scrollTopBtn) {
-        if (scrollY > 400) {
-          scrollTopBtn.classList.add('is-visible');
-        } else {
-          scrollTopBtn.classList.remove('is-visible');
         }
       }
 
