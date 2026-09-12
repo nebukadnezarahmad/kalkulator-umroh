@@ -429,38 +429,96 @@ button.btn-gold * {
 /* Big Rounded Hero Card Section (Official Mutawwifmu Layout) */
 .hero-frame-wrap {
   width: 100%;
-  background-color: #FFFFFF;
-  padding: 20px;
+  background-color: #2E538E;
+  padding: 0;
+  margin: 0;
 }
 
 .hero-rounded-box {
-  background-color: #426BAD;
+  background-color: #2E538E;
   background-image: url("../assets/hero-bg.webp");
   background-repeat: no-repeat;
   background-position: right center;
   background-size: cover;
-  border-radius: 16px;
+  border-radius: 0;
   overflow: hidden;
   position: relative;
-  min-height: 560px;
-  padding: 24px 32px 64px;
-  box-shadow: 0 12px 36px rgba(46, 83, 142, 0.12);
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 20px 32px 28px;
+  box-shadow: none;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .hero-inner {
   max-width: var(--container-max);
   width: 100%;
-  margin: 0 auto;
+  margin: auto auto;
   position: relative;
   z-index: 2;
   text-align: left;
+  padding: 20px 0;
 }
 
 .hero-content {
   max-width: 580px;
+}
+
+/* Scroll hint indicator at bottom of full-screen hero */
+.hero-scroll-hint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+
+.hero-scroll-link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: var(--font-heading);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-scroll-link:hover {
+  color: #FFFFFF;
+  transform: translateY(2px);
+}
+
+.scroll-mouse-icon {
+  width: 18px;
+  height: 28px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  padding-top: 3px;
+}
+
+.scroll-mouse-wheel {
+  width: 3px;
+  height: 5px;
+  background: #FFFFFF;
+  border-radius: 2px;
+  animation: scrollMouseAnim 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollMouseAnim {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(6px); opacity: 0.25; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 .hero-eyebrow {
@@ -1685,14 +1743,15 @@ body:has(.sticky-summary) .footer-bottom-bar {
 /* Mobile responsive adjustments */
 @media (max-width: 860px) {
   .hero-frame-wrap {
-    padding: 12px;
+    padding: 0;
   }
 
   .hero-rounded-box {
-    border-radius: 12px;
-    padding: 14px 16px 40px;
-    min-height: auto;
-    background: linear-gradient(180deg, rgba(66, 107, 173, 0.92) 0%, rgba(66, 107, 173, 0.96) 100%), url("../assets/hero-bg.webp") no-repeat center right / cover;
+    border-radius: 0;
+    padding: 14px 16px 24px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: linear-gradient(180deg, rgba(46, 83, 142, 0.90) 0%, rgba(46, 83, 142, 0.96) 100%), url("../assets/hero-bg.webp") no-repeat center right / cover;
   }
 
   .site-header {

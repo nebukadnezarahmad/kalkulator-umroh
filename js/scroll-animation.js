@@ -123,14 +123,15 @@
       }
 
       // Sticky Summary Bar visibility threshold with smooth hysteresis:
-      // Entering threshold: scrollY > 240px (past hero main focus)
-      // Exit threshold when scrolling back up: scrollY < 120px (near top)
-      // The 120px buffer prevents any jumpy flip-flopping near the threshold.
+      // Dynamic based on full-screen hero height (adapts to any device screen ratio)
+      const enterThreshold = Math.min(380, Math.max(240, window.innerHeight * 0.45));
+      const exitThreshold = Math.min(180, Math.max(110, window.innerHeight * 0.2));
+
       if (stickySummary) {
-        if (scrollY > 240 && !isStickyVisible) {
+        if (scrollY > enterThreshold && !isStickyVisible) {
           isStickyVisible = true;
           stickySummary.classList.add('is-visible');
-        } else if (scrollY < 120 && isStickyVisible) {
+        } else if (scrollY < exitThreshold && isStickyVisible) {
           isStickyVisible = false;
           stickySummary.classList.remove('is-visible');
         }
