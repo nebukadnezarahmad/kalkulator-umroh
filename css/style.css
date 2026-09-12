@@ -1141,20 +1141,24 @@ button.btn-hero-cta * {
   box-shadow: 0 -4px 20px rgba(46, 83, 142, 0.25);
   padding: 12px 0;
   color: #FFFFFF;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
   will-change: transform, opacity;
 }
 
 body.has-scroll-anim .sticky-summary:not(.is-visible) {
-  transform: translateY(115%);
+  transform: translate3d(0, calc(100% + 14px), 0);
   opacity: 0;
   pointer-events: none;
+  transition: transform 0.38s cubic-bezier(0.32, 0, 0.67, 0), opacity 0.28s ease;
 }
 
 body.has-scroll-anim .sticky-summary.is-visible {
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
   opacity: 1;
   pointer-events: auto;
+  transition: transform 0.48s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
 }
 
 .summary-inner {

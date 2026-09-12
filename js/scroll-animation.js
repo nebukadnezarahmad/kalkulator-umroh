@@ -110,6 +110,7 @@
     // 5. Throttled Scroll Listener for Dynamic UI Transitions
     const supportsCssScrollTimeline = window.CSS && CSS.supports && CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)');
     let ticking = false;
+    let isStickyVisible = false;
 
     function handleScroll() {
       const scrollY = window.scrollY || window.pageYOffset;
@@ -121,25 +122,31 @@
         progressBar.style.transform = `scaleX(${progress})`;
       }
 
-      // Sticky Summary Bar visibility threshold:
-      // Show when scrolled past 180px, smoothly retract at top
+      // Sticky Summary Bar visibility threshold with smooth hysteresis:
+      // Entering threshold: scrollY > 240px (past hero main focus)
+      // Exit threshold when scrolling back up: scrollY < 120px (near top)
+      // The 120px buffer prevents any jumpy flip-flopping near the threshold.
       if (stickySummary) {
-        if (scrollY > 180) {
+        if (scrollY > 240 && !isStickyVisible) {
+          isStickyVisible = true;
           stickySummary.classList.add('is-visible');
-        } else {
+        } else if (scrollY < 120 && isStickyVisible) {
+          isStickyVisible = false;
           stickySummary.classList.remove('is-visible');
         }
       }
 
       // Subtle Hero Parallax on desktop viewports
-      if (heroInner && window.innerWidth >= 768 && scrollY <= 600) {
-        const translateY = scrollY * 0.12;
-        const opacity = Math.max(0, 1 - (scrollY / 700));
-        heroInner.style.transform = `translate3d(0, ${translateY}px, 0)`;
-        heroInner.style.opacity = opacity.toString();
-      } else if (heroInner) {
-        heroInner.style.transform = '';
-        heroInner.style.opacity = '';
+      if (heroInner && window.innerWidth >= 768) {
+        if (scrollY <= 600) {
+          const translateY = scrollY * 0.1;
+          const opacity = Math.max(0, 1 - (scrollY / 720));
+          heroInner.style.transform = `translate3d(0, ${translateY}px, 0)`;
+          heroInner.style.opacity = opacity.toString();
+        } else if (heroInner.style.transform) {
+          heroInner.style.transform = '';
+          heroInner.style.opacity = '';
+        }
       }
 
       ticking = false;
