@@ -2038,3 +2038,72 @@ body:has(.sticky-summary) .footer-bottom-bar {
   }
 }
 
+/* 5. Embedded Mode (Seamless integration inside mutawwifmu.com WordPress pages) */
+.is-embedded .site-header {
+  display: none !important;
+}
+
+.is-embedded .scroll-progress-container {
+  display: none !important;
+}
+
+.is-embedded .hero-frame-wrap {
+  min-height: auto !important;
+  padding: 16px 14px 0 !important;
+  background-color: transparent !important;
+}
+
+.is-embedded .hero-rounded-box {
+  min-height: auto !important;
+  padding: 36px 36px 32px !important;
+  margin-bottom: 24px !important;
+  border-radius: 16px !important;
+}
+
+.is-embedded .hero-inner {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: 800px !important;
+}
+
+.is-embedded .hero-eyebrow {
+  margin-bottom: 8px !important;
+}
+
+.is-embedded .hero-title {
+  font-size: 2.2rem !important;
+  line-height: 1.22 !important;
+  margin-bottom: 12px !important;
+}
+
+.is-embedded .hero-desc {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 20px !important;
+  max-width: 680px !important;
+}
+
+.is-embedded .pre-footer-cta {
+  display: none !important;
+}
+
+@media (max-width: 860px) {
+  .is-embedded .hero-frame-wrap {
+    padding: 10px 10px 0 !important;
+  }
+
+  .is-embedded .hero-rounded-box {
+    padding: 24px 18px 24px !important;
+    border-radius: 14px !important;
+  }
+
+  .is-embedded .hero-title {
+    font-size: 1.75rem !important;
+  }
+
+  .is-embedded .hero-desc {
+    font-size: 14px !important;
+  }
+}
+
+
