@@ -1,4 +1,21 @@
-@import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap');
+@font-face {
+  font-family: 'General Sans';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('../assets/fonts/GeneralSans-Regular.ttf') format('truetype'),
+       url('https://mutawwifmu.com/wp-content/uploads/2025/04/GeneralSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../assets/fonts/Montserrat-SemiBold.ttf') format('truetype'),
+       url('https://mutawwifmu.com/wp-content/uploads/2025/05/Montserrat-SemiBold.ttf') format('truetype');
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
@@ -92,7 +109,7 @@ button, input, select, textarea {
   outline-offset: 2px;
 }
 
-/* Header and primary navigation (Floating Navbar Card inside Rounded Box - Exact Beranda Specs) */
+/* Header and primary navigation (Exact Beranda Mutawwifmu Layout & Metrics) */
 .site-header {
   position: relative;
   z-index: 20;
@@ -100,35 +117,37 @@ button, input, select, textarea {
   border-bottom: none;
   box-shadow: none;
   padding: 0;
-  margin-bottom: 48px;
+  margin-bottom: 30px;
   width: 100%;
 }
 
 .header-container {
   width: 100%;
-  max-width: 1280px;
+  max-width: 1352px;
+  height: 74px;
   margin: 0 auto;
   padding: 12px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 20px;
   background: #FFFFFF;
   border-radius: 6px;
   box-shadow: 10px 10px 40px 0px rgba(0, 0, 0, 0.03);
   border: none;
+  box-sizing: border-box;
 }
 
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .brand-logo img {
-  height: 44px;
-  width: auto;
+  height: 48px;
+  width: 131px;
   object-fit: contain;
   display: block;
 }
@@ -136,22 +155,34 @@ button, input, select, textarea {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 0;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+.nav-menu > li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .nav-link {
-  font-family: 'General Sans', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'General Sans', sans-serif;
   font-size: 16px;
   font-weight: 600;
-  line-height: 1.5em;
+  line-height: 24px;
   color: #637381;
-  padding: 6px 0;
+  padding: 13px 20px;
+  height: 50px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   text-decoration: none;
   transition: color 0.15s ease;
+  letter-spacing: normal;
 }
 
 .nav-link:hover {
@@ -283,16 +314,19 @@ button, input, select, textarea {
   gap: 10px;
 }
 
-.btn-header-contact {
+.btn-header-contact,
+a.btn-header-contact,
+button.btn-header-contact {
   background-color: #426BAD;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   border: none;
   border-radius: 6px;
-  padding: 10px 24px;
+  padding: 12px 24px;
+  height: 45px;
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   font-weight: 600;
-  line-height: 1.3em;
+  line-height: 20.8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   text-decoration: none;
@@ -301,11 +335,13 @@ button, input, select, textarea {
   justify-content: center;
   white-space: nowrap;
   box-shadow: none;
+  box-sizing: border-box;
 }
 
-.btn-header-contact:hover {
+.btn-header-contact:hover,
+a.btn-header-contact:hover {
   background-color: #31538A;
-  color: #FFFFFF;
+  color: #FFFFFF !important;
   transform: none;
   box-shadow: none;
 }
@@ -437,7 +473,7 @@ button.btn-gold * {
 .hero-frame-wrap {
   width: 100%;
   background-color: #FFFFFF;
-  padding: 16px;
+  padding: 20px;
   min-height: 100vh;
   min-height: 100dvh;
   box-sizing: border-box;
@@ -449,20 +485,21 @@ button.btn-gold * {
   background-repeat: no-repeat;
   background-position: right center;
   background-size: cover;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   position: relative;
-  min-height: calc(100vh - 32px);
-  min-height: calc(100dvh - 32px);
-  padding: 40px 48px 48px;
+  min-height: calc(100vh - 40px);
+  min-height: calc(100dvh - 40px);
+  padding: 20px 60px 48px;
   box-shadow: 0 10px 32px rgba(46, 83, 142, 0.12);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
 .hero-inner {
-  max-width: 1280px;
+  max-width: 1352px;
   width: 100%;
   margin: auto auto;
   position: relative;
