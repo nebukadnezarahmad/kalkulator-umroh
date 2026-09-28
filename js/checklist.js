@@ -28,6 +28,16 @@ function saveChecklist() {
   localStorage.setItem("MUTAWWIFMU_CHECKLIST", JSON.stringify(checklistState));
 }
 
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function renderChecklist() {
   const container = document.getElementById("checklist-phases");
   if (!container) return;
@@ -55,7 +65,7 @@ function renderChecklist() {
               <div class="option-left">
                 <input type="checkbox" class="option-checkbox" data-phase="${pIdx}" data-item="${iIdx}" ${item.done ? 'checked' : ''}>
                 <span style="${item.done ? 'text-decoration: line-through; opacity: 0.65;' : 'font-weight: 500;'} font-size: 14px; color: var(--text-main);">
-                  ${item.text}
+                  ${escapeHtml(item.text)}
                 </span>
               </div>
             </label>
@@ -155,6 +165,23 @@ function setupNavMenu() {
       navMenu.classList.remove("open");
       toggleBtn.setAttribute("aria-expanded", "false");
     });
+  });
+
+  // Breakout of iframe for any mutawwifmu.com links when embedded
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (href && (href.startsWith("https://mutawwifmu.com") || href.startsWith("http://mutawwifmu.com"))) {
+      if (window.self !== window.top) {
+        e.preventDefault();
+        try {
+          window.top.location.href = href;
+        } catch (err) {
+          window.location.href = href;
+        }
+      }
+    }
   });
 }
 

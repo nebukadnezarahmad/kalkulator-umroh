@@ -665,6 +665,23 @@ function setupNavMenu() {
       toggleBtn.setAttribute("aria-expanded", "false");
     });
   });
+
+  // Breakout of iframe for any mutawwifmu.com links when embedded
+  document.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+    const href = link.getAttribute("href");
+    if (href && (href.startsWith("https://mutawwifmu.com") || href.startsWith("http://mutawwifmu.com"))) {
+      if (window.self !== window.top) {
+        e.preventDefault();
+        try {
+          window.top.location.href = href;
+        } catch (err) {
+          window.location.href = href;
+        }
+      }
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {

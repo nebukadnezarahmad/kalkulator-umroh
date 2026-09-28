@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mutawwifmu.com/sitemap.xml
