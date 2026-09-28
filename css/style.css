@@ -201,7 +201,7 @@ button, input, select, textarea {
 .nav-link {
   font-family: 'General Sans', sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 24px;
   color: #637381;
   padding: 13px 20px;
@@ -214,6 +214,9 @@ button, input, select, textarea {
   text-decoration: none;
   transition: color 0.15s ease;
   letter-spacing: normal;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .nav-link:hover {
@@ -222,7 +225,7 @@ button, input, select, textarea {
 
 .nav-link.active {
   color: #121212;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .nav-link.active::after {
