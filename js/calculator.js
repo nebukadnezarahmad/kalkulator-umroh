@@ -102,7 +102,7 @@ function updateArmadaHint() {
   const current = calcState.transport.vehicle || "camry";
   const aObj = UMRAH_DATA.armadaList.find(x => x.id === current);
   if (aObj) {
-    hintEl.textContent = `${calcState.pax} jamaah: ${aObj.name} (${aObj.capacity}) - ${aObj.desc}`;
+    hintEl.textContent = `${calcState.pax} Jamaah: ${aObj.name} (${aObj.capacity})`;
   }
 }
 
@@ -255,8 +255,8 @@ function recalculateAll() {
   // Update Subtotals
   const visaSarEl = document.getElementById("subtotal-visa-sar");
   const visaIdrEl = document.getElementById("subtotal-visa-idr");
-  if (visaSarEl) visaSarEl.textContent = formatUSD(visaUsd);
-  if (visaIdrEl) visaIdrEl.textContent = formatIDR(visaIdr);
+  if (visaSarEl) visaSarEl.textContent = formatIDR(visaIdr);
+  if (visaIdrEl) visaIdrEl.textContent = `~${formatUSD(visaUsd)}`;
 
   const makkahSarEl = document.getElementById("subtotal-makkah-sar");
   const makkahIdrEl = document.getElementById("subtotal-makkah-idr");

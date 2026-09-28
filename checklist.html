@@ -17,37 +17,13 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="preload" href="assets/fonts/GeneralSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/GeneralSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=20260928_v10">
+  <link rel="stylesheet" href="css/style.css?v=20260929_v2">
   <style>
-    .progress-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      box-shadow: var(--shadow-card);
-      margin-bottom: 24px;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .progress-bar-bg {
-      width: 100%;
-      height: 12px;
-      background: var(--bg-soft);
-      border-radius: var(--radius-pill);
-      overflow: hidden;
-      margin: 12px 0 6px;
-      border: 1px solid var(--border);
-    }
-    .progress-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--gold) 0%, #E5AA55 100%);
-      border-radius: var(--radius-pill);
-      transition: width 0.3s ease;
-    }
     @media print {
       body { padding-bottom: 0; background: #FFF; }
-      .site-header, .hero-section, .hero-frame-wrap, .sticky-summary, .site-footer, .no-print { display: none !important; }
+      .site-header, .hero-section, .hero-frame-wrap, .sticky-summary, .site-footer, .no-print, .checklist-phase-tabs { display: none !important; }
       .main-wrapper { margin: 0; padding: 0; max-width: 100%; }
-      .calc-card { box-shadow: none; border: 1px solid #CCC; page-break-inside: avoid; }
+      .calc-card, .checklist-progress-card { box-shadow: none; border: 1px solid #CCC; page-break-inside: avoid; }
     }
   </style>
 </head>
@@ -106,25 +82,36 @@
   <main class="main-wrapper">
 
     <!-- Progress Overview -->
-    <div class="progress-card" id="checklist-progress-card">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;">
-        <span style="font-family: var(--font-heading); font-weight: 700; font-size: 16px; color: var(--text-main);">
-          Progres Kesiapan Keberangkatan Anda
-        </span>
-        <span id="progress-text" style="font-family: var(--font-heading); font-weight: 800; font-size: 18px; color: var(--gold);">
-          0%
-        </span>
+    <div class="checklist-progress-card" id="checklist-progress-card">
+      <div class="progress-card-header">
+        <div class="progress-title-wrap">
+          <span class="progress-card-title">Progres Kesiapan Keberangkatan Anda</span>
+          <span class="progress-card-subtitle" id="progress-count">0 dari 0 persiapan terpenuhi</span>
+        </div>
+        <div class="progress-badge" id="progress-text">0%</div>
       </div>
       <div class="progress-bar-bg">
         <div class="progress-bar-fill" id="progress-fill" style="width: 0%;"></div>
       </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 13px; color: var(--text-muted); flex-wrap: wrap; gap: 10px;">
-        <span id="progress-count">0 dari 0 persiapan terpenuhi</span>
-        <div class="no-print" style="display: flex; gap: 10px;">
-          <button id="btn-print-checklist" class="btn btn-sm btn-outline-gold" type="button">Cetak / Simpan PDF</button>
-          <button id="btn-reset-checklist" class="btn btn-sm btn-secondary" type="button">Reset</button>
-        </div>
+      <div class="progress-actions no-print">
+        <button id="btn-print-checklist" class="btn btn-sm btn-outline-gold" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-2px; margin-right:4px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Cetak / PDF
+        </button>
+        <button id="btn-reset-checklist" class="btn btn-sm btn-secondary" type="button">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:-2px; margin-right:4px;"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+          Reset
+        </button>
       </div>
+    </div>
+
+    <!-- Quick Phase Filter Tabs on Mobile & Desktop -->
+    <div class="checklist-phase-tabs no-print" id="checklist-phase-tabs" role="tablist" aria-label="Filter Tahapan Checklist">
+      <button type="button" class="phase-tab-btn active" data-phase="all">Semua Tahap</button>
+      <button type="button" class="phase-tab-btn" data-phase="0">1: Dokumen</button>
+      <button type="button" class="phase-tab-btn" data-phase="1">2: Ibadah</button>
+      <button type="button" class="phase-tab-btn" data-phase="2">3: Logistik</button>
+      <button type="button" class="phase-tab-btn" data-phase="3">4: Arab Saudi</button>
     </div>
 
     <!-- Phases Container -->
@@ -133,7 +120,7 @@
     <!-- Tambah Catatan Kustom -->
     <div class="calc-card no-print" style="margin-top: 24px;">
       <h3 class="card-title" style="margin-bottom: 12px; font-size: 16px;">Tambah Catatan / Kebutuhan Pribadi</h3>
-      <div class="form-grid" style="grid-template-columns: 1fr 2fr auto;">
+      <div class="checklist-add-grid">
         <select id="select-task-phase" class="form-select">
           <option value="0">Tahap 1: Dokumen &amp; Tiket</option>
           <option value="1">Tahap 2: Perlengkapan Ibadah</option>
@@ -141,7 +128,10 @@
           <option value="3">Tahap 4: Setibanya di Arab Saudi</option>
         </select>
         <input type="text" id="input-new-task" class="form-control" placeholder="Tulis perlengkapan atau berkas tambahan...">
-        <button id="btn-add-task" class="btn btn-gold" type="button">+ Tambah</button>
+        <button id="btn-add-task" class="btn btn-gold btn-add-custom" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Tambah
+        </button>
       </div>
     </div>
 
@@ -223,8 +213,8 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="js/data.js?v=20260911_v6"></script>
-  <script src="js/checklist.js?v=20260911_v6"></script>
-  <script src="js/scroll-animation.js?v=20260912_v2"></script>
+  <script src="js/data.js?v=20260929_v2"></script>
+  <script src="js/checklist.js?v=20260929_v2"></script>
+  <script src="js/scroll-animation.js?v=20260929_v2"></script>
 </body>
 </html>
