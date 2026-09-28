@@ -896,6 +896,78 @@ button.btn-hero-cta * {
   font-weight: 600;
 }
 
+/* Armada Selector Control (Sesuai Pilihan Armada Booklet Mutawwifmu) */
+.armada-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 991px) {
+  .armada-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .armada-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.armada-btn {
+  min-height: 54px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 3px;
+}
+
+.armada-btn:hover {
+  border-color: var(--gold);
+  background: #FFFFFF;
+}
+
+.armada-btn.active {
+  background: #FFFFFF;
+  border-color: var(--gold);
+  box-shadow: 0 2px 6px rgba(214, 158, 75, 0.18);
+}
+
+.armada-btn .armada-name {
+  font-family: var(--font-heading);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.armada-btn.active .armada-name {
+  color: var(--primary);
+}
+
+.armada-btn .armada-cap {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.armada-btn.active .armada-cap {
+  color: #B4731E;
+  font-weight: 600;
+}
+
 /* Thin horizontal divider line in hotel cards */
 .hotel-divider-line {
   width: 100%;

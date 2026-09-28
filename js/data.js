@@ -1,14 +1,14 @@
 /**
  * Data Master Kalkulator Biaya Umroh Mandiri - Mutawwifmu
- * Nilai kurs, daftar hotel Makkah & Madinah, rute Kereta Cepat Haramain (HHR),
- * transportasi lokal, mutawwif, dan tiket pesawat.
+ * Sesuai Dokumen Resmi: OFFICIAL COMPANY PROFILE & PRICELIST BOOKLET MUTAWWIFMU V1 (2025-2026)
+ * Nilai kurs, paket visa, armada transportasi darat, city tour, layanan mutawwif, handling bandara, hotel, dan kereta cepat.
  */
 
 const UMRAH_DATA = {
   config: {
     appName: "Kalkulator Umroh Mandiri",
     brandName: "Mutawwifmu",
-    brandTagline: "Teman Perjalanan Umroh & Halal Travel Terpercaya",
+    brandTagline: "Land Arrangement No. 1 di Dunia",
     officialWhatsApp: "6287745873159",
     currency: {
       SAR_TO_IDR: 4250,
@@ -18,8 +18,11 @@ const UMRAH_DATA = {
 
   visa: {
     defaultPax: 2,
-    priceUsd: 215, // Biaya visa resmi + asuransi kesehatan Arab Saudi
-    description: "Sudah termasuk penerbitan visa resmi umroh dan asuransi kesehatan pemerintah Arab Saudi."
+    priceIdr: 3200000, // IDR 3.200.000 per pax (Sesuai Booklet Mutawwifmu Hal. 04)
+    insuranceIdr: 100000, // Asuransi Perjalanan: IDR 100.000 per pax (Booklet Hal. 04)
+    totalPerPaxIdr: 3300000, // Total Visa Umrah Reguler + Asuransi Medis resmi: IDR 3.300.000 per pax
+    priceUsd: 204, // Estimasi ekuivalen USD di kurs 16.200
+    description: "Sesuai Booklet Resmi Mutawwifmu: Visa Umrah Reguler (Rp3.200.000) dan Asuransi Perjalanan resmi (Rp100.000)."
   },
 
   hotelsMakkah: [
@@ -56,21 +59,143 @@ const UMRAH_DATA = {
     { id: "jeddah_madinah", label: "Bandara Jeddah → Madinah", priceSar: 200, desc: "Durasi ±1 jam 50 menit" }
   ],
 
-  localTransport: [
-    { id: "airport_hotel_jeddah", label: "Antar-Jemput Bandara Jeddah ↔ Hotel Makkah", priceSar: 350, desc: "Sedan / GMC privat langsung ke lobi hotel Makkah", icon: "car" },
-    { id: "airport_hotel_medinah", label: "Antar-Jemput Bandara Madinah ↔ Hotel Madinah", priceSar: 250, desc: "Sedan / GMC privat langsung ke lobi hotel Madinah", icon: "car" },
-    { id: "stasiun_hotel_makkah", label: "Stasiun Kereta HHR ↔ Hotel Makkah", priceSar: 200, desc: "Antar-jemput stasiun Haramain ke hotel Makkah", icon: "car" },
-    { id: "stasiun_hotel_medinah", label: "Stasiun Kereta HHR ↔ Hotel Madinah", priceSar: 200, desc: "Antar-jemput stasiun Haramain ke hotel Madinah", icon: "car" },
-    { id: "carter_ziarah_makkah", label: "Carter Mobil Ziarah Kota Makkah", priceSar: 450, desc: "Jabal Nur, Arafah, Mina, Jabal Tsur (Durasi ±6 Jam)", icon: "van" },
-    { id: "carter_ziarah_medinah", label: "Carter Mobil Ziarah Kota Madinah", priceSar: 400, desc: "Masjid Quba, Jabal Uhud, Percetakan Quran (Durasi ±6 Jam)", icon: "van" },
-    { id: "ziarah_thaif", label: "Carter Mobil Ekskursi Ziarah Thaif PP", priceSar: 600, desc: "Teleferik, Masjid Abdullah bin Abbas, Miqat Qarnul Manazil (±8 Jam)", icon: "mountain" },
-    { id: "wisata_alula", label: "Ekskursi Madinah ↔ Al Ula PP", priceSar: 1200, desc: "Kawasan Bersejarah Hegra / Madain Saleh & Elephant Rock", icon: "landmark" }
+  // Daftar Pilihan Armada Resmi Mutawwifmu (Booklet Hal. 05)
+  armadaList: [
+    { id: "camry", name: "Camry / Sonata", capacity: "2–3 Pax", desc: "Sedan premium, cocok untuk pasangan atau keluarga kecil", maxPax: 3 },
+    { id: "staria", name: "Hyundai Staria", capacity: "4–6 Pax", desc: "MPV modern, nyaman untuk keluarga / rombongan kecil", maxPax: 6 },
+    { id: "gmc", name: "GMC New Model", capacity: "4–6 Pax", desc: "SUV luxury besar, pengalaman berkendara VIP", maxPax: 6 },
+    { id: "hiace", name: "Toyota Hiace", capacity: "7–12 Pax", desc: "Minibus lega, ideal untuk rombongan keluarga besar", maxPax: 12 },
+    { id: "coaster", name: "Toyota Coaster", capacity: "13–29 Pax", desc: "Bus mini, pilihan terbaik grup rombongan menengah", maxPax: 29 },
+    { id: "bus", name: "Bus Full Size", capacity: "30–49 Pax", desc: "Bus besar 49 seat, solusi ekonomis jamaah rombongan", maxPax: 49 }
   ],
 
+  // Rute Perjalanan Transportasi & City Tour Resmi (Booklet Hal. 05 & 06)
+  localTransport: [
+    {
+      id: "airport_hotel_jeddah",
+      label: "Bandara Jeddah ↔ Hotel Makkah",
+      desc: "Antar-jemput kedatangan bandara Jeddah langsung ke lobi hotel Makkah",
+      icon: "car",
+      prices: { camry: 500, staria: 600, gmc: 700, hiace: 650, coaster: 900, bus: 1050 }
+    },
+    {
+      id: "hotel_makkah_airport_jeddah",
+      label: "Hotel Makkah ↔ Bandara Jeddah",
+      desc: "Antar-jemput kepulangan dari lobi hotel Makkah menuju bandara Jeddah",
+      icon: "car",
+      prices: { camry: 450, staria: 550, gmc: 700, hiace: 650, coaster: 900, bus: 1050 }
+    },
+    {
+      id: "makkah_madinah_transfer",
+      label: "Transfer Antarkota Makkah ↔ Madinah",
+      desc: "Perjalanan darat antarkota Makkah & Madinah (alternatif / pendukung kereta HHR)",
+      icon: "car",
+      prices: { camry: 700, staria: 800, gmc: 800, hiace: 900, coaster: 1250, bus: 1450 }
+    },
+    {
+      id: "airport_hotel_medinah",
+      label: "Bandara Madinah ↔ Hotel Madinah",
+      desc: "Antar-jemput kedatangan bandara Madinah langsung ke lobi hotel Madinah",
+      icon: "car",
+      prices: { camry: 400, staria: 450, gmc: 600, hiace: 600, coaster: 750, bus: 950 }
+    },
+    {
+      id: "hotel_madinah_airport_medinah",
+      label: "Hotel Madinah ↔ Bandara Madinah",
+      desc: "Antar-jemput kepulangan dari lobi hotel Madinah menuju bandara Madinah",
+      icon: "car",
+      prices: { camry: 370, staria: 400, gmc: 550, hiace: 550, coaster: 700, bus: 950 }
+    },
+    {
+      id: "hotel_madinah_airport_jeddah",
+      label: "Hotel Madinah ↔ Bandara Jeddah (PP)",
+      desc: "Perjalanan darat langsung dari hotel Madinah menuju bandara Jeddah",
+      icon: "car",
+      prices: { camry: 750, staria: 850, gmc: 1150, hiace: 900, coaster: 1250, bus: 1650 }
+    },
+    {
+      id: "city_tour_makkah",
+      label: "City Tour Kota Makkah (Termasuk Mutawwif & Snack)",
+      desc: "Jabal Tsur, Padang Arafah, Jabal Rahmah, Muzdalifah & Mina, Jabal Nur",
+      icon: "van",
+      prices: { camry: 820, staria: 930, gmc: 930, hiace: 1045, coaster: 1235, bus: 1705 }
+    },
+    {
+      id: "city_tour_madinah",
+      label: "City Tour Kota Madinah (Termasuk Mutawwif & Snack)",
+      desc: "Masjid Bilal, Sholat di Masjid Quba, Kebun Kurma, Jabal Uhud",
+      icon: "van",
+      prices: { camry: 820, staria: 880, gmc: 880, hiace: 995, coaster: 1165, bus: 1395 }
+    },
+    {
+      id: "city_tour_thaif",
+      label: "City Tour Ekskursi Thaif (Termasuk Mutawwif & Snack)",
+      desc: "Masjid Abdullah bin Abbas, Pabrik Parfum Mawar, Miqat Qarnul Manazil",
+      icon: "mountain",
+      prices: { camry: 920, staria: 1235, gmc: 1235, hiace: 1345, coaster: 1665, bus: 2095 }
+    },
+    {
+      id: "wisata_alula",
+      label: "Ekskursi Madinah ↔ Al-Ula (Hegra & Elephant Rock)",
+      desc: "Kawasan Bersejarah Hegra / Madain Saleh & Elephant Rock (Paket Eksklusif)",
+      icon: "landmark",
+      prices: { camry: 1200, staria: 1400, gmc: 1600, hiace: 1800, coaster: 2500, bus: 3500 }
+    }
+  ],
+
+  // Layanan Mutawwif, Handling, & Fasilitas Tambahan (Booklet Hal. 04 & 07)
   mutawwifServices: [
-    { id: "mutawwif_full", label: "Pendampingan Mutawwif Khusus", priceSar: 1500, desc: "Mutawwif resmi berbahasa Indonesia mendampingi rangkaian ibadah umroh & ziarah sejarah Islam.", checked: true },
-    { id: "airport_handling", label: "Handling Bandara Kedatangan & Kepulangan", priceSar: 300, desc: "Penyambutan di bandara, bantuan imigrasi, penanganan bagasi bus/mobil, dan check-in hotel.", checked: true },
-    { id: "exclusive_merchandise", label: "Paket Perlengkapan Umroh Mutawwifmu", priceIdr: 950000, isPerPax: true, desc: "Perlengkapan ibadah eksklusif dikirim ke rumah sebelum keberangkatan (Koper fiber, Ihram/Mukena, Tas paspor).", checked: false }
+    {
+      id: "mutawwif_reguler",
+      label: "Mutawwif Reguler (Berbahasa Indonesia)",
+      priceSar: 300,
+      desc: "Penyediaan mutawwif resmi bersertifikat berbahasa Indonesia mendampingi rangkaian ibadah umroh (Sesuai Booklet).",
+      checked: true
+    },
+    {
+      id: "mutawwif_bilingual",
+      label: "Mutawwif Bilingual (Indonesia, Arab, Inggris)",
+      priceSar: 350,
+      desc: "Mutawwif berpengalaman menguasai 3 bahasa (Indonesia, Arab, Inggris) untuk asistensi ibadah dan komunikasi.",
+      checked: false
+    },
+    {
+      id: "airport_handling_jeddah",
+      label: "Handling Bandara Jeddah (Kedatangan & Kepulangan)",
+      priceSar: 300,
+      desc: "Pendampingan imigrasi, penanganan bagasi bus/mobil, dan check-in hotel di Bandara Jeddah (per grup).",
+      checked: true
+    },
+    {
+      id: "airport_handling_jakarta",
+      label: "Handling Bandara Jakarta (Soekarno-Hatta)",
+      priceIdr: 350000,
+      isPerPax: true,
+      desc: "Asistensi check-in, bagasi, dan pelepasan jamaah di Bandara Internasional Soekarno-Hatta (Rp350.000 / pax).",
+      checked: false
+    },
+    {
+      id: "airport_handling_vip",
+      label: "Handling Jeddah VIP + Penjemputan + Free Mutawwif 1x",
+      priceSar: 900,
+      desc: "Paket lengkap handling bandara PP, penjemputan khusus, dan gratis 1x pendampingan mutawwif saat umroh.",
+      checked: false
+    },
+    {
+      id: "doc_foto_video",
+      label: "Dokumentasi Profesional Foto & Video",
+      priceSar: 600,
+      desc: "Tim fotografer & videografer profesional di tanah suci, termasuk editing foto & video siap tayang.",
+      checked: false
+    },
+    {
+      id: "exclusive_merchandise",
+      label: "Paket Perlengkapan Umroh Mutawwifmu",
+      priceIdr: 950000,
+      isPerPax: true,
+      desc: "Perlengkapan ibadah eksklusif dikirim ke rumah sebelum keberangkatan (Koper fiber, Ihram/Mukena, Tas paspor).",
+      checked: false
+    }
   ],
 
   flightEstimates: [

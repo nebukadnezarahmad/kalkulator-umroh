@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="preload" href="assets/fonts/GeneralSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/GeneralSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=20260928_v10">
+  <link rel="stylesheet" href="css/style.css?v=20260929_v1">
 </head>
 <body>
 
@@ -91,8 +91,8 @@
             </div>
           </div>
           <div class="card-subtotal">
-            <div class="sar-val" id="subtotal-visa-sar">$430</div>
-            <div class="idr-val" id="subtotal-visa-idr">Rp6.966.000</div>
+            <div class="sar-val" id="subtotal-visa-sar">$407</div>
+            <div class="idr-val" id="subtotal-visa-idr">Rp6.600.000</div>
           </div>
         </div>
 
@@ -111,10 +111,10 @@
 
           <div class="form-group">
             <label class="form-label">
-              <span>Paket Visa</span>
-              <span class="hint">Biaya resmi per pax</span>
+              <span>Paket Visa &amp; Asuransi</span>
+              <span class="hint">Biaya resmi per pax (Sesuai Booklet)</span>
             </label>
-            <input type="text" class="form-control" value="Visa Umroh + Asuransi Medis ($215 / pax)" readonly style="background:var(--bg-soft);cursor:not-allowed">
+            <input type="text" class="form-control" value="Visa Umroh Reguler + Asuransi Medis (Rp3.300.000 / pax)" readonly style="background:var(--bg-soft);cursor:not-allowed">
           </div>
         </div>
       </section>
@@ -295,24 +295,32 @@
         </div>
       </section>
 
-      <!-- Langkah 5: Transportasi Lokal & Ziarah -->
+      <!-- Langkah 5: Transportasi Darat & Ziarah -->
       <section class="calc-card" id="card-step-transport">
         <div class="card-header">
           <div class="step-info">
             <div class="step-num">05</div>
             <div>
-              <h2 class="card-title">Transportasi Darat &amp; Ziarah</h2>
-              <p class="card-subtitle">Carter kendaraan antar jemput bandara, stasiun, dan ziarah kota suci</p>
+              <h2 class="card-title">Transportasi Darat &amp; City Tour</h2>
+              <p class="card-subtitle">Pilihan armada dan carter kendaraan resmi di Arab Saudi (Sesuai Booklet)</p>
             </div>
           </div>
           <div class="card-subtotal">
-            <div class="sar-val" id="subtotal-transport-sar">1.350 SAR</div>
-            <div class="idr-val" id="subtotal-transport-idr">Rp5.737.500</div>
+            <div class="sar-val" id="subtotal-transport-sar">2.140 SAR</div>
+            <div class="idr-val" id="subtotal-transport-idr">Rp9.095.000</div>
           </div>
         </div>
 
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label class="form-label">
+            <span>Pilihan Tipe Armada</span>
+            <span class="hint" id="armada-calc-hint">Disesuaikan otomatis sesuai kapasitas jamaah</span>
+          </label>
+          <div class="armada-grid" id="armada-type-control"></div>
+        </div>
+
         <div>
-          <label class="form-label" style="margin-bottom: 10px;">Pilihan Rute Carter Mobil / Bus</label>
+          <label class="form-label" style="margin-bottom: 10px;">Pilihan Rute &amp; City Tour Resmi</label>
           <div class="options-list" id="transport-routes-list"></div>
         </div>
       </section>
@@ -524,9 +532,9 @@
   <div id="toast-notice" class="toast-notice" role="status" aria-live="polite"></div>
 
   <!-- Scripts -->
-  <script src="js/data.js?v=20260911_v6"></script>
-  <script src="js/calculator.js?v=20260911_v6"></script>
-  <script src="js/whatsapp.js?v=20260911_v6"></script>
-  <script src="js/scroll-animation.js?v=20260912_v2"></script>
+  <script src="js/data.js?v=20260929_v1"></script>
+  <script src="js/calculator.js?v=20260929_v1"></script>
+  <script src="js/whatsapp.js?v=20260929_v1"></script>
+  <script src="js/scroll-animation.js?v=20260929_v1"></script>
 </body>
 </html>

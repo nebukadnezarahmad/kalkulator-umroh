@@ -1,6 +1,7 @@
 /**
  * Kalkulator Biaya Umroh Mandiri - Logic & Calculations
  * Mutawwifmu Visual Design System Edition
+ * Diperbarui sesuai Booklet Resmi Mutawwifmu V1 (2025-2026)
  */
 
 let calcState = {
@@ -22,10 +23,12 @@ let calcState = {
     tickets: 2
   },
   transport: {
-    selectedIds: ["airport_hotel_jeddah", "carter_ziarah_makkah", "carter_ziarah_medinah"]
+    vehicle: "camry", // 'camry' | 'staria' | 'gmc' | 'hiace' | 'coaster' | 'bus'
+    isManualVehicle: false,
+    selectedIds: ["airport_hotel_jeddah", "city_tour_makkah", "city_tour_madinah"]
   },
   mutawwif: {
-    selectedIds: ["mutawwif_full", "airport_handling"]
+    selectedIds: ["mutawwif_reguler", "airport_handling_jeddah"]
   },
   flight: {
     selectedId: "saudia",
@@ -56,23 +59,149 @@ function showToast(message) {
   }, 3200);
 }
 
+function autoSelectVehicle(pax) {
+  if (calcState.transport.isManualVehicle) return;
+  if (pax <= 3) calcState.transport.vehicle = "camry";
+  else if (pax <= 6) calcState.transport.vehicle = "staria";
+  else if (pax <= 12) calcState.transport.vehicle = "hiace";
+  else if (pax <= 29) calcState.transport.vehicle = "coaster";
+  else calcState.transport.vehicle = "bus";
+
+  updateArmadaControlUI();
+  updateTransportRoutesListUI();
+}
+
+function updateArmadaControlUI() {
+  const container = document.getElementById("armada-type-control");
+  if (!container || !UMRAH_DATA.armadaList) return;
+  const current = calcState.transport.vehicle || "camry";
+
+  container.innerHTML = UMRAH_DATA.armadaList.map(a => `
+    <button type="button" class="armada-btn ${a.id === current ? 'active' : ''}" data-id="${a.id}" aria-label="Pilih ${a.name}">
+      <span class="armada-name">${a.name}</span>
+      <span class="armada-cap">${a.capacity}</span>
+    </button>
+  `).join("");
+
+  updateArmadaHint();
+
+  container.querySelectorAll(".armada-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      calcState.transport.vehicle = btn.dataset.id;
+      calcState.transport.isManualVehicle = true;
+      updateArmadaControlUI();
+      updateTransportRoutesListUI();
+      recalculateAll();
+    });
+  });
+}
+
+function updateArmadaHint() {
+  const hintEl = document.getElementById("armada-calc-hint");
+  if (!hintEl || !UMRAH_DATA.armadaList) return;
+  const current = calcState.transport.vehicle || "camry";
+  const aObj = UMRAH_DATA.armadaList.find(x => x.id === current);
+  if (aObj) {
+    hintEl.textContent = `${calcState.pax} jamaah: ${aObj.name} (${aObj.capacity}) - ${aObj.desc}`;
+  }
+}
+
+function updateTransportRoutesListUI() {
+  const transportContainer = document.getElementById("transport-routes-list");
+  if (!transportContainer) return;
+  const currentVehicle = calcState.transport.vehicle || "camry";
+
+  transportContainer.innerHTML = UMRAH_DATA.localTransport.map(t => {
+    const isChecked = calcState.transport.selectedIds.includes(t.id);
+    const price = (t.prices && t.prices[currentVehicle] !== undefined) ? t.prices[currentVehicle] : (t.priceSar || 0);
+    return `
+      <label class="option-item ${isChecked ? 'selected' : ''}" for="transport-${t.id}">
+        <div class="option-left">
+          <input type="checkbox" id="transport-${t.id}" class="option-checkbox" value="${t.id}" ${isChecked ? 'checked' : ''}>
+          <div>
+            <div class="option-label">${t.label}</div>
+            <div class="option-desc">${t.desc}</div>
+          </div>
+        </div>
+        <div class="option-price">${formatSAR(price)}</div>
+      </label>
+    `;
+  }).join("");
+
+  transportContainer.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+    chk.addEventListener("change", (e) => {
+      const id = e.target.value;
+      const item = chk.closest(".option-item");
+      if (e.target.checked) {
+        if (!calcState.transport.selectedIds.includes(id)) calcState.transport.selectedIds.push(id);
+        item.classList.add("selected");
+      } else {
+        calcState.transport.selectedIds = calcState.transport.selectedIds.filter(x => x !== id);
+        item.classList.remove("selected");
+      }
+      recalculateAll();
+    });
+  });
+}
+
+function renderMutawwifServicesUI() {
+  const mutawwifContainer = document.getElementById("mutawwif-services-list");
+  if (!mutawwifContainer) return;
+
+  mutawwifContainer.innerHTML = UMRAH_DATA.mutawwifServices.map(m => {
+    const isChecked = calcState.mutawwif.selectedIds.includes(m.id);
+    const priceText = m.priceSar ? `${formatSAR(m.priceSar)}` : `${formatIDR(m.priceIdr)}${m.isPerPax ? '/pax' : ''}`;
+    return `
+      <label class="option-item ${isChecked ? 'selected' : ''}" for="mutawwif-${m.id}">
+        <div class="option-left">
+          <input type="checkbox" id="mutawwif-${m.id}" class="option-checkbox" value="${m.id}" ${isChecked ? 'checked' : ''}>
+          <div>
+            <div class="option-label">${m.label}</div>
+            <div class="option-desc">${m.desc}</div>
+          </div>
+        </div>
+        <div class="option-price">${priceText}</div>
+      </label>
+    `;
+  }).join("");
+
+  mutawwifContainer.querySelectorAll('input[type="checkbox"]').forEach(chk => {
+    chk.addEventListener("change", (e) => {
+      const id = e.target.value;
+      const item = chk.closest(".option-item");
+      if (e.target.checked) {
+        if (!calcState.mutawwif.selectedIds.includes(id)) calcState.mutawwif.selectedIds.push(id);
+        item.classList.add("selected");
+      } else {
+        calcState.mutawwif.selectedIds = calcState.mutawwif.selectedIds.filter(x => x !== id);
+        item.classList.remove("selected");
+      }
+      recalculateAll();
+    });
+  });
+}
+
 function recalculateAll() {
   const currency = UMRAH_DATA.config.currency;
   const pax = Math.max(1, calcState.pax);
 
-  const visaUsd = pax * UMRAH_DATA.visa.priceUsd;
-  const visaIdr = visaUsd * currency.USD_TO_IDR;
+  // Visa & Asuransi (Sesuai Booklet Mutawwifmu V1 Hal. 04: Rp3.200.000 + Asuransi Rp100.000 = Rp3.300.000/pax)
+  const visaIdr = pax * (UMRAH_DATA.visa.totalPerPaxIdr || 3300000);
+  const visaUsd = Math.round(visaIdr / currency.USD_TO_IDR);
 
+  // Hotel Makkah
   const hotelMakkah = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId) || UMRAH_DATA.hotelsMakkah[0];
   const makkahPricePerNight = hotelMakkah.prices[calcState.makkah.roomType] || 0;
   const makkahSar = makkahPricePerNight * calcState.makkah.nights * calcState.makkah.rooms;
   const makkahIdr = makkahSar * currency.SAR_TO_IDR;
 
+  // Hotel Madinah
   const hotelMadinah = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId) || UMRAH_DATA.hotelsMadinah[0];
   const madinahPricePerNight = hotelMadinah.prices[calcState.madinah.roomType] || 0;
   const madinahSar = madinahPricePerNight * calcState.madinah.nights * calcState.madinah.rooms;
   const madinahIdr = madinahSar * currency.SAR_TO_IDR;
 
+  // Kereta Cepat Haramain (HHR)
   let hhrSingleTripCost = 0;
   calcState.hhr.selectedRoutes.forEach(rId => {
     const route = UMRAH_DATA.hhrRoutes.find(r => r.id === rId);
@@ -81,13 +210,21 @@ function recalculateAll() {
   const hhrSar = hhrSingleTripCost * calcState.hhr.tickets;
   const hhrIdr = hhrSar * currency.SAR_TO_IDR;
 
+  // Transportasi Darat & City Tour (Sesuai Booklet Armada & Rute)
   let transportSar = 0;
+  const currentVehicle = calcState.transport.vehicle || "camry";
   calcState.transport.selectedIds.forEach(tId => {
     const item = UMRAH_DATA.localTransport.find(t => t.id === tId);
-    if (item) transportSar += item.priceSar;
+    if (item) {
+      const price = (item.prices && item.prices[currentVehicle] !== undefined)
+        ? item.prices[currentVehicle]
+        : (item.priceSar || 0);
+      transportSar += price;
+    }
   });
   const transportIdr = transportSar * currency.SAR_TO_IDR;
 
+  // Layanan Mutawwif & Handling Bandara (Sesuai Booklet)
   let mutawwifSar = 0;
   let mutawwifIdr = 0;
   calcState.mutawwif.selectedIds.forEach(mId => {
@@ -100,6 +237,7 @@ function recalculateAll() {
     }
   });
 
+  // Tiket Pesawat
   let flightIdr = 0;
   const flightItem = UMRAH_DATA.flightEstimates.find(f => f.id === calcState.flight.selectedId);
   if (flightItem) {
@@ -161,8 +299,9 @@ function recalculateAll() {
   if (stickyTotalSarEl) stickyTotalSarEl.textContent = formatSAR(totalSar);
   if (stickyTotalVisaEl) stickyTotalVisaEl.textContent = formatUSD(visaUsd);
 
-  // Room capacity calculation hints
+  // Room capacity calculation hints & armada hint
   updateRoomCapacityHints();
+  updateArmadaHint();
 }
 
 function updateRoomCapacityHints() {
@@ -251,76 +390,12 @@ function initCalculator() {
     });
   }
 
-  // Setup Transport
-  const transportContainer = document.getElementById("transport-routes-list");
-  if (transportContainer) {
-    transportContainer.innerHTML = UMRAH_DATA.localTransport.map(t => {
-      const isChecked = calcState.transport.selectedIds.includes(t.id);
-      return `
-        <label class="option-item ${isChecked ? 'selected' : ''}" for="transport-${t.id}">
-          <div class="option-left">
-            <input type="checkbox" id="transport-${t.id}" class="option-checkbox" value="${t.id}" ${isChecked ? 'checked' : ''}>
-            <div>
-              <div class="option-label">${t.label}</div>
-              <div class="option-desc">${t.desc}</div>
-            </div>
-          </div>
-          <div class="option-price">${formatSAR(t.priceSar)}</div>
-        </label>
-      `;
-    }).join("");
+  // Setup Armada Control & Transport Routes (Booklet)
+  updateArmadaControlUI();
+  updateTransportRoutesListUI();
 
-    transportContainer.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-      chk.addEventListener("change", (e) => {
-        const id = e.target.value;
-        const item = chk.closest(".option-item");
-        if (e.target.checked) {
-          if (!calcState.transport.selectedIds.includes(id)) calcState.transport.selectedIds.push(id);
-          item.classList.add("selected");
-        } else {
-          calcState.transport.selectedIds = calcState.transport.selectedIds.filter(x => x !== id);
-          item.classList.remove("selected");
-        }
-        recalculateAll();
-      });
-    });
-  }
-
-  // Setup Mutawwif Services
-  const mutawwifContainer = document.getElementById("mutawwif-services-list");
-  if (mutawwifContainer) {
-    mutawwifContainer.innerHTML = UMRAH_DATA.mutawwifServices.map(m => {
-      const isChecked = calcState.mutawwif.selectedIds.includes(m.id);
-      const priceText = m.priceSar ? `${formatSAR(m.priceSar)}` : `${formatIDR(m.priceIdr)}${m.isPerPax ? '/pax' : ''}`;
-      return `
-        <label class="option-item ${isChecked ? 'selected' : ''}" for="mutawwif-${m.id}">
-          <div class="option-left">
-            <input type="checkbox" id="mutawwif-${m.id}" class="option-checkbox" value="${m.id}" ${isChecked ? 'checked' : ''}>
-            <div>
-              <div class="option-label">${m.label}</div>
-              <div class="option-desc">${m.desc}</div>
-            </div>
-          </div>
-          <div class="option-price">${priceText}</div>
-        </label>
-      `;
-    }).join("");
-
-    mutawwifContainer.querySelectorAll('input[type="checkbox"]').forEach(chk => {
-      chk.addEventListener("change", (e) => {
-        const id = e.target.value;
-        const item = chk.closest(".option-item");
-        if (e.target.checked) {
-          if (!calcState.mutawwif.selectedIds.includes(id)) calcState.mutawwif.selectedIds.push(id);
-          item.classList.add("selected");
-        } else {
-          calcState.mutawwif.selectedIds = calcState.mutawwif.selectedIds.filter(x => x !== id);
-          item.classList.remove("selected");
-        }
-        recalculateAll();
-      });
-    });
-  }
+  // Setup Mutawwif & Handling Services (Booklet)
+  renderMutawwifServicesUI();
 
   // Setup Flight
   const flightSelect = document.getElementById("flight-select");
@@ -361,6 +436,8 @@ function initCalculator() {
       calcState.hhr.tickets = calcState.pax;
       hhrInput.value = calcState.hhr.tickets;
     }
+    // Auto-update armada kendaraan sesuai jumlah pax
+    autoSelectVehicle(calcState.pax);
     // Auto-update room count
     autoAdjustRooms("makkah");
     autoAdjustRooms("madinah");
@@ -400,8 +477,8 @@ function initCalculator() {
         makkah: { hotelId: "emaar_grand", roomType: "quad", nights: 5, rooms: 1 },
         madinah: { hotelId: "saja_al_madinah", roomType: "quad", nights: 4, rooms: 1 },
         hhr: { selectedRoutes: ["makkah_madinah"], tickets: 2 },
-        transport: { selectedIds: ["airport_hotel_jeddah", "carter_ziarah_makkah", "carter_ziarah_medinah"] },
-        mutawwif: { selectedIds: ["mutawwif_full", "airport_handling"] },
+        transport: { vehicle: "camry", isManualVehicle: false, selectedIds: ["airport_hotel_jeddah", "city_tour_makkah", "city_tour_madinah"] },
+        mutawwif: { selectedIds: ["mutawwif_reguler", "airport_handling_jeddah"] },
         flight: { selectedId: "saudia", customPrice: 0 }
       };
 
@@ -420,6 +497,10 @@ function initCalculator() {
 
       syncRoomSegmentActive("makkah", "quad");
       syncRoomSegmentActive("madinah", "quad");
+
+      updateArmadaControlUI();
+      updateTransportRoutesListUI();
+      renderMutawwifServicesUI();
 
       updateHotelMakkahInfo();
       updateHotelMadinahInfo();
@@ -629,6 +710,8 @@ function buildSummaryText() {
   const hotelN = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId);
   const totalEl = document.getElementById("sticky-total-idr");
   const perpaxEl = document.getElementById("sticky-perpax-idr");
+  const currentVehicle = calcState.transport.vehicle || "camry";
+  const vObj = UMRAH_DATA.armadaList ? UMRAH_DATA.armadaList.find(a => a.id === currentVehicle) : null;
 
   return [
     "RINGKASAN ESTIMASI BIAYA UMROH MANDIRI (MUTAWWIFMU)",
@@ -636,6 +719,7 @@ function buildSummaryText() {
     `• Hotel Makkah: ${hotelM ? hotelM.name : '-'} (${calcState.makkah.nights} malam, ${calcState.makkah.rooms} kamar ${calcState.makkah.roomType})`,
     `• Hotel Madinah: ${hotelN ? hotelN.name : '-'} (${calcState.madinah.nights} malam, ${calcState.madinah.rooms} kamar ${calcState.madinah.roomType})`,
     `• Tiket Kereta Cepat HHR: ${calcState.hhr.tickets} tiket (${calcState.hhr.selectedRoutes.length} rute)`,
+    `• Armada Transportasi: ${vObj ? vObj.name + ' (' + vObj.capacity + ')' : currentVehicle.toUpperCase()}`,
     `• Total Estimasi Rombongan: ${totalEl ? totalEl.textContent : '-'}`,
     `• Estimasi Biaya Per Jamaah: ${perpaxEl ? perpaxEl.textContent : '-'}`
   ].join("\n");
@@ -688,4 +772,3 @@ document.addEventListener("DOMContentLoaded", () => {
   initCalculator();
   setupNavMenu();
 });
-

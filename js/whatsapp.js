@@ -1,6 +1,7 @@
 /**
  * WhatsApp Lead Generator - Mutawwifmu Edition
  * Formats user calculation into an attractive, professional consultation message.
+ * Updated to reflect official Booklet Mutawwifmu V1 pricing.
  */
 
 function buildWhatsAppConsultationMessage() {
@@ -10,13 +11,13 @@ function buildWhatsAppConsultationMessage() {
   const lines = [];
   lines.push("السلام عليكم ورحمة الله وبركاته");
   lines.push("*BISMILLAH, KONSULTASI ESTIMASI BIAYA UMROH MANDIRI*");
-  lines.push("Ref: Kalkulator Mandiri Mutawwifmu.com");
+  lines.push("Ref: Kalkulator Mandiri Mutawwifmu.com (Booklet Resmi)");
   lines.push("---------------------------------------");
 
-  const visaUsd = pax * UMRAH_DATA.visa.priceUsd;
-  const visaIdr = visaUsd * currency.USD_TO_IDR;
+  const visaIdr = pax * (UMRAH_DATA.visa.totalPerPaxIdr || 3300000);
+  const visaUsd = Math.round(visaIdr / currency.USD_TO_IDR);
   lines.push(`👥 *Jumlah Jamaah:* ${pax} Orang`);
-  lines.push(`📄 *Visa & Asuransi:* ${formatUSD(visaUsd)} (~${formatIDR(visaIdr)})`);
+  lines.push(`📄 *Visa Umrah & Asuransi:* ${formatIDR(visaIdr)} (~${formatUSD(visaUsd)})`);
   lines.push("");
 
   const hotelMakkah = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId);
@@ -43,16 +44,22 @@ function buildWhatsAppConsultationMessage() {
     lines.push(`🚄 *Kereta Cepat Haramain (HHR):*`);
     calcState.hhr.selectedRoutes.forEach(rId => {
       const r = UMRAH_DATA.hhrRoutes.find(x => x.id === rId);
-      if (r) lines.push(`   • ${r.label} (${calcState.hhr.tickets} Tiket)`);
+      if (r) lines.push(`   • ${r.label} (${calcState.hhr.tickets} Tiket @ ${formatSAR(r.priceSar)})`);
     });
     lines.push("");
   }
 
   if (calcState.transport.selectedIds.length > 0) {
-    lines.push(`🚗 *Transportasi Lokal & Carter:*`);
+    const currentVehicle = calcState.transport.vehicle || "camry";
+    const vObj = UMRAH_DATA.armadaList ? UMRAH_DATA.armadaList.find(a => a.id === currentVehicle) : null;
+    const vLabel = vObj ? `${vObj.name} (${vObj.capacity})` : currentVehicle.toUpperCase();
+    lines.push(`🚗 *Transportasi Darat & City Tour (Armada: ${vLabel}):*`);
     calcState.transport.selectedIds.forEach(tId => {
       const t = UMRAH_DATA.localTransport.find(x => x.id === tId);
-      if (t) lines.push(`   • ${t.label}`);
+      if (t) {
+        const p = (t.prices && t.prices[currentVehicle] !== undefined) ? t.prices[currentVehicle] : (t.priceSar || 0);
+        lines.push(`   • ${t.label} (${formatSAR(p)})`);
+      }
     });
     lines.push("");
   }
@@ -61,7 +68,10 @@ function buildWhatsAppConsultationMessage() {
     lines.push(`🧕 *Layanan Mutawwif & Handling:*`);
     calcState.mutawwif.selectedIds.forEach(mId => {
       const m = UMRAH_DATA.mutawwifServices.find(x => x.id === mId);
-      if (m) lines.push(`   • ${m.label}`);
+      if (m) {
+        const priceText = m.priceSar ? `${formatSAR(m.priceSar)}` : `${formatIDR(m.priceIdr)}${m.isPerPax ? '/pax' : ''}`;
+        lines.push(`   • ${m.label} (${priceText})`);
+      }
     });
     lines.push("");
   }
@@ -85,8 +95,8 @@ function buildWhatsAppConsultationMessage() {
   lines.push(`💵 *ESTIMASI PER ORANG:* ${perPaxIdrEl}`);
   lines.push("---------------------------------------");
   lines.push("");
-  lines.push("Halo Tim Mutawwifmu, saya telah menyusun rincian rencana umroh mandiri di atas.");
-  lines.push("Mohon info ketersediaan slot hotel, visa, dan panduan teknis Land Arrangement untuk rencana ini. Terima kasih!");
+  lines.push("Halo Tim Mutawwifmu, saya telah menyusun rincian rencana umroh mandiri di atas sesuai panduan Booklet Resmi Mutawwifmu.");
+  lines.push("Mohon info ketersediaan slot hotel, visa, dan konfirmasi Land Arrangement untuk rencana ini. Terima kasih!");
 
   return lines.join("\n");
 }
