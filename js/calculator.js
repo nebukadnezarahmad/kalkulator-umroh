@@ -323,9 +323,86 @@ function updateRoomCapacityHints() {
   }
 }
 
+/**
+ * Auto-sync live currency rate (Opsi B: Kurs Pasar Live + Safety Buffer)
+ * Memperbarui kurs harian (cache 24 jam di localStorage), berjalan di background
+ * tanpa indikator badge transparan apapun di tampilan UI sesuai preferensi pengguna.
+ */
+function initAutoCurrency() {
+  const CACHE_KEY_SAR = "mutawwifmu_sar_rate";
+  const CACHE_KEY_USD = "mutawwifmu_usd_rate";
+  const CACHE_KEY_TIME = "mutawwifmu_currency_time";
+  const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+  const BUFFER_SAR_IDR = 50; // Safety buffer (+Rp50) untuk mencakup spread bank & fluktuasi kartu/transaksi riil
+
+  // 1. Terapkan kurs dari cache jika masih valid (< 24 jam)
+  try {
+    const cachedSar = localStorage.getItem(CACHE_KEY_SAR);
+    const cachedUsd = localStorage.getItem(CACHE_KEY_USD);
+    const cachedTime = localStorage.getItem(CACHE_KEY_TIME);
+
+    if (cachedSar && cachedTime && (Date.now() - Number(cachedTime) < ONE_DAY_MS)) {
+      const parsedSar = Number(cachedSar);
+      if (!isNaN(parsedSar) && parsedSar > 0) {
+        UMRAH_DATA.config.currency.SAR_TO_IDR = parsedSar;
+      }
+      if (cachedUsd) {
+        const parsedUsd = Number(cachedUsd);
+        if (!isNaN(parsedUsd) && parsedUsd > 0) {
+          UMRAH_DATA.config.currency.USD_TO_IDR = parsedUsd;
+        }
+      }
+      return;
+    }
+  } catch (err) {
+    // Abaikan jika localStorage tidak dapat diakses
+  }
+
+  // 2. Fetch kurs harian live dari API resmi valas (SAR base)
+  fetch("https://open.er-api.com/v6/latest/SAR")
+    .then(res => {
+      if (!res.ok) throw new Error("Network response not ok");
+      return res.json();
+    })
+    .then(data => {
+      if (data && data.result === "success" && data.rates && data.rates.IDR) {
+        const rawSarToIdr = Number(data.rates.IDR);
+        // Opsi B: Tambahkan safety buffer (+Rp50)
+        const bufferedSarRate = Math.round(rawSarToIdr + BUFFER_SAR_IDR);
+
+        let calculatedUsdRate = UMRAH_DATA.config.currency.USD_TO_IDR;
+        if (data.rates.USD && Number(data.rates.USD) > 0) {
+          calculatedUsdRate = Math.round(rawSarToIdr / Number(data.rates.USD));
+        }
+
+        // Perbarui data currency global
+        UMRAH_DATA.config.currency.SAR_TO_IDR = bufferedSarRate;
+        UMRAH_DATA.config.currency.USD_TO_IDR = calculatedUsdRate;
+
+        // Simpan ke cache localStorage
+        try {
+          localStorage.setItem(CACHE_KEY_SAR, bufferedSarRate.toString());
+          localStorage.setItem(CACHE_KEY_USD, calculatedUsdRate.toString());
+          localStorage.setItem(CACHE_KEY_TIME, Date.now().toString());
+        } catch (e) {
+          // Abaikan jika quota error
+        }
+
+        // Hitung ulang semua estimasi biaya secara hening di latar belakang
+        recalculateAll();
+      }
+    })
+    .catch(() => {
+      // Fallback hening: tetap gunakan nilai default di UMRAH_DATA jika offline / API gangguan
+    });
+}
+
 function initCalculator() {
   document.documentElement.removeAttribute("data-theme");
   localStorage.removeItem("mutawwifmu_theme");
+
+  // Inisialisasi sinkronisasi kurs live harian (Opsi B: Kurs Pasar + Safety Buffer)
+  initAutoCurrency();
 
   // Populate Makkah Hotels
   const makkahSelect = document.getElementById("hotel-makkah-select");
