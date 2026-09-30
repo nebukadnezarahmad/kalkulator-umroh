@@ -189,6 +189,58 @@ function recalculateAll() {
   const currency = UMRAH_DATA.config.currency;
   const pax = Math.max(0, calcState.pax || 0);
 
+  // Jika jumlah jamaah 0, SEMUA biaya, subtotal, dan rupiah wajib mulai dari 0
+  if (pax === 0) {
+    const visaSarEl = document.getElementById("subtotal-visa-sar");
+    const visaIdrEl = document.getElementById("subtotal-visa-idr");
+    if (visaSarEl) visaSarEl.textContent = "Rp0";
+    if (visaIdrEl) visaIdrEl.textContent = "~$0";
+
+    const makkahSarEl = document.getElementById("subtotal-makkah-sar");
+    const makkahIdrEl = document.getElementById("subtotal-makkah-idr");
+    if (makkahSarEl) makkahSarEl.textContent = "0 SAR";
+    if (makkahIdrEl) makkahIdrEl.textContent = "Rp0";
+
+    const madinahSarEl = document.getElementById("subtotal-madinah-sar");
+    const madinahIdrEl = document.getElementById("subtotal-madinah-idr");
+    if (madinahSarEl) madinahSarEl.textContent = "0 SAR";
+    if (madinahIdrEl) madinahIdrEl.textContent = "Rp0";
+
+    const hhrSarEl = document.getElementById("subtotal-hhr-sar");
+    const hhrIdrEl = document.getElementById("subtotal-hhr-idr");
+    if (hhrSarEl) hhrSarEl.textContent = "0 SAR";
+    if (hhrIdrEl) hhrIdrEl.textContent = "Rp0";
+
+    const transportSarEl = document.getElementById("subtotal-transport-sar");
+    const transportIdrEl = document.getElementById("subtotal-transport-idr");
+    if (transportSarEl) transportSarEl.textContent = "0 SAR";
+    if (transportIdrEl) transportIdrEl.textContent = "Rp0";
+
+    const mutawwifSarEl = document.getElementById("subtotal-mutawwif-sar");
+    const mutawwifIdrEl = document.getElementById("subtotal-mutawwif-idr");
+    if (mutawwifSarEl) mutawwifSarEl.textContent = "0 SAR";
+    if (mutawwifIdrEl) mutawwifIdrEl.textContent = "Rp0";
+
+    const flightSarEl = document.getElementById("subtotal-flight-sar");
+    const flightIdrEl = document.getElementById("subtotal-flight-idr");
+    if (flightSarEl) flightSarEl.textContent = "0 SAR";
+    if (flightIdrEl) flightIdrEl.textContent = "Rp0";
+
+    const stickyTotalEl = document.getElementById("sticky-total-idr");
+    const stickyPerPaxEl = document.getElementById("sticky-perpax-idr");
+    const stickyTotalSarEl = document.getElementById("sticky-total-sar");
+    const stickyTotalVisaEl = document.getElementById("sticky-total-visa");
+
+    if (stickyTotalEl) stickyTotalEl.textContent = "Rp0";
+    if (stickyPerPaxEl) stickyPerPaxEl.textContent = "Rp0 / org";
+    if (stickyTotalSarEl) stickyTotalSarEl.textContent = "0 SAR";
+    if (stickyTotalVisaEl) stickyTotalVisaEl.textContent = "$0";
+
+    updateRoomCapacityHints();
+    updateArmadaHint();
+    return;
+  }
+
   // Visa & Asuransi (Sesuai Booklet Mutawwifmu V1 Hal. 04: Rp3.200.000 + Asuransi Rp100.000 = Rp3.300.000/pax)
   const visaIdr = pax * (UMRAH_DATA.visa.totalPerPaxIdr || 3300000);
   const visaUsd = (currency.USD_TO_IDR && currency.USD_TO_IDR > 0) ? Math.round(visaIdr / currency.USD_TO_IDR) : 0;
@@ -505,9 +557,10 @@ function initCalculator() {
 
   // Steppers setup (start from 0, min 0)
   setupStepper("pax-count", (val) => {
+    const prevPax = calcState.pax;
     calcState.pax = Math.max(0, val);
     const hhrInput = document.getElementById("hhr-tickets");
-    if (hhrInput && parseInt(hhrInput.value, 10) === calcState.hhr.tickets) {
+    if (hhrInput && (calcState.hhr.tickets === prevPax || calcState.hhr.tickets === 0)) {
       calcState.hhr.tickets = calcState.pax;
       hhrInput.value = calcState.hhr.tickets;
     }
