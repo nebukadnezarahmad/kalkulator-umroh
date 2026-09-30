@@ -5,22 +5,22 @@
  */
 
 let calcState = {
-  pax: 2,
+  pax: 0,
   makkah: {
     hotelId: "emaar_grand",
     roomType: "quad", // 'double' | 'triple' | 'quad'
-    nights: 5,
-    rooms: 1
+    nights: 0,
+    rooms: 0
   },
   madinah: {
     hotelId: "saja_al_madinah",
     roomType: "quad",
-    nights: 4,
-    rooms: 1
+    nights: 0,
+    rooms: 0
   },
   hhr: {
     selectedRoutes: ["makkah_madinah"],
-    tickets: 2
+    tickets: 0
   },
   transport: {
     vehicle: "camry", // 'camry' | 'staria' | 'gmc' | 'hiace' | 'coaster' | 'bus'
@@ -102,7 +102,11 @@ function updateArmadaHint() {
   const current = calcState.transport.vehicle || "camry";
   const aObj = UMRAH_DATA.armadaList.find(x => x.id === current);
   if (aObj) {
-    hintEl.textContent = `${calcState.pax} Jamaah: ${aObj.name} (${aObj.capacity})`;
+    if (calcState.pax === 0) {
+      hintEl.textContent = `0 Jamaah • Rekomendasi armada: ${aObj.name} (${aObj.capacity})`;
+    } else {
+      hintEl.textContent = `${calcState.pax} Jamaah: ${aObj.name} (${aObj.capacity})`;
+    }
   }
 }
 
@@ -183,23 +187,17 @@ function renderMutawwifServicesUI() {
 
 function recalculateAll() {
   const currency = UMRAH_DATA.config.currency;
-  const pax = Math.max(1, calcState.pax);
+  const pax = Math.max(0, calcState.pax || 0);
 
   // Visa & Asuransi (Sesuai Booklet Mutawwifmu V1 Hal. 04: Rp3.200.000 + Asuransi Rp100.000 = Rp3.300.000/pax)
   const visaIdr = pax * (UMRAH_DATA.visa.totalPerPaxIdr || 3300000);
-  const visaUsd = Math.round(visaIdr / currency.USD_TO_IDR);
+  const visaUsd = (currency.USD_TO_IDR && currency.USD_TO_IDR > 0) ? Math.round(visaIdr / currency.USD_TO_IDR) : 0;
 
-  // Hotel Makkah
-  const hotelMakkah = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId) || UMRAH_DATA.hotelsMakkah[0];
-  const makkahPricePerNight = hotelMakkah.prices[calcState.makkah.roomType] || 0;
-  const makkahSar = makkahPricePerNight * calcState.makkah.nights * calcState.makkah.rooms;
-  const makkahIdr = makkahSar * currency.SAR_TO_IDR;
-
-  // Hotel Madinah
-  const hotelMadinah = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId) || UMRAH_DATA.hotelsMadinah[0];
-  const madinahPricePerNight = hotelMadinah.prices[calcState.madinah.roomType] || 0;
-  const madinahSar = madinahPricePerNight * calcState.madinah.nights * calcState.madinah.rooms;
-  const madinahIdr = madinahSar * currency.SAR_TO_IDR;
+  // Akomodasi Hotel Makkah & Madinah di-take out sementara
+  const makkahSar = 0;
+  const makkahIdr = 0;
+  const madinahSar = 0;
+  const madinahIdr = 0;
 
   // Kereta Cepat Haramain (HHR)
   let hhrSingleTripCost = 0;
@@ -250,7 +248,7 @@ function recalculateAll() {
 
   const totalSar = makkahSar + madinahSar + hhrSar + transportSar + mutawwifSar;
   const totalIdr = (totalSar * currency.SAR_TO_IDR) + visaIdr + mutawwifIdr + flightIdr;
-  const perPaxIdr = Math.round(totalIdr / pax);
+  const perPaxIdr = pax > 0 ? Math.round(totalIdr / pax) : 0;
 
   // Update Subtotals
   const visaSarEl = document.getElementById("subtotal-visa-sar");
@@ -295,7 +293,7 @@ function recalculateAll() {
   const stickyTotalVisaEl = document.getElementById("sticky-total-visa");
 
   if (stickyTotalEl) stickyTotalEl.textContent = formatIDR(totalIdr);
-  if (stickyPerPaxEl) stickyPerPaxEl.textContent = formatIDR(perPaxIdr) + " / org";
+  if (stickyPerPaxEl) stickyPerPaxEl.textContent = pax > 0 ? (formatIDR(perPaxIdr) + " / org") : "Rp0 / org";
   if (stickyTotalSarEl) stickyTotalSarEl.textContent = formatSAR(totalSar);
   if (stickyTotalVisaEl) stickyTotalVisaEl.textContent = formatUSD(visaUsd);
 
@@ -309,8 +307,8 @@ function updateRoomCapacityHints() {
   const makkahCap = calcState.makkah.roomType === 'quad' ? 4 : calcState.makkah.roomType === 'triple' ? 3 : 2;
   const madinahCap = calcState.madinah.roomType === 'quad' ? 4 : calcState.madinah.roomType === 'triple' ? 3 : 2;
 
-  const makkahAutoRooms = Math.ceil(pax / makkahCap);
-  const madinahAutoRooms = Math.ceil(pax / madinahCap);
+  const makkahAutoRooms = pax > 0 ? Math.ceil(pax / makkahCap) : 0;
+  const madinahAutoRooms = pax > 0 ? Math.ceil(pax / madinahCap) : 0;
 
   const makkahHint = document.getElementById("makkah-room-calc-hint");
   if (makkahHint) {
@@ -505,9 +503,9 @@ function initCalculator() {
   setupRoomTypeControl("makkah");
   setupRoomTypeControl("madinah");
 
-  // Steppers setup
+  // Steppers setup (start from 0, min 0)
   setupStepper("pax-count", (val) => {
-    calcState.pax = Math.max(1, val);
+    calcState.pax = Math.max(0, val);
     const hhrInput = document.getElementById("hhr-tickets");
     if (hhrInput && parseInt(hhrInput.value, 10) === calcState.hhr.tickets) {
       calcState.hhr.tickets = calcState.pax;
@@ -522,22 +520,22 @@ function initCalculator() {
   });
 
   setupStepper("makkah-nights", (val) => {
-    calcState.makkah.nights = Math.max(1, val);
+    calcState.makkah.nights = Math.max(0, val);
     recalculateAll();
   });
 
   setupStepper("makkah-rooms", (val) => {
-    calcState.makkah.rooms = Math.max(1, val);
+    calcState.makkah.rooms = Math.max(0, val);
     recalculateAll();
   });
 
   setupStepper("madinah-nights", (val) => {
-    calcState.madinah.nights = Math.max(1, val);
+    calcState.madinah.nights = Math.max(0, val);
     recalculateAll();
   });
 
   setupStepper("madinah-rooms", (val) => {
-    calcState.madinah.rooms = Math.max(1, val);
+    calcState.madinah.rooms = Math.max(0, val);
     recalculateAll();
   });
 
@@ -550,27 +548,27 @@ function initCalculator() {
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
       calcState = {
-        pax: 2,
-        makkah: { hotelId: "emaar_grand", roomType: "quad", nights: 5, rooms: 1 },
-        madinah: { hotelId: "saja_al_madinah", roomType: "quad", nights: 4, rooms: 1 },
-        hhr: { selectedRoutes: ["makkah_madinah"], tickets: 2 },
+        pax: 0,
+        makkah: { hotelId: "emaar_grand", roomType: "quad", nights: 0, rooms: 0 },
+        madinah: { hotelId: "saja_al_madinah", roomType: "quad", nights: 0, rooms: 0 },
+        hhr: { selectedRoutes: ["makkah_madinah"], tickets: 0 },
         transport: { vehicle: "camry", isManualVehicle: false, selectedIds: ["airport_hotel_jeddah", "city_tour_makkah", "city_tour_madinah"] },
         mutawwif: { selectedIds: ["mutawwif_reguler", "airport_handling_jeddah"] },
         flight: { selectedId: "saudia", customPrice: 0 }
       };
 
       const paxEl = document.getElementById("pax-count");
-      if (paxEl) paxEl.value = 2;
+      if (paxEl) paxEl.value = 0;
       const mkNights = document.getElementById("makkah-nights");
-      if (mkNights) mkNights.value = 5;
+      if (mkNights) mkNights.value = 0;
       const mkRooms = document.getElementById("makkah-rooms");
-      if (mkRooms) mkRooms.value = 1;
+      if (mkRooms) mkRooms.value = 0;
       const mdNights = document.getElementById("madinah-nights");
-      if (mdNights) mdNights.value = 4;
+      if (mdNights) mdNights.value = 0;
       const mdRooms = document.getElementById("madinah-rooms");
-      if (mdRooms) mdRooms.value = 1;
+      if (mdRooms) mdRooms.value = 0;
       const hhrTickets = document.getElementById("hhr-tickets");
-      if (hhrTickets) hhrTickets.value = 2;
+      if (hhrTickets) hhrTickets.value = 0;
 
       syncRoomSegmentActive("makkah", "quad");
       syncRoomSegmentActive("madinah", "quad");
@@ -652,11 +650,14 @@ function setupStepper(inputId, onChange) {
 
   const btnMinus = parent.querySelector(".stepper-minus");
   const btnPlus = parent.querySelector(".stepper-plus");
+  const min = input.hasAttribute("min") ? parseInt(input.getAttribute("min"), 10) : 0;
+  const max = input.hasAttribute("max") ? parseInt(input.getAttribute("max"), 10) : 999;
 
   if (btnMinus) {
     btnMinus.addEventListener("click", () => {
-      let val = parseInt(input.value, 10) || 1;
-      if (val > 1) {
+      let val = parseInt(input.value, 10);
+      if (isNaN(val)) val = min;
+      if (val > min) {
         val--;
         input.value = val;
         onChange(val);
@@ -666,15 +667,21 @@ function setupStepper(inputId, onChange) {
 
   if (btnPlus) {
     btnPlus.addEventListener("click", () => {
-      let val = parseInt(input.value, 10) || 1;
-      val++;
-      input.value = val;
-      onChange(val);
+      let val = parseInt(input.value, 10);
+      if (isNaN(val)) val = min;
+      if (val < max) {
+        val++;
+        input.value = val;
+        onChange(val);
+      }
     });
   }
 
   input.addEventListener("input", () => {
-    let val = parseInt(input.value, 10) || 1;
+    let val = parseInt(input.value, 10);
+    if (isNaN(val)) val = min;
+    if (val < min) val = min;
+    if (val > max) val = max;
     onChange(val);
   });
 }
@@ -783,8 +790,6 @@ function updateHotelMadinahInfo() {
 }
 
 function buildSummaryText() {
-  const hotelM = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId);
-  const hotelN = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId);
   const totalEl = document.getElementById("sticky-total-idr");
   const perpaxEl = document.getElementById("sticky-perpax-idr");
   const currentVehicle = calcState.transport.vehicle || "camry";
@@ -792,13 +797,11 @@ function buildSummaryText() {
 
   return [
     "RINGKASAN ESTIMASI BIAYA UMROH MANDIRI (MUTAWWIFMU)",
-    `• Jumlah Jamaah: ${calcState.pax} orang`,
-    `• Hotel Makkah: ${hotelM ? hotelM.name : '-'} (${calcState.makkah.nights} malam, ${calcState.makkah.rooms} kamar ${calcState.makkah.roomType})`,
-    `• Hotel Madinah: ${hotelN ? hotelN.name : '-'} (${calcState.madinah.nights} malam, ${calcState.madinah.rooms} kamar ${calcState.madinah.roomType})`,
+    `• Jumlah Jamaah: ${calcState.pax > 0 ? calcState.pax + " orang" : "0 orang (Belum ditentukan)"}`,
     `• Tiket Kereta Cepat HHR: ${calcState.hhr.tickets} tiket (${calcState.hhr.selectedRoutes.length} rute)`,
-    `• Armada Transportasi: ${vObj ? vObj.name + ' (' + vObj.capacity + ')' : currentVehicle.toUpperCase()}`,
-    `• Total Estimasi Rombongan: ${totalEl ? totalEl.textContent : '-'}`,
-    `• Estimasi Biaya Per Jamaah: ${perpaxEl ? perpaxEl.textContent : '-'}`
+    `• Armada Transportasi: ${vObj ? vObj.name + " (" + vObj.capacity + ")" : currentVehicle.toUpperCase()}`,
+    `• Total Estimasi Rombongan: ${totalEl ? totalEl.textContent : "-"}`,
+    `• Estimasi Biaya Per Jamaah: ${perpaxEl ? perpaxEl.textContent : "-"}`
   ].join("\n");
 }
 

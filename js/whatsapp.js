@@ -5,7 +5,7 @@
  */
 
 function buildWhatsAppConsultationMessage() {
-  const pax = Math.max(1, calcState.pax);
+  const pax = Math.max(0, calcState.pax || 0);
   const currency = UMRAH_DATA.config.currency;
 
   const lines = [];
@@ -15,28 +15,10 @@ function buildWhatsAppConsultationMessage() {
   lines.push("---------------------------------------");
 
   const visaIdr = pax * (UMRAH_DATA.visa.totalPerPaxIdr || 3300000);
-  const visaUsd = Math.round(visaIdr / currency.USD_TO_IDR);
-  lines.push(`👥 *Jumlah Jamaah:* ${pax} Orang`);
-  lines.push(`📄 *Visa Umrah & Asuransi:* ${formatIDR(visaIdr)} (~${formatUSD(visaUsd)})`);
-  lines.push("");
-
-  const hotelMakkah = UMRAH_DATA.hotelsMakkah.find(h => h.id === calcState.makkah.hotelId);
-  if (hotelMakkah) {
-    const roomTypeLabel = calcState.makkah.roomType.toUpperCase();
-    lines.push(`🕋 *Hotel Makkah:* ${hotelMakkah.name}`);
-    lines.push(`   • Kamar: Tipe ${roomTypeLabel} (${calcState.makkah.rooms} Kamar)`);
-    lines.push(`   • Durasi: ${calcState.makkah.nights} Malam`);
-    lines.push(`   • Jarak: ${hotelMakkah.dist}`);
-  }
-  lines.push("");
-
-  const hotelMadinah = UMRAH_DATA.hotelsMadinah.find(h => h.id === calcState.madinah.hotelId);
-  if (hotelMadinah) {
-    const roomTypeLabel = calcState.madinah.roomType.toUpperCase();
-    lines.push(`🕌 *Hotel Madinah:* ${hotelMadinah.name}`);
-    lines.push(`   • Kamar: Tipe ${roomTypeLabel} (${calcState.madinah.rooms} Kamar)`);
-    lines.push(`   • Durasi: ${calcState.madinah.nights} Malam`);
-    lines.push(`   • Jarak: ${hotelMadinah.dist}`);
+  const visaUsd = (currency.USD_TO_IDR && currency.USD_TO_IDR > 0) ? Math.round(visaIdr / currency.USD_TO_IDR) : 0;
+  lines.push(`👥 *Jumlah Jamaah:* ${pax > 0 ? pax + " Orang" : "0 Orang (Belum ditentukan)"}`);
+  if (pax > 0) {
+    lines.push(`📄 *Visa Umrah & Asuransi:* ${formatIDR(visaIdr)} (~${formatUSD(visaUsd)})`);
   }
   lines.push("");
 
@@ -96,7 +78,7 @@ function buildWhatsAppConsultationMessage() {
   lines.push("---------------------------------------");
   lines.push("");
   lines.push("Halo Tim Mutawwifmu, saya telah menyusun rincian rencana umroh mandiri di atas sesuai panduan Booklet Resmi Mutawwifmu.");
-  lines.push("Mohon info ketersediaan slot hotel, visa, dan konfirmasi Land Arrangement untuk rencana ini. Terima kasih!");
+  lines.push("Mohon info ketersediaan tiket, visa, dan konfirmasi Land Arrangement untuk rencana ini. Terima kasih!");
 
   return lines.join("\n");
 }
