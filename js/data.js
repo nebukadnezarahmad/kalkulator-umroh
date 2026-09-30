@@ -11,8 +11,8 @@ const UMRAH_DATA = {
     brandTagline: "Land Arrangement No. 1 di Dunia",
     officialWhatsApp: "6287745873159",
     currency: {
-      SAR_TO_IDR: 4250,
-      USD_TO_IDR: 16200
+      SAR_TO_IDR: 4500,
+      USD_TO_IDR: 17500
     }
   },
 
@@ -21,7 +21,7 @@ const UMRAH_DATA = {
     priceIdr: 3200000, // IDR 3.200.000 per pax (Sesuai Booklet Mutawwifmu Hal. 04)
     insuranceIdr: 100000, // Asuransi Perjalanan: IDR 100.000 per pax (Booklet Hal. 04)
     totalPerPaxIdr: 3300000, // Total Visa Umrah Reguler + Asuransi Medis resmi: IDR 3.300.000 per pax
-    priceUsd: 204, // Estimasi ekuivalen USD di kurs 16.200
+    priceUsd: 189, // Estimasi ekuivalen USD di kurs 17.500
     description: "Sesuai Booklet Resmi Mutawwifmu: Visa Umrah Reguler (Rp3.200.000) dan Asuransi Perjalanan resmi (Rp100.000)."
   },
 
