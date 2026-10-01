@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kalkulator Biaya Umroh Mandiri 2026: Mutawwifmu</title>
-  <meta name="description" content="Simulasi rincian estimasi biaya umroh mandiri dan backpacker 2026. Hitung visa, hotel Makkah dan Madinah, tiket Kereta Cepat HHR, serta mutawwif berizin bersama Mutawwifmu.">
+  <meta name="description" content="Simulasi rincian estimasi biaya paket Land Arrangement umroh mandiri 2026. Hitung visa, transportasi darat, city tour, serta layanan mutawwif berizin bersama Mutawwifmu.">
   <link rel="icon" type="image/webp" href="assets/favicon.webp">
   <link rel="canonical" href="https://mutawwifmu.com/kalkulator-umroh/">
   <meta property="og:type" content="website">
@@ -116,41 +116,13 @@
       <!-- Bagian Akomodasi Hotel Makkah & Madinah di-takeout sementara sesuai permintaan -->
 
 
-<!-- Langkah 2: Kereta Cepat Haramain (HHR) -->
-      <section class="calc-card" id="card-step-hhr">
-        <div class="card-header">
-          <div class="step-info">
-            <div class="step-num">02</div>
-            <div>
-              <h2 class="card-title">Kereta Cepat Haramain (HHR)</h2>
-              <p class="card-subtitle">Perjalanan nyaman antarkota Makkah, Madinah, dan Bandara Jeddah (kecepatan 300 km/jam)</p>
-            </div>
-          </div>
-          <div class="card-subtotal">
-            <div class="sar-val" id="subtotal-hhr-sar">0 SAR</div>
-            <div class="idr-val" id="subtotal-hhr-idr">Rp0</div>
-          </div>
-        </div>
+<!-- Bagian Kereta Cepat Haramain (HHR) di-takeout sesuai permintaan -->
 
-        <div style="margin-bottom: 14px;">
-          <div class="form-group" style="max-width: 280px; margin-bottom: 14px;">
-            <label class="form-label" for="hhr-tickets">Jumlah Tiket Kereta</label>
-            <div class="stepper-wrap">
-              <button type="button" class="stepper-btn stepper-minus" aria-label="Kurangi tiket kereta">−</button>
-              <input type="number" id="hhr-tickets" class="stepper-input" value="0" min="0" max="50">
-              <button type="button" class="stepper-btn stepper-plus" aria-label="Tambah tiket kereta">+</button>
-            </div>
-          </div>
-          <label class="form-label" style="margin-bottom: 8px;">Pilihan Rute Kereta Cepat HHR</label>
-          <div class="options-list" id="hhr-routes-list"></div>
-        </div>
-      </section>
-
-      <!-- Langkah 3: Transportasi Darat & Ziarah -->
+      <!-- Langkah 2: Transportasi Darat & Ziarah -->
       <section class="calc-card" id="card-step-transport">
         <div class="card-header">
           <div class="step-info">
-            <div class="step-num">03</div>
+            <div class="step-num">02</div>
             <div>
               <h2 class="card-title">Transportasi Darat &amp; City Tour</h2>
               <p class="card-subtitle">Pilihan armada dan carter kendaraan resmi di Arab Saudi (Sesuai Booklet)</p>
@@ -176,11 +148,11 @@
         </div>
       </section>
 
-      <!-- Langkah 4: Layanan Mutawwif & Handling -->
+      <!-- Langkah 3: Layanan Mutawwif & Handling -->
       <section class="calc-card" id="card-step-mutawwif">
         <div class="card-header">
           <div class="step-info">
-            <div class="step-num">04</div>
+            <div class="step-num">03</div>
             <div>
               <h2 class="card-title">Layanan Mutawwif &amp; Handling Bandara</h2>
               <p class="card-subtitle">Bimbingan ibadah berpengalaman sesuai sunnah dan asistensi resmi di Tanah Suci</p>
@@ -198,37 +170,7 @@
         </div>
       </section>
 
-      <!-- Langkah 5: Estimasi Tiket Pesawat PP -->
-      <section class="calc-card" id="card-step-flight">
-        <div class="card-header">
-          <div class="step-info">
-            <div class="step-num">05</div>
-            <div>
-              <h2 class="card-title">Tiket Pesawat PP Internasional</h2>
-              <p class="card-subtitle">Perkiraan harga tiket penerbangan pulang-pergi Indonesia ke Arab Saudi</p>
-            </div>
-          </div>
-          <div class="card-subtotal">
-            <div class="sar-val" id="subtotal-flight-sar">0 SAR</div>
-            <div class="idr-val" id="subtotal-flight-idr">Rp0</div>
-          </div>
-        </div>
-
-        <div class="form-grid">
-          <div class="form-group">
-            <label class="form-label" for="flight-select">Maskapai Penerbangan</label>
-            <select id="flight-select" class="form-select"></select>
-          </div>
-
-          <div class="form-group" id="custom-flight-group" style="display: none;">
-            <label class="form-label" for="custom-flight-input">
-              <span>Nominal Tiket PP per Orang</span>
-              <span class="hint">Masukkan dalam Rupiah</span>
-            </label>
-            <input type="number" id="custom-flight-input" class="form-control" placeholder="Contoh: 14500000" step="100000">
-          </div>
-        </div>
-      </section>
+      <!-- Bagian Estimasi Tiket Pesawat PP Internasional di-takeout sesuai permintaan -->
 
       <!-- Callout Checklist Ibadah -->
       <div class="callout-box">
@@ -255,20 +197,20 @@
     </div>
     <div class="faq-grid">
       <div class="faq-card">
-        <h3 class="faq-q">Berapa estimasi total biaya umroh mandiri di tahun 2026?</h3>
-        <p class="faq-a">Estimasi biaya umroh mandiri berkisar antara Rp18 juta hingga Rp26 juta per orang untuk durasi 9 s.d. 12 hari, bergantung pada tipe kamar hotel (Quad paling hemat), rute kereta cepat HHR, dan penawaran tiket pesawat yang Anda pesan.</p>
+        <h3 class="faq-q">Berapa estimasi biaya paket Land Arrangement di tahun 2026?</h3>
+        <p class="faq-a">Estimasi biaya paket Land Arrangement umroh mandiri dihitung secara transparan dan akurat sesuai pilihan visa resmi, armada transportasi darat, serta layanan asistensi mutawwif yang Anda pilih.</p>
       </div>
       <div class="faq-card">
-        <h3 class="faq-q">Apa keunggulan kamar Quad dibanding Double?</h3>
-        <p class="faq-a">Kamar tipe Quad diisi 4 orang dengan kasur terpisah sehingga tarif sewa kamar dibagi rata berempat. Opsi ini memangkas biaya hotel hingga 35-40% per orang tanpa mengurangi kenyamanan istirahat.</p>
+        <h3 class="faq-q">Apa saja layanan Land Arrangement yang disediakan Mutawwifmu?</h3>
+        <p class="faq-a">Mutawwifmu menyediakan paket visa umroh resmi + asuransi medis, carter armada transportasi darat &amp; city tour ziarah (Makkah, Madinah, Jeddah), serta pendampingan mutawwif berpengalaman dan handling bandara.</p>
       </div>
       <div class="faq-card">
-        <h3 class="faq-q">Mengapa disarankan menggunakan Kereta Cepat Haramain (HHR)?</h3>
-        <p class="faq-a">Kereta Cepat HHR memangkas waktu tempuh Madinah-Makkah menjadi 2 jam saja (kecepatan 300 km/jam), jauh lebih singkat dibanding bus umum (6-7 jam), sehingga stamina jamaah tetap prima untuk tawaf dan sa'i.</p>
+        <h3 class="faq-q">Bagaimana fleksibilitas armada transportasi lokal?</h3>
+        <p class="faq-a">Pilihan armada otomatis disesuaikan dengan kapasitas rombongan jamaah, mulai dari sedan Toyota Camry, Hyundai Staria, Toyota HiAce, Coaster hingga bus pariwisata berkapasitas besar untuk kenyamanan ziarah.</p>
       </div>
       <div class="faq-card">
         <h3 class="faq-q">Bagaimana cara mengonfirmasi paket LA ini ke Mutawwifmu?</h3>
-        <p class="faq-a">Klik tombol "Konsultasikan Rincian ke WhatsApp". Rincian tanggal, tipe kamar hotel, tiket kereta, dan armada kendaraan akan tersusun rapi untuk divalidasi ketersediaannya oleh tim Mutawwifmu.</p>
+        <p class="faq-a">Klik tombol "Konsultasikan Rincian ke WhatsApp". Rincian jumlah jamaah, visa, armada transportasi, dan layanan mutawwif akan tersusun rapi untuk divalidasi ketersediaannya oleh tim Mutawwifmu.</p>
       </div>
     </div>
   </section>

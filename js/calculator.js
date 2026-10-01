@@ -251,14 +251,9 @@ function recalculateAll() {
   const madinahSar = 0;
   const madinahIdr = 0;
 
-  // Kereta Cepat Haramain (HHR)
-  let hhrSingleTripCost = 0;
-  calcState.hhr.selectedRoutes.forEach(rId => {
-    const route = UMRAH_DATA.hhrRoutes.find(r => r.id === rId);
-    if (route) hhrSingleTripCost += route.priceSar;
-  });
-  const hhrSar = hhrSingleTripCost * calcState.hhr.tickets;
-  const hhrIdr = hhrSar * currency.SAR_TO_IDR;
+  // Kereta Cepat Haramain (HHR) di-takeout sementara
+  const hhrSar = 0;
+  const hhrIdr = 0;
 
   // Transportasi Darat & City Tour (Sesuai Booklet Armada & Rute)
   let transportSar = 0;
@@ -287,16 +282,8 @@ function recalculateAll() {
     }
   });
 
-  // Tiket Pesawat
-  let flightIdr = 0;
-  const flightItem = UMRAH_DATA.flightEstimates.find(f => f.id === calcState.flight.selectedId);
-  if (flightItem) {
-    if (flightItem.id === "custom_flight") {
-      flightIdr = calcState.flight.customPrice * pax;
-    } else {
-      flightIdr = flightItem.priceIdr * pax;
-    }
-  }
+  // Tiket Pesawat di-takeout sementara
+  const flightIdr = 0;
 
   const totalSar = makkahSar + madinahSar + hhrSar + transportSar + mutawwifSar;
   const totalIdr = (totalSar * currency.SAR_TO_IDR) + visaIdr + mutawwifIdr + flightIdr;
@@ -851,7 +838,6 @@ function buildSummaryText() {
   return [
     "RINGKASAN ESTIMASI BIAYA UMROH MANDIRI (MUTAWWIFMU)",
     `• Jumlah Jamaah: ${calcState.pax > 0 ? calcState.pax + " orang" : "0 orang (Belum ditentukan)"}`,
-    `• Tiket Kereta Cepat HHR: ${calcState.hhr.tickets} tiket (${calcState.hhr.selectedRoutes.length} rute)`,
     `• Armada Transportasi: ${vObj ? vObj.name + " (" + vObj.capacity + ")" : currentVehicle.toUpperCase()}`,
     `• Total Estimasi Rombongan: ${totalEl ? totalEl.textContent : "-"}`,
     `• Estimasi Biaya Per Jamaah: ${perpaxEl ? perpaxEl.textContent : "-"}`

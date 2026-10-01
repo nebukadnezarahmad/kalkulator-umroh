@@ -22,15 +22,6 @@ function buildWhatsAppConsultationMessage() {
   }
   lines.push("");
 
-  if (calcState.hhr.selectedRoutes.length > 0) {
-    lines.push(`🚄 *Kereta Cepat Haramain (HHR):*`);
-    calcState.hhr.selectedRoutes.forEach(rId => {
-      const r = UMRAH_DATA.hhrRoutes.find(x => x.id === rId);
-      if (r) lines.push(`   • ${r.label} (${calcState.hhr.tickets} Tiket @ ${formatSAR(r.priceSar)})`);
-    });
-    lines.push("");
-  }
-
   if (calcState.transport.selectedIds.length > 0) {
     const currentVehicle = calcState.transport.vehicle || "camry";
     const vObj = UMRAH_DATA.armadaList ? UMRAH_DATA.armadaList.find(a => a.id === currentVehicle) : null;
@@ -58,16 +49,6 @@ function buildWhatsAppConsultationMessage() {
     lines.push("");
   }
 
-  const flight = UMRAH_DATA.flightEstimates.find(f => f.id === calcState.flight.selectedId);
-  if (flight) {
-    let flightText = flight.label;
-    if (flight.id === "custom_flight" && calcState.flight.customPrice > 0) {
-      flightText = `Input Sendiri (~${formatIDR(calcState.flight.customPrice)}/pax)`;
-    }
-    lines.push(`✈️ *Estimasi Penerbangan:* ${flightText}`);
-    lines.push("");
-  }
-
   const totalIdrEl = document.getElementById("sticky-total-idr")?.textContent || "Rp0";
   const totalSarEl = document.getElementById("sticky-total-sar")?.textContent || "0 SAR";
   const perPaxIdrEl = document.getElementById("sticky-perpax-idr")?.textContent || "Rp0 / org";
@@ -78,7 +59,7 @@ function buildWhatsAppConsultationMessage() {
   lines.push("---------------------------------------");
   lines.push("");
   lines.push("Halo Tim Mutawwifmu, saya telah menyusun rincian rencana umroh mandiri di atas sesuai panduan Booklet Resmi Mutawwifmu.");
-  lines.push("Mohon info ketersediaan tiket, visa, dan konfirmasi Land Arrangement untuk rencana ini. Terima kasih!");
+  lines.push("Mohon info ketersediaan visa dan konfirmasi Land Arrangement untuk rencana ini. Terima kasih!");
 
   return lines.join("\n");
 }
