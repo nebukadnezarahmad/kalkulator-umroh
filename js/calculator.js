@@ -25,7 +25,7 @@ let calcState = {
   transport: {
     vehicle: "camry", // 'camry' | 'staria' | 'gmc' | 'hiace' | 'coaster' | 'bus'
     isManualVehicle: false,
-    selectedIds: ["airport_hotel_jeddah", "city_tour_makkah", "city_tour_madinah"]
+    selectedIds: ["airport_hotel_jeddah"]
   },
   mutawwif: {
     selectedIds: ["mutawwif_reguler", "airport_handling_jeddah"]
@@ -63,8 +63,8 @@ function autoSelectVehicle(pax) {
   if (calcState.transport.isManualVehicle) return;
   if (pax <= 3) calcState.transport.vehicle = "camry";
   else if (pax <= 6) calcState.transport.vehicle = "staria";
-  else if (pax <= 12) calcState.transport.vehicle = "hiace";
-  else if (pax <= 29) calcState.transport.vehicle = "coaster";
+  else if (pax <= 10) calcState.transport.vehicle = "hiace";
+  else if (pax <= 18) calcState.transport.vehicle = "coaster";
   else calcState.transport.vehicle = "bus";
 
   updateArmadaControlUI();
@@ -193,8 +193,8 @@ function recalculateAll() {
   if (pax === 0) {
     const visaSarEl = document.getElementById("subtotal-visa-sar");
     const visaIdrEl = document.getElementById("subtotal-visa-idr");
-    if (visaSarEl) visaSarEl.textContent = "Rp0";
-    if (visaIdrEl) visaIdrEl.textContent = "~$0";
+    if (visaSarEl) visaSarEl.textContent = "0 SAR";
+    if (visaIdrEl) visaIdrEl.textContent = "Rp0";
 
     const makkahSarEl = document.getElementById("subtotal-makkah-sar");
     const makkahIdrEl = document.getElementById("subtotal-makkah-idr");
@@ -234,16 +234,16 @@ function recalculateAll() {
     if (stickyTotalEl) stickyTotalEl.textContent = "Rp0";
     if (stickyPerPaxEl) stickyPerPaxEl.textContent = "Rp0 / org";
     if (stickyTotalSarEl) stickyTotalSarEl.textContent = "0 SAR";
-    if (stickyTotalVisaEl) stickyTotalVisaEl.textContent = "$0";
+    if (stickyTotalVisaEl) stickyTotalVisaEl.textContent = "0 SAR";
 
     updateRoomCapacityHints();
     updateArmadaHint();
     return;
   }
 
-  // Visa & Asuransi (Sesuai Booklet Mutawwifmu V1 Hal. 04: Rp3.200.000 + Asuransi Rp100.000 = Rp3.300.000/pax)
-  const visaIdr = pax * (UMRAH_DATA.visa.totalPerPaxIdr || 3300000);
-  const visaUsd = (currency.USD_TO_IDR && currency.USD_TO_IDR > 0) ? Math.round(visaIdr / currency.USD_TO_IDR) : 0;
+  // Visa Umrah Resmi (Update Mutawwifmu: 600 SAR / pax)
+  const visaSar = pax * (UMRAH_DATA.visa.priceSar || 600);
+  const visaIdr = visaSar * currency.SAR_TO_IDR;
 
   // Akomodasi Hotel Makkah & Madinah di-take out sementara
   const makkahSar = 0;
@@ -285,15 +285,15 @@ function recalculateAll() {
   // Tiket Pesawat di-takeout sementara
   const flightIdr = 0;
 
-  const totalSar = makkahSar + madinahSar + hhrSar + transportSar + mutawwifSar;
-  const totalIdr = (totalSar * currency.SAR_TO_IDR) + visaIdr + mutawwifIdr + flightIdr;
+  const totalSar = visaSar + makkahSar + madinahSar + hhrSar + transportSar + mutawwifSar;
+  const totalIdr = (totalSar * currency.SAR_TO_IDR) + mutawwifIdr + flightIdr;
   const perPaxIdr = pax > 0 ? Math.round(totalIdr / pax) : 0;
 
   // Update Subtotals
   const visaSarEl = document.getElementById("subtotal-visa-sar");
   const visaIdrEl = document.getElementById("subtotal-visa-idr");
-  if (visaSarEl) visaSarEl.textContent = formatIDR(visaIdr);
-  if (visaIdrEl) visaIdrEl.textContent = `~${formatUSD(visaUsd)}`;
+  if (visaSarEl) visaSarEl.textContent = formatSAR(visaSar);
+  if (visaIdrEl) visaIdrEl.textContent = `~${formatIDR(visaIdr)}`;
 
   const makkahSarEl = document.getElementById("subtotal-makkah-sar");
   const makkahIdrEl = document.getElementById("subtotal-makkah-idr");
@@ -334,7 +334,7 @@ function recalculateAll() {
   if (stickyTotalEl) stickyTotalEl.textContent = formatIDR(totalIdr);
   if (stickyPerPaxEl) stickyPerPaxEl.textContent = pax > 0 ? (formatIDR(perPaxIdr) + " / org") : "Rp0 / org";
   if (stickyTotalSarEl) stickyTotalSarEl.textContent = formatSAR(totalSar);
-  if (stickyTotalVisaEl) stickyTotalVisaEl.textContent = formatUSD(visaUsd);
+  if (stickyTotalVisaEl) stickyTotalVisaEl.textContent = formatSAR(visaSar);
 
   // Room capacity calculation hints & armada hint
   updateRoomCapacityHints();
@@ -592,7 +592,7 @@ function initCalculator() {
         makkah: { hotelId: "emaar_grand", roomType: "quad", nights: 0, rooms: 0 },
         madinah: { hotelId: "saja_al_madinah", roomType: "quad", nights: 0, rooms: 0 },
         hhr: { selectedRoutes: ["makkah_madinah"], tickets: 0 },
-        transport: { vehicle: "camry", isManualVehicle: false, selectedIds: ["airport_hotel_jeddah", "city_tour_makkah", "city_tour_madinah"] },
+        transport: { vehicle: "camry", isManualVehicle: false, selectedIds: ["airport_hotel_jeddah"] },
         mutawwif: { selectedIds: ["mutawwif_reguler", "airport_handling_jeddah"] },
         flight: { selectedId: "saudia", customPrice: 0 }
       };
@@ -831,6 +831,7 @@ function updateHotelMadinahInfo() {
 
 function buildSummaryText() {
   const totalEl = document.getElementById("sticky-total-idr");
+  const totalSarEl = document.getElementById("sticky-total-sar");
   const perpaxEl = document.getElementById("sticky-perpax-idr");
   const currentVehicle = calcState.transport.vehicle || "camry";
   const vObj = UMRAH_DATA.armadaList ? UMRAH_DATA.armadaList.find(a => a.id === currentVehicle) : null;
@@ -839,7 +840,7 @@ function buildSummaryText() {
     "RINGKASAN ESTIMASI BIAYA UMROH MANDIRI (MUTAWWIFMU)",
     `• Jumlah Jamaah: ${calcState.pax > 0 ? calcState.pax + " orang" : "0 orang (Belum ditentukan)"}`,
     `• Armada Transportasi: ${vObj ? vObj.name + " (" + vObj.capacity + ")" : currentVehicle.toUpperCase()}`,
-    `• Total Estimasi Rombongan: ${totalEl ? totalEl.textContent : "-"}`,
+    `• Total Estimasi Rombongan: ${totalEl ? totalEl.textContent : "-"} (~${totalSarEl ? totalSarEl.textContent : "-"})`,
     `• Estimasi Biaya Per Jamaah: ${perpaxEl ? perpaxEl.textContent : "-"}`
   ].join("\n");
 }

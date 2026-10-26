@@ -14,11 +14,11 @@ function buildWhatsAppConsultationMessage() {
   lines.push("Ref: Kalkulator Mandiri Mutawwifmu.com (Booklet Resmi)");
   lines.push("---------------------------------------");
 
-  const visaIdr = pax * (UMRAH_DATA.visa.totalPerPaxIdr || 3300000);
-  const visaUsd = (currency.USD_TO_IDR && currency.USD_TO_IDR > 0) ? Math.round(visaIdr / currency.USD_TO_IDR) : 0;
+  const visaSar = pax * (UMRAH_DATA.visa.priceSar || 600);
+  const visaIdr = visaSar * currency.SAR_TO_IDR;
   lines.push(`👥 *Jumlah Jamaah:* ${pax > 0 ? pax + " Orang" : "0 Orang (Belum ditentukan)"}`);
   if (pax > 0) {
-    lines.push(`📄 *Visa Umrah & Asuransi:* ${formatIDR(visaIdr)} (~${formatUSD(visaUsd)})`);
+    lines.push(`📄 *Visa Umrah Resmi:* ${formatSAR(visaSar)} (~${formatIDR(visaIdr)})`);
   }
   lines.push("");
 
@@ -26,7 +26,7 @@ function buildWhatsAppConsultationMessage() {
     const currentVehicle = calcState.transport.vehicle || "camry";
     const vObj = UMRAH_DATA.armadaList ? UMRAH_DATA.armadaList.find(a => a.id === currentVehicle) : null;
     const vLabel = vObj ? `${vObj.name} (${vObj.capacity})` : currentVehicle.toUpperCase();
-    lines.push(`🚗 *Transportasi Darat & City Tour (Armada: ${vLabel}):*`);
+    lines.push(`🚗 *Transportasi Darat & Ziarah (Armada: ${vLabel}):*`);
     calcState.transport.selectedIds.forEach(tId => {
       const t = UMRAH_DATA.localTransport.find(x => x.id === tId);
       if (t) {

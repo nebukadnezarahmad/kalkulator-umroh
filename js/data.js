@@ -18,11 +18,11 @@ const UMRAH_DATA = {
 
   visa: {
     defaultPax: 2,
-    priceIdr: 3200000, // IDR 3.200.000 per pax (Sesuai Booklet Mutawwifmu Hal. 04)
-    insuranceIdr: 100000, // Asuransi Perjalanan: IDR 100.000 per pax (Booklet Hal. 04)
-    totalPerPaxIdr: 3300000, // Total Visa Umrah Reguler + Asuransi Medis resmi: IDR 3.300.000 per pax
-    priceUsd: 189, // Estimasi ekuivalen USD di kurs 17.500
-    description: "Sesuai Booklet Resmi Mutawwifmu: Visa Umrah Reguler (Rp3.200.000) dan Asuransi Perjalanan resmi (Rp100.000)."
+    priceSar: 600, // Update Resmi: 600 SAR per pax
+    priceIdr: 2700000, // IDR 2.700.000 per pax (kurs SAR 4.500)
+    totalPerPaxIdr: 2700000,
+    priceUsd: 154,
+    description: "Update Resmi Mutawwifmu: Visa Umrah Reguler Resmi Kerajaan Arab Saudi (600 SAR / Rp2.700.000 per pax)."
   },
 
   hotelsMakkah: [
@@ -59,80 +59,66 @@ const UMRAH_DATA = {
     { id: "jeddah_madinah", label: "Bandara Jeddah → Madinah", priceSar: 200, desc: "Durasi ±1 jam 50 menit" }
   ],
 
-  // Daftar Pilihan Armada Resmi Mutawwifmu (Booklet Hal. 05)
+  // Daftar Pilihan Armada Resmi Mutawwifmu (Tabel Transport Terkini)
   armadaList: [
-    { id: "camry", name: "Camry / Sonata", capacity: "2–3 Pax", desc: "Sedan premium, cocok untuk pasangan atau keluarga kecil", maxPax: 3 },
-    { id: "staria", name: "Hyundai Staria", capacity: "4–6 Pax", desc: "MPV modern, nyaman untuk keluarga / rombongan kecil", maxPax: 6 },
-    { id: "gmc", name: "GMC New Model", capacity: "4–6 Pax", desc: "SUV luxury besar, pengalaman berkendara VIP", maxPax: 6 },
-    { id: "hiace", name: "Toyota Hiace", capacity: "7–12 Pax", desc: "Minibus lega, ideal untuk rombongan keluarga besar", maxPax: 12 },
-    { id: "coaster", name: "Toyota Coaster", capacity: "13–29 Pax", desc: "Bus mini, pilihan terbaik grup rombongan menengah", maxPax: 29 },
-    { id: "bus", name: "Bus Full Size", capacity: "30–49 Pax", desc: "Bus besar 49 seat, solusi ekonomis jamaah rombongan", maxPax: 49 }
+    { id: "camry", name: "Camry / Sonata", capacity: "4 Seat", desc: "Sedan premium, nyaman untuk pasangan atau keluarga kecil (2–3 Pax + bagasi)", maxPax: 3 },
+    { id: "staria", name: "Hyundai Staria", capacity: "7 Seat", desc: "MPV modern & luas, nyaman untuk keluarga / rombongan (4–6 Pax)", maxPax: 6 },
+    { id: "gmc", name: "GMC New Model", capacity: "7 Seat", desc: "SUV luxury besar, kenyamanan berkendara VIP (4–6 Pax)", maxPax: 6 },
+    { id: "hiace", name: "Toyota Hiace", capacity: "10 Seat", desc: "Minibus lega & tangguh, ideal untuk rombongan keluarga besar (7–10 Pax)", maxPax: 10 },
+    { id: "coaster", name: "Toyota Coaster", capacity: "18 Seat", desc: "Bus mini 18 seat, pilihan terbaik grup rombongan menengah (11–18 Pax)", maxPax: 18 },
+    { id: "bus", name: "Bus Full Size", capacity: "49 Seat", desc: "Bus besar 49 seat, solusi ekonomis jamaah rombongan besar (19–49 Pax)", maxPax: 49 }
   ],
 
-  // Rute Perjalanan Transportasi & City Tour Resmi (Booklet Hal. 05 & 06)
+  // Rute Perjalanan Transportasi Darat Resmi (Update Tabel Transport Mutawwifmu)
   localTransport: [
     {
       id: "airport_hotel_jeddah",
       label: "Bandara Jeddah ↔ Hotel Makkah",
       desc: "Antar-jemput kedatangan bandara Jeddah langsung ke lobi hotel Makkah",
       icon: "car",
-      prices: { camry: 500, staria: 600, gmc: 700, hiace: 650, coaster: 900, bus: 1050 }
+      prices: { camry: 400, staria: 500, gmc: 650, hiace: 550, coaster: 800, bus: 950 }
     },
     {
       id: "hotel_makkah_airport_jeddah",
       label: "Hotel Makkah ↔ Bandara Jeddah",
       desc: "Antar-jemput kepulangan dari lobi hotel Makkah menuju bandara Jeddah",
       icon: "car",
-      prices: { camry: 450, staria: 550, gmc: 700, hiace: 650, coaster: 900, bus: 1050 }
+      prices: { camry: 350, staria: 450, gmc: 650, hiace: 550, coaster: 750, bus: 950 }
     },
     {
       id: "makkah_madinah_transfer",
       label: "Transfer Antarkota Makkah ↔ Madinah",
       desc: "Perjalanan darat antarkota Makkah & Madinah (alternatif / pendukung kereta HHR)",
       icon: "car",
-      prices: { camry: 700, staria: 800, gmc: 800, hiace: 900, coaster: 1250, bus: 1450 }
+      prices: { camry: 600, staria: 700, gmc: 1100, hiace: 800, coaster: 1150, bus: 1350 }
     },
     {
       id: "airport_hotel_medinah",
       label: "Bandara Madinah ↔ Hotel Madinah",
       desc: "Antar-jemput kedatangan bandara Madinah langsung ke lobi hotel Madinah",
       icon: "car",
-      prices: { camry: 400, staria: 450, gmc: 600, hiace: 600, coaster: 750, bus: 950 }
+      prices: { camry: 300, staria: 350, gmc: 550, hiace: 500, coaster: 650, bus: 850 }
     },
     {
       id: "hotel_madinah_airport_medinah",
       label: "Hotel Madinah ↔ Bandara Madinah",
       desc: "Antar-jemput kepulangan dari lobi hotel Madinah menuju bandara Madinah",
       icon: "car",
-      prices: { camry: 370, staria: 400, gmc: 550, hiace: 550, coaster: 700, bus: 950 }
+      prices: { camry: 270, staria: 300, gmc: 500, hiace: 450, coaster: 600, bus: 850 }
     },
     {
       id: "hotel_madinah_airport_jeddah",
       label: "Hotel Madinah ↔ Bandara Jeddah (PP)",
       desc: "Perjalanan darat langsung dari hotel Madinah menuju bandara Jeddah",
       icon: "car",
-      prices: { camry: 750, staria: 850, gmc: 1150, hiace: 900, coaster: 1250, bus: 1650 }
-    },
-    {
-      id: "city_tour_makkah",
-      label: "City Tour Kota Makkah (Termasuk Mutawwif & Snack)",
-      desc: "Jabal Tsur, Padang Arafah, Jabal Rahmah, Muzdalifah & Mina, Jabal Nur",
-      icon: "van",
-      prices: { camry: 820, staria: 930, gmc: 930, hiace: 1045, coaster: 1235, bus: 1705 }
-    },
-    {
-      id: "city_tour_madinah",
-      label: "City Tour Kota Madinah (Termasuk Mutawwif & Snack)",
-      desc: "Masjid Bilal, Sholat di Masjid Quba, Kebun Kurma, Jabal Uhud",
-      icon: "van",
-      prices: { camry: 820, staria: 880, gmc: 880, hiace: 995, coaster: 1165, bus: 1395 }
+      prices: { camry: 650, staria: 750, gmc: 1100, hiace: 800, coaster: 1150, bus: 1550 }
     },
     {
       id: "city_tour_thaif",
-      label: "City Tour Ekskursi Thaif (Termasuk Mutawwif & Snack)",
-      desc: "Masjid Abdullah bin Abbas, Pabrik Parfum Mawar, Miqat Qarnul Manazil",
+      label: "Ziarah / Ekskursi Kota Thaif (PP Makkah)",
+      desc: "Masjid Abdullah bin Abbas, Pabrik Parfum Mawar, Miqat Qarnul Manazil (PP)",
       icon: "mountain",
-      prices: { camry: 920, staria: 1235, gmc: 1235, hiace: 1345, coaster: 1665, bus: 2095 }
+      prices: { camry: 600, staria: 750, gmc: 1100, hiace: 850, coaster: 1150, bus: 1350 }
     },
     {
       id: "wisata_alula",
